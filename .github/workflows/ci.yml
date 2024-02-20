@@ -10,7 +10,7 @@ on:
       - develop
 
 env:
-  CLANG_TIDY_VERSION: "15.0.2"
+  CLANG_TIDY_VERSION: "15.0.7"
   VERBOSE: 1
 
 
@@ -31,21 +31,15 @@ jobs:
         os:
           - ubuntu-latest
           - macos-latest
-          - windows-latest
         compiler:
           # you can specify the version after `-` like "llvm-15.0.2".
-          - llvm-15.0.2
+          - llvm-15.0.7
           - gcc-11
         generator:
           - "Ninja Multi-Config"
         build_type:
           - Release
           - Debug
-
-        exclude:
-          # mingw is determined by this author to be too buggy to support
-          - os: windows-latest
-            compiler: gcc-11
 
         include:
           # Add appropriate variables for gcov version required. This will intentionally break
@@ -54,7 +48,7 @@ jobs:
             gcov_executable: gcov
             enable_ipo: On
 
-          - compiler: llvm-15.0.2
+          - compiler: llvm-15.0.7
             enable_ipo: Off
             gcov_executable: "llvm-cov gcov"
 

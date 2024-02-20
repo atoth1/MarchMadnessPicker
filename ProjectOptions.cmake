@@ -29,7 +29,7 @@ macro(MarchMadnessPicker_setup_options)
 
   MarchMadnessPicker_supports_sanitizers()
 
-  if(NOT PROJECT_IS_TOP_LEVEL OR MarchMadnessPicker_PACKAGING_MAINTAINER_MODE)
+  if(NOT PROJECT_IS_TOP_LEVEL)
     option(MarchMadnessPicker_ENABLE_IPO "Enable IPO/LTO" OFF)
     option(MarchMadnessPicker_WARNINGS_AS_ERRORS "Treat Warnings As Errors" OFF)
     option(MarchMadnessPicker_ENABLE_USER_LINKER "Enable user-selected linker" OFF)

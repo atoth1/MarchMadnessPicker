@@ -11,9 +11,6 @@ inputs:
   generator:
     required: true
     type: string
-  packaging_maintainer_mode:
-    required: true
-    type: string
 
 
 runs:
@@ -26,7 +23,7 @@ runs:
         path: |
           ~/.cache/pip
           ~/.ccache
-        key: ${{ runner.os }}-${{ inputs.compiler }}-${{ inputs.build_type }}-${{ inputs.generator }}-${{ inputs.packaging_maintainer_mode }}-${{ hashFiles('**/CMakeLists.txt') }}
+        key: ${{ runner.os }}-${{ inputs.compiler }}-${{ inputs.build_type }}-${{ inputs.generator }}-${{ hashFiles('**/CMakeLists.txt') }}
         restore-keys: |
           ${{ runner.os }}-${{ inputs.compiler }}-${{ inputs.build_type }}
 

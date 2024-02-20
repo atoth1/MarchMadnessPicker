@@ -31,7 +31,6 @@ jobs:
         os:
           - ubuntu-latest
           - macos-latest
-          - windows-latest
         compiler:
           # you can specify the version after `-` like "llvm-15.0.2".
           - llvm-15.0.2
@@ -41,11 +40,6 @@ jobs:
         build_type:
           - Release
           - Debug
-
-        exclude:
-          # mingw is determined by this author to be too buggy to support
-          - os: windows-latest
-            compiler: gcc-11
 
         include:
           # Add appropriate variables for gcov version required. This will intentionally break

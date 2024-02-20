@@ -1,5 +1,4 @@
 include(cmake/SystemLink.cmake)
-include(cmake/LibFuzzer.cmake)
 include(CMakeDependentOption)
 include(CheckCXXCompilerFlag)
 
@@ -78,15 +77,6 @@ macro(MarchMadnessPicker_setup_options)
       MarchMadnessPicker_ENABLE_CACHE)
   endif()
 
-  MarchMadnessPicker_check_libfuzzer_support(LIBFUZZER_SUPPORTED)
-  if(LIBFUZZER_SUPPORTED AND (MarchMadnessPicker_ENABLE_SANITIZER_ADDRESS OR MarchMadnessPicker_ENABLE_SANITIZER_THREAD OR MarchMadnessPicker_ENABLE_SANITIZER_UNDEFINED))
-    set(DEFAULT_FUZZER ON)
-  else()
-    set(DEFAULT_FUZZER OFF)
-  endif()
-
-  option(MarchMadnessPicker_BUILD_FUZZ_TESTS "Enable fuzz testing executable" ${DEFAULT_FUZZER})
-
 endmacro()
 
 macro(MarchMadnessPicker_global_options)
@@ -125,7 +115,6 @@ macro(MarchMadnessPicker_local_options)
   MarchMadnessPicker_set_project_warnings(
     MarchMadnessPicker_warnings
     ${MarchMadnessPicker_WARNINGS_AS_ERRORS}
-    ""
     ""
     ""
     "")

@@ -25,7 +25,6 @@ project(
 include(cmake/PreventInSourceBuilds.cmake)
 include(ProjectOptions.cmake)
 
-
 MarchMadnessPicker_setup_options()
 
 MarchMadnessPicker_global_options()
@@ -33,9 +32,6 @@ include(Dependencies.cmake)
 MarchMadnessPicker_setup_dependencies()
 
 MarchMadnessPicker_local_options()
-
-# don't know if this should be set globally from here or not...
-set(CMAKE_CXX_VISIBILITY_PRESET hidden)
 
 set(GIT_SHA
     "Unknown"
@@ -51,25 +47,16 @@ target_compile_features(MarchMadnessPicker_options INTERFACE cxx_std_${CMAKE_CXX
 add_library(MarchMadnessPicker::MarchMadnessPicker_options ALIAS MarchMadnessPicker_options)
 add_library(MarchMadnessPicker::MarchMadnessPicker_warnings ALIAS MarchMadnessPicker_warnings)
 
-#add_library(MarchMadnessPicker::MarchMadnessPicker_options INTERFACE IMPORTED)
-#add_library(MarchMadnessPicker::MarchMadnessPicker_warnings INTERFACE IMPORTED)
-
 # configure files based on CMake configuration options
 add_subdirectory(configured_files)
 
 # Adding the src:
 add_subdirectory(src)
 
-# Don't even look at tests if we're not top level
-if(NOT PROJECT_IS_TOP_LEVEL)
-  return()
-endif()
-
-# Adding the tests:
+# Adding the tests
 include(CTest)
 
 if(BUILD_TESTING)
-  message(AUTHOR_WARNING "Building Tests. Be sure to check out test/constexpr_tests.cpp for constexpr testing")
   add_subdirectory(test)
 endif()
 

@@ -29,53 +29,19 @@ macro(MarchMadnessPicker_setup_options)
 
   MarchMadnessPicker_supports_sanitizers()
 
-  if(NOT PROJECT_IS_TOP_LEVEL)
-    option(MarchMadnessPicker_ENABLE_IPO "Enable IPO/LTO" OFF)
-    option(MarchMadnessPicker_WARNINGS_AS_ERRORS "Treat Warnings As Errors" OFF)
-    option(MarchMadnessPicker_ENABLE_USER_LINKER "Enable user-selected linker" OFF)
-    option(MarchMadnessPicker_ENABLE_SANITIZER_ADDRESS "Enable address sanitizer" OFF)
-    option(MarchMadnessPicker_ENABLE_SANITIZER_LEAK "Enable leak sanitizer" OFF)
-    option(MarchMadnessPicker_ENABLE_SANITIZER_UNDEFINED "Enable undefined sanitizer" OFF)
-    option(MarchMadnessPicker_ENABLE_SANITIZER_THREAD "Enable thread sanitizer" OFF)
-    option(MarchMadnessPicker_ENABLE_SANITIZER_MEMORY "Enable memory sanitizer" OFF)
-    option(MarchMadnessPicker_ENABLE_UNITY_BUILD "Enable unity builds" OFF)
-    option(MarchMadnessPicker_ENABLE_CLANG_TIDY "Enable clang-tidy" OFF)
-    option(MarchMadnessPicker_ENABLE_CPPCHECK "Enable cpp-check analysis" OFF)
-    option(MarchMadnessPicker_ENABLE_PCH "Enable precompiled headers" OFF)
-    option(MarchMadnessPicker_ENABLE_CACHE "Enable ccache" OFF)
-  else()
-    option(MarchMadnessPicker_ENABLE_IPO "Enable IPO/LTO" ON)
-    option(MarchMadnessPicker_WARNINGS_AS_ERRORS "Treat Warnings As Errors" ON)
-    option(MarchMadnessPicker_ENABLE_USER_LINKER "Enable user-selected linker" OFF)
-    option(MarchMadnessPicker_ENABLE_SANITIZER_ADDRESS "Enable address sanitizer" ${SUPPORTS_ASAN})
-    option(MarchMadnessPicker_ENABLE_SANITIZER_LEAK "Enable leak sanitizer" OFF)
-    option(MarchMadnessPicker_ENABLE_SANITIZER_UNDEFINED "Enable undefined sanitizer" ${SUPPORTS_UBSAN})
-    option(MarchMadnessPicker_ENABLE_SANITIZER_THREAD "Enable thread sanitizer" OFF)
-    option(MarchMadnessPicker_ENABLE_SANITIZER_MEMORY "Enable memory sanitizer" OFF)
-    option(MarchMadnessPicker_ENABLE_UNITY_BUILD "Enable unity builds" OFF)
-    option(MarchMadnessPicker_ENABLE_CLANG_TIDY "Enable clang-tidy" ON)
-    option(MarchMadnessPicker_ENABLE_CPPCHECK "Enable cpp-check analysis" ON)
-    option(MarchMadnessPicker_ENABLE_PCH "Enable precompiled headers" OFF)
-    option(MarchMadnessPicker_ENABLE_CACHE "Enable ccache" ON)
-  endif()
-
-  if(NOT PROJECT_IS_TOP_LEVEL)
-    mark_as_advanced(
-      MarchMadnessPicker_ENABLE_IPO
-      MarchMadnessPicker_WARNINGS_AS_ERRORS
-      MarchMadnessPicker_ENABLE_USER_LINKER
-      MarchMadnessPicker_ENABLE_SANITIZER_ADDRESS
-      MarchMadnessPicker_ENABLE_SANITIZER_LEAK
-      MarchMadnessPicker_ENABLE_SANITIZER_UNDEFINED
-      MarchMadnessPicker_ENABLE_SANITIZER_THREAD
-      MarchMadnessPicker_ENABLE_SANITIZER_MEMORY
-      MarchMadnessPicker_ENABLE_UNITY_BUILD
-      MarchMadnessPicker_ENABLE_CLANG_TIDY
-      MarchMadnessPicker_ENABLE_CPPCHECK
-      MarchMadnessPicker_ENABLE_COVERAGE
-      MarchMadnessPicker_ENABLE_PCH
-      MarchMadnessPicker_ENABLE_CACHE)
-  endif()
+  option(MarchMadnessPicker_ENABLE_IPO "Enable IPO/LTO" ON)
+  option(MarchMadnessPicker_WARNINGS_AS_ERRORS "Treat Warnings As Errors" ON)
+  option(MarchMadnessPicker_ENABLE_USER_LINKER "Enable user-selected linker" OFF)
+  option(MarchMadnessPicker_ENABLE_SANITIZER_ADDRESS "Enable address sanitizer" ${SUPPORTS_ASAN})
+  option(MarchMadnessPicker_ENABLE_SANITIZER_LEAK "Enable leak sanitizer" OFF)
+  option(MarchMadnessPicker_ENABLE_SANITIZER_UNDEFINED "Enable undefined sanitizer" ${SUPPORTS_UBSAN})
+  option(MarchMadnessPicker_ENABLE_SANITIZER_THREAD "Enable thread sanitizer" OFF)
+  option(MarchMadnessPicker_ENABLE_SANITIZER_MEMORY "Enable memory sanitizer" OFF)
+  option(MarchMadnessPicker_ENABLE_UNITY_BUILD "Enable unity builds" OFF)
+  option(MarchMadnessPicker_ENABLE_CLANG_TIDY "Enable clang-tidy" ON)
+  option(MarchMadnessPicker_ENABLE_CPPCHECK "Enable cpp-check analysis" ON)
+  option(MarchMadnessPicker_ENABLE_PCH "Enable precompiled headers" OFF)
+  option(MarchMadnessPicker_ENABLE_CACHE "Enable ccache" ON)
 
 endmacro()
 
@@ -104,9 +70,7 @@ macro(MarchMadnessPicker_global_options)
 endmacro()
 
 macro(MarchMadnessPicker_local_options)
-  if(PROJECT_IS_TOP_LEVEL)
-    include(cmake/StandardProjectSettings.cmake)
-  endif()
+  include(cmake/StandardProjectSettings.cmake)
 
   add_library(MarchMadnessPicker_warnings INTERFACE)
   add_library(MarchMadnessPicker_options INTERFACE)

@@ -77,15 +77,15 @@ NamespaceIndentation: Inner
 ObjCBlockIndentWidth: 7
 ObjCSpaceAfterProperty: true
 ObjCSpaceBeforeProtocolList: false
-PointerAlignment: Right
+PointerAlignment: Left
 ReflowComments: true
 SortIncludes: true
 SortUsingDeclarations: false
 SpaceAfterCStyleCast: false
-SpaceAfterTemplateKeyword: false
+SpaceAfterTemplateKeyword: true
 SpaceBeforeAssignmentOperators: true
 SpaceBeforeParens: ControlStatements
-SpaceInEmptyParentheses: false
+SpaceInEmptyParentheses: true
 SpacesBeforeTrailingComments: 0
 SpacesInAngles: false
 SpacesInCStyleCastParentheses: false
@@ -93,6 +93,6 @@ SpacesInContainerLiterals: true
 SpacesInParentheses: false
 SpacesInSquareBrackets: false
 Standard: c++20
-TabWidth: 8
+TabWidth: 2
 UseTab: Never
 

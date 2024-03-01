@@ -51,7 +51,8 @@ add_library(MarchMadnessPicker::MarchMadnessPicker_warnings ALIAS MarchMadnessPi
 add_subdirectory(configured_files)
 
 # Adding the src:
-add_subdirectory(src)
+add_subdirectory(src-picker)
+add_subdirectory(kenpom-scraper)
 
 # Adding the tests
 include(CTest)

@@ -54,6 +54,9 @@ add_subdirectory(configured_files)
 add_subdirectory(src-picker)
 add_subdirectory(kenpom-scraper)
 
+# Include python for kenpom-scraper tests
+find_package(Python REQUIRED)
+
 # Adding the tests
 include(CTest)
 

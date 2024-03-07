@@ -4,12 +4,12 @@ from abc import ABC, abstractmethod
 import json
 from kenpom_data import KenpomData
 
-class JsonWriter(ABC):
+class OutputWriter(ABC):
   @abstractmethod
   def writeOutput(self):
     pass
 
-class JsonFileWriter(JsonWriter):
+class JsonFileWriter(OutputWriter):
   def __init__(self, file_name: str, entries: list[KenpomData]):
     super().__init__()
     self._file_name = file_name

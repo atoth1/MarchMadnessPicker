@@ -8,6 +8,10 @@ function(MarchMadnessPicker_setup_dependencies)
   # For each dependency, see if it's
   # already been provided to us by a parent project
 
+  if(NOT TARGET nlohmann_json::nlohmann_json)
+    cpmaddpackage("gh:nlohmann/json@3.11.3")
+  endif()
+
   if(NOT TARGET fmtlib::fmtlib)
     cpmaddpackage("gh:fmtlib/fmt#9.1.0")
   endif()

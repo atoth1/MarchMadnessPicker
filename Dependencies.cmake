@@ -12,7 +12,7 @@ function(MarchMadnessPicker_setup_dependencies)
     cpmaddpackage("gh:nlohmann/json@3.11.3")
   endif()
 
-  if(NOT TARGET fmtlib::fmtlib)
+  if(NOT TARGET fmt::fmt)
     cpmaddpackage("gh:fmtlib/fmt#9.1.0")
   endif()
 

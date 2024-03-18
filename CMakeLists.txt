@@ -47,10 +47,7 @@ target_compile_features(MarchMadnessPicker_options INTERFACE cxx_std_${CMAKE_CXX
 add_library(MarchMadnessPicker::MarchMadnessPicker_options ALIAS MarchMadnessPicker_options)
 add_library(MarchMadnessPicker::MarchMadnessPicker_warnings ALIAS MarchMadnessPicker_warnings)
 
-# configure files based on CMake configuration options
-add_subdirectory(configured_files)
-
-# Adding the src:
+# Adding the src
 add_subdirectory(src-picker)
 add_subdirectory(kenpom-scraper)
 

@@ -1,14 +1,21 @@
 include(${Catch2_SOURCE_DIR}/extras/Catch.cmake)
 
+configure_file("test-team-data.json" "test-team-data.json" COPYONLY)
 
+set(SOURCES
+  BracketDataTest.cpp
+  ProblemDataTest.cpp
+  TeamDataTest.cpp
+)
 
-#add_executable(tests tests.cpp)
-#target_link_libraries(
-#  tests
-#  PRIVATE MarchMadnessPicker::MarchMadnessPicker_warnings
-#          MarchMadnessPicker::MarchMadnessPicker_options
-#          MarchMadnessPicker::sample_library
-#          Catch2::Catch2WithMain)
+add_executable(unit-tests ${SOURCES})
+target_link_libraries(unit-tests
+  PRIVATE
+  ${PROJECT_NAME}
+  MarchMadnessPicker::MarchMadnessPicker_warnings
+  MarchMadnessPicker::MarchMadnessPicker_options
+  Catch2::Catch2WithMain
+  fmt::fmt)
 
 #if(WIN32 AND BUILD_SHARED_LIBS)
 #  add_custom_command(
@@ -20,17 +27,15 @@ include(${Catch2_SOURCE_DIR}/extras/Catch.cmake)
 
 # automatically discover tests that are defined in catch based test files you can modify the unittests. Set TEST_PREFIX
 # to whatever you want, or use different for different binaries
-#catch_discover_tests(
-#  tests
-#  TEST_PREFIX
-#  "unittests."
-#  REPORTER
-#  XML
-#  OUTPUT_DIR
-#  .
-#  OUTPUT_PREFIX
-#  "unittests."
-#  OUTPUT_SUFFIX
-#  .xml)
-
-
+catch_discover_tests(
+  unit-tests
+  TEST_PREFIX
+  "unittests."
+  REPORTER
+  XML
+  OUTPUT_DIR
+  .
+  OUTPUT_PREFIX
+  "unittests."
+  OUTPUT_SUFFIX
+  .xml)

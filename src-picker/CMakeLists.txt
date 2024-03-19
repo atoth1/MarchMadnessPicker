@@ -2,6 +2,12 @@
 set(SOURCES
   BracketData.cpp
   ProblemData.cpp
+  RandomizationStrategy_MersenneTwister.cpp
+  RandomizationStrategy_MinStdRand.cpp
+  RandomizationStrategy_StdRand.cpp
+  SelectionStrategy_CoinFlip.cpp
+  SelectionStrategy_RankDeterministic.cpp
+  SelectionStrategy_SpreadBased.cpp
   TeamData.cpp
 )
 

@@ -5,7 +5,10 @@ configure_file("test-team-data.json" "test-team-data.json" COPYONLY)
 set(SOURCES
   BracketDataTest.cpp
   ProblemDataTest.cpp
+  RandomizationStrategyTest.cpp
+  SelectionStrategyTest.cpp
   TeamDataTest.cpp
+  TestUtils.cpp
 )
 
 add_executable(unit-tests ${SOURCES})

@@ -7,7 +7,7 @@
 
 picker::CoinFlipStrategy::CoinFlipStrategy(std::unique_ptr<RandomizationStrategy>&& inRand) : rand(std::move(inRand)) {}
 
-std::string picker::CoinFlipStrategy::selectWinner(const std::string& team1, const std::string& team2)
+std::string picker::CoinFlipStrategy::selectWinner(const std::string& team1, const std::string& team2) const
 {
   return rand->getRandom( ) < THRESH ? team1 : team2;
 }

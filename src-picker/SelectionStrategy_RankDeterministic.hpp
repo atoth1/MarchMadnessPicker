@@ -19,7 +19,7 @@ public:
 
   explicit RankDeterministicStrategy(const TeamDataLookup* inTeamDataLookup);
 
-  std::string selectWinner(const std::string& team1, const std::string& team2) override;
+  std::string selectWinner(const std::string& team1, const std::string& team2) const override;
 
 private:
   const TeamDataLookup* teamDataLookup;

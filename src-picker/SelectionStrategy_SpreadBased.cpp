@@ -78,7 +78,7 @@ double computeWinProbability(const double predictedSpread)
 
 }// namespace
 
-std::string picker::SpreadBasedStrategy::selectWinner(const std::string& team1, const std::string& team2)
+std::string picker::SpreadBasedStrategy::selectWinner(const std::string& team1, const std::string& team2) const
 {
   const picker::TeamData& data1 = teamDataLookup->at(team1);
   const picker::TeamData& data2 = teamDataLookup->at(team2);

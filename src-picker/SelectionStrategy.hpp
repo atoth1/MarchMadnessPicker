@@ -18,7 +18,7 @@ public:
 
   SelectionStrategy& operator=(SelectionStrategy&&) = delete;
 
-  virtual std::string selectWinner(const std::string& team1, const std::string& team2) = 0;
+  virtual std::string selectWinner(const std::string& team1, const std::string& team2) const = 0;
 
 protected:
   SelectionStrategy( ) = default;

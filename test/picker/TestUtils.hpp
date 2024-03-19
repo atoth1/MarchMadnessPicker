@@ -3,22 +3,12 @@
 
 #include <string>
 
-// #include "OutputStrategy.hpp"
 #include "RandomizationStrategy.hpp"
 #include "SelectionStrategy.hpp"
 
-/*class StringOutputStrategy : public picker::OutputStrategy
-{
-public:
-  StringOutputStrategy( ) = default;
-
-  void writeOutput( ) override;
-
-  std::string getOutput( ) const { return output; };
-
-private:
-  std::string output{ };
-};*/
+namespace picker {
+struct Bracket;
+}
 
 class DeterministicStrategy : public picker::RandomizationStrategy
 {
@@ -36,7 +26,7 @@ class LexicographicCompareStrategy : public picker::SelectionStrategy
 public:
   LexicographicCompareStrategy( ) = default;
 
-  std::string selectWinner(const std::string& team1, const std::string& team2) override;
+  std::string selectWinner(const std::string& team1, const std::string& team2) const override;
 };
 
 #endif

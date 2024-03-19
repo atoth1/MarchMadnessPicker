@@ -20,7 +20,7 @@ public:
 
   SpreadBasedStrategy(std::unique_ptr<RandomizationStrategy>&& inRand, const TeamDataLookup* inTeamDataLookup);
 
-  std::string selectWinner(const std::string& team1, const std::string& team2) override;
+  std::string selectWinner(const std::string& team1, const std::string& team2) const override;
 
 private:
   std::unique_ptr<RandomizationStrategy> rand;

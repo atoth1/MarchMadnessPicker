@@ -1,6 +1,10 @@
 
 set(SOURCES
+  Bracket.cpp
   BracketData.cpp
+  #OutputStrategy_Combination.hpp
+  #OutputStrategy_File.hpp
+  #OutputStrategy_Stdout.hpp
   ProblemData.cpp
   RandomizationStrategy_MersenneTwister.cpp
   RandomizationStrategy_MinStdRand.cpp

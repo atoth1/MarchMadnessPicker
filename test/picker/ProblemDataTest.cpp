@@ -1,6 +1,8 @@
 #include <fstream>
+#include <iterator>
 #include <optional>
 #include <string>
+#include <utility>
 #include <vector>
 
 #include "catch2/catch_test_macros.hpp"
@@ -86,7 +88,7 @@ std::string getBracketDataString( )
         { "name": "Northwestern", "seed": 7 },
         { "name": "Boise St.", "seed": 10 },
         { "name": "UCLA", "seed": 2 },
-        { "name": "UNC Ashville", "seed": 15 }
+        { "name": "UNC Asheville", "seed": 15 }
       ]
     })";
 }
@@ -175,6 +177,7 @@ TEST_CASE("ProblemData parsing - successul parse no default arguments", "[Proble
   picker::ProblemData problemData{ };
   jsonData.get_to(problemData);
   CHECK(problemData == getExpectedProblemDataNoDefaultArgs( ));// NOLINT
+  CHECK_NOTHROW(problemData.validate( ));// NOLINT;
 }
 
 TEST_CASE("ProblemData parsing - successul parse with default arguments", "[ProblemData]")// NOLINT
@@ -183,12 +186,25 @@ TEST_CASE("ProblemData parsing - successul parse with default arguments", "[Prob
   picker::ProblemData problemData{ };
   jsonData.get_to(problemData);
   CHECK(problemData == getExpectedProblemDataDefaultArgs( ));// NOLINT
+  CHECK_NOTHROW(problemData.validate( ));// NOLINT;
 }
 
 TEST_CASE("ProblemData parsing - expected exceptions", "[ProblemData]")// NOLINT
 {
   for (const auto& inputString : getInvalidInputStrings( )) {
     const auto jsonData = nlohmann::json::parse(inputString);
-    REQUIRE_THROWS_AS(jsonData.template get<picker::ProblemData>( ), nlohmann::json::exception);// NOLINT
+    CHECK_THROWS_AS(jsonData.template get<picker::ProblemData>( ), nlohmann::json::exception);// NOLINT
   }
+}
+
+TEST_CASE("PriblemData validation - invalid bracket", "[ProblemData]")// NOLINT
+{
+  const auto jsonData = nlohmann::json::parse(getValidInputStringDefaultArgs( ));
+  picker::ProblemData problemData{ };
+  jsonData.get_to(problemData);
+  picker::TeamData& topSeed = problemData.teamDataLookup.at(*problemData.bracketData.topLeft.teams.begin( ));
+  picker::TeamData& bottomSeed =
+    problemData.teamDataLookup.at(*std::prev(problemData.bracketData.topLeft.teams.end( )));
+  std::swap(topSeed.seed, bottomSeed.seed);
+  CHECK_THROWS_AS(problemData.validate( ), std::runtime_error);// NOLINT
 }

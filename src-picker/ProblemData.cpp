@@ -1,13 +1,46 @@
 #include <fstream>
+#include <stdexcept>
 #include <string>
 #include <vector>
 
 #include "nlohmann/json.hpp"
 
+#include "BracketData.hpp"
 #include "ProblemData.hpp"
 #include "TeamData.hpp"
 
-void picker::ProblemData::validate( ) const {}
+void picker::ProblemData::validate( ) const
+{
+  auto validateRegion = [this](const picker::RegionData& regionData) {
+    bool allTeamNamesFound = true;
+    for (const auto& teamName : regionData.teams) {
+      if (auto teamDataIt = this->teamDataLookup.find(teamName); teamDataIt == this->teamDataLookup.end( )) {
+        allTeamNamesFound = false;
+      }
+    }
+
+    if (!allTeamNamesFound) {
+      throw std::runtime_error(R"(ERROR - Mismatched team names between "bracket_data" and "team_data_file".")");
+    }
+
+    bool allSeedsCorrect = true;
+    int seed = 1;
+    for (const auto& teamName : regionData.teams) {
+      const auto& data = this->teamDataLookup.at(teamName);
+      if (data.seed != seed) { allSeedsCorrect = false; }
+      ++seed;
+    }
+
+    if (!allSeedsCorrect) {
+      throw std::runtime_error(R"(ERROR - Mismatched seeding between "bracket_data" and "team_data_file".")");
+    }
+  };
+
+  validateRegion(bracketData.topLeft);
+  validateRegion(bracketData.bottomLeft);
+  validateRegion(bracketData.topRight);
+  validateRegion(bracketData.bottomRight);
+}
 
 void picker::from_json(const nlohmann::json& input, picker::ProblemData& output)
 {

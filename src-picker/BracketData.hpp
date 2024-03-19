@@ -1,5 +1,5 @@
-#ifndef PICKER_BRACKET_DATA
-#define PICKER_BRACKET_DATA
+#ifndef PICKER_BRACKET_DATA_HPP
+#define PICKER_BRACKET_DATA_HPP
 
 #include <array>
 #include <string>
@@ -7,6 +7,7 @@
 #include "nlohmann/json_fwd.hpp"
 
 namespace picker {
+
 struct RegionData
 {
   static constexpr int N_TEAMS = 16;

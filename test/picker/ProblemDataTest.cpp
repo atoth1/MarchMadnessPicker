@@ -125,13 +125,13 @@ picker::BracketData getExpectedBracketData( )
   return data;
 }
 
-picker::TeamDataLookup getExpectedTeamDataLookup( )
+picker::ProblemData::TeamDataLookup getExpectedTeamDataLookup( )
 {
   std::ifstream teamDataStream("test-team-data.json");
   const auto teamData = nlohmann::json::parse(teamDataStream);
   const auto parsedTeamData = teamData.template get<std::vector<picker::TeamData>>( );
 
-  picker::TeamDataLookup lookup{ };
+  picker::ProblemData::TeamDataLookup lookup{ };
   for (const auto& data : parsedTeamData) { lookup[data.teamName] = data; }
   return lookup;
 }

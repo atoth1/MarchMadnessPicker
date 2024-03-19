@@ -1,21 +1,21 @@
-#ifndef PICKER_BRACKET_VALIDATOR
-#define PICKER_BRACKET_VALIDATOR
+#ifndef PICKER_PROBLEM_DATA_HPP
+#define PICKER_PROBLEM_DATA_HPP
 
 #include <optional>
 #include <string>
 #include <unordered_map>
 
-#include "nlohmann/json_fwd.hpp"
+#include "nlohmann/json.hpp"
 
 #include "BracketData.hpp"
 #include "TeamData.hpp"
 
 namespace picker {
 
-using TeamDataLookup = std::unordered_map<std::string, TeamData>;
-
 struct ProblemData
 {
+  using TeamDataLookup = std::unordered_map<std::string, TeamData>;
+
   BracketData bracketData{ };
   TeamDataLookup teamDataLookup{ };
 

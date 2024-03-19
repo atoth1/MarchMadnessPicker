@@ -21,7 +21,7 @@ void picker::from_json(const nlohmann::json& input, picker::ProblemData& output)
     std::vector<picker::TeamData> teamData{ };
     parsedTeamData.get_to(teamData);
 
-    TeamDataLookup lookup{ };
+    picker::ProblemData::TeamDataLookup lookup{ };
     for (const auto& data : teamData) { lookup[data.teamName] = data; }
     return lookup;
   };

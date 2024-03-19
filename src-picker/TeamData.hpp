@@ -1,5 +1,5 @@
-#ifndef PICKER_TEAM_DATA
-#define PICKER_TEAM_DATA
+#ifndef PICKER_TEAM_DATA_HPP
+#define PICKER_TEAM_DATA_HPP
 
 #include <optional>
 #include <string>
@@ -7,6 +7,7 @@
 #include "nlohmann/json_fwd.hpp"
 
 namespace picker {
+
 struct TeamData
 {
   std::string teamName;

@@ -7,12 +7,15 @@
 
 void picker::from_json(const nlohmann::json& input, picker::RegionData& output)
 {
-  if (!input.is_array( )) { throw std::runtime_error("ERROR - RegionData must be parsed from a JSON array."); }
+  if (input.contains("name")) { input.at("name").get_to(output.name); }
 
-  if (input.size( ) < RegionData::N_TEAMS) { throw std::runtime_error("ERROR - Too few teams in region."); }
+  const auto& teams = input.at("teams");
+  if (!teams.is_array( )) { throw std::runtime_error("ERROR - Teams must be parsed from a JSON array."); }
+
+  if (teams.size( ) < RegionData::N_TEAMS) { throw std::runtime_error("ERROR - Too few teams in region."); }
 
   std::set<unsigned> seeds{ };
-  for (const auto& team : input) {
+  for (const auto& team : teams) {
     const auto seed = team.at("seed").template get<unsigned>( );
     seeds.insert(seed);
     team.at("name").get_to(output.teams.at(seed - 1));

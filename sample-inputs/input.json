@@ -8,269 +8,281 @@
   "output_strategy_params": {},
   "bracket_data": {
     "dummy": "Spellings of team names need match those in team_data_file.",
-    "top_left": [
-      {
-        "name": "Connecticut",
-        "seed": 1
-      },
-      {
-        "name": "Stetson",
-        "seed": 16
-      },
-      {
-        "name": "Florida Atlantic",
-        "seed": 8
-      },
-      {
-        "name": "Northwestern",
-        "seed": 9
-      },
-      {
-        "name": "San Diego St.",
-        "seed": 5
-      },
-      {
-        "name": "UAB",
-        "seed": 12
-      },
-      {
-        "name": "Auburn",
-        "seed": 4
-      },
-      {
-        "name": "Yale",
-        "seed": 13
-      },
-      {
-        "name": "BYU",
-        "seed": 6
-      },
-      {
-        "name": "Duquesne",
-        "seed": 11
-      },
-      {
-        "name": "Illinois",
-        "seed": 3
-      },
-      {
-        "name": "Morehead St.",
-        "seed": 14
-      },
-      {
-        "name": "Washington St.",
-        "seed": 7
-      },
-      {
-        "name": "Drake",
-        "seed": 10
-      },
-      {
-        "name": "Iowa St.",
-        "seed": 2
-      },
-      {
-        "name": "South Dakota St.",
-        "seed": 15
-      }
-    ],
-    "bottom_left": [
-      {
-        "name": "North Carolina",
-        "seed": 1
-      },
-      {
-        "name": "TBD",
-        "seed": 16
-      },
-      {
-        "name": "Mississippi St.",
-        "seed": 8
-      },
-      {
-        "name": "Michigan St.",
-        "seed": 9
-      },
-      {
-        "name": "Saint Mary's",
-        "seed": 5
-      },
-      {
-        "name": "Grand Canyon",
-        "seed": 12
-      },
-      {
-        "name": "Alabama",
-        "seed": 4
-      },
-      {
-        "name": "Charleston",
-        "seed": 13
-      },
-      {
-        "name": "Clemson",
-        "seed": 6
-      },
-      {
-        "name": "New Mexico",
-        "seed": 11
-      },
-      {
-        "name": "Baylor",
-        "seed": 3
-      },
-      {
-        "name": "Colgate",
-        "seed": 14
-      },
-      {
-        "name": "Dayton",
-        "seed": 7
-      },
-      {
-        "name": "Nevada",
-        "seed": 10
-      },
-      {
-        "name": "Arizona",
-        "seed": 2
-      },
-      {
-        "name": "Long Beach St.",
-        "seed": 15
-      }
-    ],
-    "top_right": [
-      {
-        "name": "Houston",
-        "seed": 1
-      },
-      {
-        "name": "Longwood",
-        "seed": 16
-      },
-      {
-        "name": "Nebraska",
-        "seed": 8
-      },
-      {
-        "name": "Texas A&M",
-        "seed": 9
-      },
-      {
-        "name": "Wisconsin",
-        "seed": 5
-      },
-      {
-        "name": "James Madison",
-        "seed": 12
-      },
-      {
-        "name": "Duke",
-        "seed": 4
-      },
-      {
-        "name": "Vermont",
-        "seed": 13
-      },
-      {
-        "name": "Texas Tech",
-        "seed": 6
-      },
-      {
-        "name": "N.C. State",
-        "seed": 11
-      },
-      {
-        "name": "Kentucky",
-        "seed": 3
-      },
-      {
-        "name": "Oakland",
-        "seed": 14
-      },
-      {
-        "name": "Florida",
-        "seed": 7
-      },
-      {
-        "name": "TBD",
-        "seed": 10
-      },
-      {
-        "name": "Marquette",
-        "seed": 2
-      },
-      {
-        "name": "Western Kentucky",
-        "seed": 15
-      }
-    ],
-    "bottom_right": [
-      {
-        "name": "Purdue",
-        "seed": 1
-      },
-      {
-        "name": "TBD",
-        "seed": 16
-      },
-      {
-        "name": "Utah St.",
-        "seed": 8
-      },
-      {
-        "name": "TCU",
-        "seed": 9
-      },
-      {
-        "name": "Gonzaga",
-        "seed": 5
-      },
-      {
-        "name": "McNeese St.",
-        "seed": 12
-      },
-      {
-        "name": "Kansas",
-        "seed": 4
-      },
-      {
-        "name": "Samford",
-        "seed": 13
-      },
-      {
-        "name": "South Carolina",
-        "seed": 6
-      },
-      {
-        "name": "Oregon",
-        "seed": 11
-      },
-      {
-        "name": "Creighton",
-        "seed": 3
-      },
-      {
-        "name": "Akron",
-        "seed": 14
-      },
-      {
-        "name": "Texas",
-        "seed": 7
-      },
-      {
-        "name": "TBD",
-        "seed": 10
-      },
-      {
-        "name": "Tennessee",
-        "seed": 2
-      },
-      {
-        "name": "Saint Peter's",
-        "seed": 15
-      }
-    ]
+    "top_left": {
+      "name": "East",
+      "teams": [
+        {
+          "name": "Connecticut",
+          "seed": 1
+        },
+        {
+          "name": "Stetson",
+          "seed": 16
+        },
+        {
+          "name": "Florida Atlantic",
+          "seed": 8
+        },
+        {
+          "name": "Northwestern",
+          "seed": 9
+        },
+        {
+          "name": "San Diego St.",
+          "seed": 5
+        },
+        {
+          "name": "UAB",
+          "seed": 12
+        },
+        {
+          "name": "Auburn",
+          "seed": 4
+        },
+        {
+          "name": "Yale",
+          "seed": 13
+        },
+        {
+          "name": "BYU",
+          "seed": 6
+        },
+        {
+          "name": "Duquesne",
+          "seed": 11
+        },
+        {
+          "name": "Illinois",
+          "seed": 3
+        },
+        {
+          "name": "Morehead St.",
+          "seed": 14
+        },
+        {
+          "name": "Washington St.",
+          "seed": 7
+        },
+        {
+          "name": "Drake",
+          "seed": 10
+        },
+        {
+          "name": "Iowa St.",
+          "seed": 2
+        },
+        {
+          "name": "South Dakota St.",
+          "seed": 15
+        }
+      ]
+    },
+    "bottom_left": {
+      "name": "West",
+      "teams": [
+        {
+          "name": "North Carolina",
+          "seed": 1
+        },
+        {
+          "name": "TBD",
+          "seed": 16
+        },
+        {
+          "name": "Mississippi St.",
+          "seed": 8
+        },
+        {
+          "name": "Michigan St.",
+          "seed": 9
+        },
+        {
+          "name": "Saint Mary's",
+          "seed": 5
+        },
+        {
+          "name": "Grand Canyon",
+          "seed": 12
+        },
+        {
+          "name": "Alabama",
+          "seed": 4
+        },
+        {
+          "name": "Charleston",
+          "seed": 13
+        },
+        {
+          "name": "Clemson",
+          "seed": 6
+        },
+        {
+          "name": "New Mexico",
+          "seed": 11
+        },
+        {
+          "name": "Baylor",
+          "seed": 3
+        },
+        {
+          "name": "Colgate",
+          "seed": 14
+        },
+        {
+          "name": "Dayton",
+          "seed": 7
+        },
+        {
+          "name": "Nevada",
+          "seed": 10
+        },
+        {
+          "name": "Arizona",
+          "seed": 2
+        },
+        {
+          "name": "Long Beach St.",
+          "seed": 15
+        }
+      ]
+    },
+    "top_right": {
+      "name": "South",
+      "teams": [
+        {
+          "name": "Houston",
+          "seed": 1
+        },
+        {
+          "name": "Longwood",
+          "seed": 16
+        },
+        {
+          "name": "Nebraska",
+          "seed": 8
+        },
+        {
+          "name": "Texas A&M",
+          "seed": 9
+        },
+        {
+          "name": "Wisconsin",
+          "seed": 5
+        },
+        {
+          "name": "James Madison",
+          "seed": 12
+        },
+        {
+          "name": "Duke",
+          "seed": 4
+        },
+        {
+          "name": "Vermont",
+          "seed": 13
+        },
+        {
+          "name": "Texas Tech",
+          "seed": 6
+        },
+        {
+          "name": "N.C. State",
+          "seed": 11
+        },
+        {
+          "name": "Kentucky",
+          "seed": 3
+        },
+        {
+          "name": "Oakland",
+          "seed": 14
+        },
+        {
+          "name": "Florida",
+          "seed": 7
+        },
+        {
+          "name": "TBD",
+          "seed": 10
+        },
+        {
+          "name": "Marquette",
+          "seed": 2
+        },
+        {
+          "name": "Western Kentucky",
+          "seed": 15
+        }
+      ]
+    },
+    "bottom_right": {
+      "name": "Midwest",
+      "teams": [
+        {
+          "name": "Purdue",
+          "seed": 1
+        },
+        {
+          "name": "TBD",
+          "seed": 16
+        },
+        {
+          "name": "Utah St.",
+          "seed": 8
+        },
+        {
+          "name": "TCU",
+          "seed": 9
+        },
+        {
+          "name": "Gonzaga",
+          "seed": 5
+        },
+        {
+          "name": "McNeese St.",
+          "seed": 12
+        },
+        {
+          "name": "Kansas",
+          "seed": 4
+        },
+        {
+          "name": "Samford",
+          "seed": 13
+        },
+        {
+          "name": "South Carolina",
+          "seed": 6
+        },
+        {
+          "name": "Oregon",
+          "seed": 11
+        },
+        {
+          "name": "Creighton",
+          "seed": 3
+        },
+        {
+          "name": "Akron",
+          "seed": 14
+        },
+        {
+          "name": "Texas",
+          "seed": 7
+        },
+        {
+          "name": "TBD",
+          "seed": 10
+        },
+        {
+          "name": "Tennessee",
+          "seed": 2
+        },
+        {
+          "name": "Saint Peter's",
+          "seed": 15
+        }
+      ]
+    }
   }
 }

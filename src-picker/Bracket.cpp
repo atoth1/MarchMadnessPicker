@@ -1,4 +1,5 @@
 #include <memory>
+// #include <ostream>
 #include <string>
 #include <variant>
 
@@ -35,6 +36,7 @@ picker::Bracket picker::makeBracket(const BracketData& bracketData, const std::s
   auto makeRegion = [strategy](std::unique_ptr<Region>& region, const RegionData& regionData) {
     // NOLINTBEGIN
     region = std::make_unique<Region>( );
+    region->name = regionData.name;
 
     region->roundOf64[0] = std::make_shared<Matchup>(regionData.teams[0], regionData.teams[15], strategy);
     region->roundOf64[1] = std::make_shared<Matchup>(regionData.teams[7], regionData.teams[8], strategy);
@@ -67,3 +69,17 @@ picker::Bracket picker::makeBracket(const BracketData& bracketData, const std::s
   bracket.championship = std::make_unique<Matchup>(bracket.leftSemifinal, bracket.rightSemifinal, strategy);
   return bracket;
 }
+
+// std::ostream& picker::operator<<(std::ostream& out, picker::Region& region) {}
+
+/*std::ostream& picker::operator<<(std::ostream& out, picker::Bracket& bracket)
+{
+  out << bracket.topLeft->name << " Region:\n";
+  out << bracket.topLeft << "\n\n";
+
+  out << bracket.bottomLeft << "\n\n";
+
+  out << bracket.topRight << "\n\n";
+
+  out << bracket.bottomRight << "\n\n";*
+}*/

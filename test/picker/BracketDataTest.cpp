@@ -12,44 +12,11 @@ namespace {
 std::string getValidRegionInputString( )
 {
   return R"(
-    [
-      { "name": "A", "seed": 1 },
-      { "name": "B", "seed": 2 },
-      { "name": "C", "seed": 3 },
-      { "name": "D", "seed": 4 },
-      { "name": "E", "seed": 5 },
-      { "name": "F", "seed": 6 },
-      { "name": "G", "seed": 7 },
-      { "name": "H", "seed": 8 },
-      { "name": "I", "seed": 9 },
-      { "name": "J", "seed": 10 },
-      { "name": "K", "seed": 11 },
-      { "name": "L", "seed": 12 },
-      { "name": "M", "seed": 13 },
-      { "name": "N", "seed": 14 },
-      { "name": "O", "seed": 15 },
-      { "name": "P", "seed": 16 }
-    ]
-  )";
-}
-
-picker::RegionData getExpectedRegionData( )
-{
-  return { { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P" } };
-}
-
-std::vector<std::string> getRuntimeErrorRegionInputStrings( )
-{
-  return { R"({ })",
-    R"(
-      [
-        { "name": "A", "seed": 1 }
-      ]
-    )",
-    R"(
-      [
+    {
+      "name": "Region Name",
+      "teams": [
         { "name": "A", "seed": 1 },
-        { "name": "B", "seed": 1 },
+        { "name": "B", "seed": 2 },
         { "name": "C", "seed": 3 },
         { "name": "D", "seed": 4 },
         { "name": "E", "seed": 5 },
@@ -65,6 +32,40 @@ std::vector<std::string> getRuntimeErrorRegionInputStrings( )
         { "name": "O", "seed": 15 },
         { "name": "P", "seed": 16 }
       ]
+    }
+  )";
+}
+
+picker::RegionData getExpectedRegionData( )
+{
+  return { "Region Name", { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P" } };
+}
+
+std::vector<std::string> getRuntimeErrorRegionInputStrings( )
+{
+  return { R"( { "teams": {} } )",
+    R"( { "teams": [ { "name": "A", "seed": 1 } ] } )",
+    R"(
+      {
+        "teams": [
+          { "name": "A", "seed": 1 },
+          { "name": "B", "seed": 1 },
+          { "name": "C", "seed": 3 },
+          { "name": "D", "seed": 4 },
+          { "name": "E", "seed": 5 },
+          { "name": "F", "seed": 6 },
+          { "name": "G", "seed": 7 },
+          { "name": "H", "seed": 8 },
+          { "name": "I", "seed": 9 },
+          { "name": "J", "seed": 10 },
+          { "name": "K", "seed": 11 },
+          { "name": "L", "seed": 12 },
+          { "name": "M", "seed": 13 },
+          { "name": "N", "seed": 14 },
+          { "name": "O", "seed": 15 },
+          { "name": "P", "seed": 16 }
+        ]
+      }
     )" };
 }
 
@@ -72,44 +73,48 @@ std::vector<std::string> getJsonErrorRegionInputStrings( )
 {
   return {
     R"(
-      [
-        { "name": "A" },
-        { "name": "B", "seed": 2 },
-        { "name": "C", "seed": 3 },
-        { "name": "D", "seed": 4 },
-        { "name": "E", "seed": 5 },
-        { "name": "F", "seed": 6 },
-        { "name": "G", "seed": 7 },
-        { "name": "H", "seed": 8 },
-        { "name": "I", "seed": 9 },
-        { "name": "J", "seed": 10 },
-        { "name": "K", "seed": 11 },
-        { "name": "L", "seed": 12 },
-        { "name": "M", "seed": 13 },
-        { "name": "N", "seed": 14 },
-        { "name": "O", "seed": 15 },
-        { "name": "P", "seed": 16 }
-      ]
+      {
+        "teams": [
+          { "name": "A" },
+          { "name": "B", "seed": 2 },
+          { "name": "C", "seed": 3 },
+          { "name": "D", "seed": 4 },
+          { "name": "E", "seed": 5 },
+          { "name": "F", "seed": 6 },
+          { "name": "G", "seed": 7 },
+          { "name": "H", "seed": 8 },
+          { "name": "I", "seed": 9 },
+          { "name": "J", "seed": 10 },
+          { "name": "K", "seed": 11 },
+          { "name": "L", "seed": 12 },
+          { "name": "M", "seed": 13 },
+          { "name": "N", "seed": 14 },
+          { "name": "O", "seed": 15 },
+          { "name": "P", "seed": 16 }
+        ]
+      }
     )",
     R"(
-      [
-        { "seed": 1 },
-        { "name": "B", "seed": 2 },
-        { "name": "C", "seed": 3 },
-        { "name": "D", "seed": 4 },
-        { "name": "E", "seed": 5 },
-        { "name": "F", "seed": 6 },
-        { "name": "G", "seed": 7 },
-        { "name": "H", "seed": 8 },
-        { "name": "I", "seed": 9 },
-        { "name": "J", "seed": 10 },
-        { "name": "K", "seed": 11 },
-        { "name": "L", "seed": 12 },
-        { "name": "M", "seed": 13 },
-        { "name": "N", "seed": 14 },
-        { "name": "O", "seed": 15 },
-        { "name": "P", "seed": 16 }
-      ]
+      {
+        "teams": [
+          { "seed": 1 },
+          { "name": "B", "seed": 2 },
+          { "name": "C", "seed": 3 },
+          { "name": "D", "seed": 4 },
+          { "name": "E", "seed": 5 },
+          { "name": "F", "seed": 6 },
+          { "name": "G", "seed": 7 },
+          { "name": "H", "seed": 8 },
+          { "name": "I", "seed": 9 },
+          { "name": "J", "seed": 10 },
+          { "name": "K", "seed": 11 },
+          { "name": "L", "seed": 12 },
+          { "name": "M", "seed": 13 },
+          { "name": "N", "seed": 14 },
+          { "name": "O", "seed": 15 },
+          { "name": "P", "seed": 16 }
+        ]
+      }
     )"
   };
 }

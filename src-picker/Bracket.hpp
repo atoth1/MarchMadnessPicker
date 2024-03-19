@@ -3,6 +3,7 @@
 
 #include <array>
 #include <memory>
+// #include <ostream>
 #include <string>
 #include <variant>
 
@@ -40,6 +41,7 @@ struct Region
   static constexpr int ROUND_OF_32_MATCHUPS = 4;
   static constexpr int SWEET_16_MATCHUPS = 4;
 
+  std::string name{ };
   std::array<std::shared_ptr<Matchup>, ROUND_OF_64_MATCHUPS> roundOf64{ };
   std::array<std::shared_ptr<Matchup>, ROUND_OF_32_MATCHUPS> roundOf32{ };
   std::array<std::shared_ptr<Matchup>, SWEET_16_MATCHUPS> sweet16{ };
@@ -61,6 +63,10 @@ struct Bracket
 struct BracketData;
 
 Bracket makeBracket(const BracketData& bracketData, const std::shared_ptr<SelectionStrategy>& strategy);
+
+// std::ostream& operator<<(std::ostream& out, Region& region);
+
+// std::ostream& operator<<(std::ostream& out, Bracket& bracket);
 
 }// namespace picker
 

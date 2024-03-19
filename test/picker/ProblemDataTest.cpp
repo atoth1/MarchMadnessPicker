@@ -18,78 +18,86 @@ namespace {
 std::string getBracketDataString( )
 {
   return R"({
-      "top_left": [
-        { "name": "Alabama", "seed": 1 },
-        { "name": "Texas A&M Corpus Chris", "seed": 16 },
-        { "name": "Maryland", "seed": 8 },
-        { "name": "West Virginia", "seed": 9 },
-        { "name": "San Diego St.", "seed": 5 },
-        { "name": "Charleston", "seed": 12 },
-        { "name": "Virginia", "seed": 4 },
-        { "name": "Furman", "seed": 13 },
-        { "name": "Creighton", "seed": 6 },
-        { "name": "N.C. State", "seed": 11 },
-        { "name": "Baylor", "seed": 3 },
-        { "name": "UC Santa Barbara", "seed": 14 },
-        { "name": "Missouri", "seed": 7 },
-        { "name": "Utah St.", "seed": 10 },
-        { "name": "Arizona", "seed": 2 },
-        { "name": "Princeton", "seed": 15 }
-      ],
-      "bottom_left": [
-        { "name": "Purdue", "seed": 1 },
-        { "name": "Fairleigh Dickinson", "seed": 16 },
-        { "name": "Memphis", "seed": 8 },
-        { "name": "Florida Atlantic", "seed": 9 },
-        { "name": "Duke", "seed": 5 },
-        { "name": "Oral Roberts", "seed": 12 },
-        { "name": "Tennessee", "seed": 4 },
-        { "name": "Louisiana", "seed": 13 },
-        { "name": "Kentucky", "seed": 6 },
-        { "name": "Providence", "seed": 11 },
-        { "name": "Kansas St.", "seed": 3 },
-        { "name": "Montana St.", "seed": 14 },
-        { "name": "Michigan St.", "seed": 7 },
-        { "name": "USC", "seed": 10 },
-        { "name": "Marquette", "seed": 2 },
-        { "name": "Vermont", "seed": 15 }
-      ],
-      "top_right": [
-        { "name": "Houston", "seed": 1 },
-        { "name": "Northern Kentucky", "seed": 16 },
-        { "name": "Iowa", "seed": 8 },
-        { "name": "Auburn", "seed": 9 },
-        { "name": "Miami FL", "seed": 5 },
-        { "name": "Drake", "seed": 12 },
-        { "name": "Indiana", "seed": 4 },
-        { "name": "Kent St.", "seed": 13 },
-        { "name": "Iowa St.", "seed": 6 },
-        { "name": "Pittsburgh", "seed": 11 },
-        { "name": "Xavier", "seed": 3 },
-        { "name": "Kennesaw St.", "seed": 14 },
-        { "name": "Texas A&M", "seed": 7 },
-        { "name": "Penn St.", "seed": 10 },
-        { "name": "Texas", "seed": 2 },
-        { "name": "Colgate", "seed": 15 }
-      ],
-      "bottom_right": [
-        { "name": "Kansas", "seed": 1 },
-        { "name": "Howard", "seed": 16 },
-        { "name": "Arkansas", "seed": 8 },
-        { "name": "Illinois", "seed": 9 },
-        { "name": "Saint Mary's", "seed": 5 },
-        { "name": "VCU", "seed": 12 },
-        { "name": "Connecticut", "seed": 4 },
-        { "name": "Iona", "seed": 13 },
-        { "name": "TCU", "seed": 6 },
-        { "name": "Arizona St.", "seed": 11 },
-        { "name": "Gonzaga", "seed": 3 },
-        { "name": "Grand Canyon", "seed": 14 },
-        { "name": "Northwestern", "seed": 7 },
-        { "name": "Boise St.", "seed": 10 },
-        { "name": "UCLA", "seed": 2 },
-        { "name": "UNC Asheville", "seed": 15 }
-      ]
+      "top_left": {
+        "teams": [
+          { "name": "Alabama", "seed": 1 },
+          { "name": "Texas A&M Corpus Chris", "seed": 16 },
+          { "name": "Maryland", "seed": 8 },
+          { "name": "West Virginia", "seed": 9 },
+          { "name": "San Diego St.", "seed": 5 },
+          { "name": "Charleston", "seed": 12 },
+          { "name": "Virginia", "seed": 4 },
+          { "name": "Furman", "seed": 13 },
+          { "name": "Creighton", "seed": 6 },
+          { "name": "N.C. State", "seed": 11 },
+          { "name": "Baylor", "seed": 3 },
+          { "name": "UC Santa Barbara", "seed": 14 },
+          { "name": "Missouri", "seed": 7 },
+          { "name": "Utah St.", "seed": 10 },
+          { "name": "Arizona", "seed": 2 },
+          { "name": "Princeton", "seed": 15 }
+        ]
+      },
+      "bottom_left": {
+        "teams": [
+          { "name": "Purdue", "seed": 1 },
+          { "name": "Fairleigh Dickinson", "seed": 16 },
+          { "name": "Memphis", "seed": 8 },
+          { "name": "Florida Atlantic", "seed": 9 },
+          { "name": "Duke", "seed": 5 },
+          { "name": "Oral Roberts", "seed": 12 },
+          { "name": "Tennessee", "seed": 4 },
+          { "name": "Louisiana", "seed": 13 },
+          { "name": "Kentucky", "seed": 6 },
+          { "name": "Providence", "seed": 11 },
+          { "name": "Kansas St.", "seed": 3 },
+          { "name": "Montana St.", "seed": 14 },
+          { "name": "Michigan St.", "seed": 7 },
+          { "name": "USC", "seed": 10 },
+          { "name": "Marquette", "seed": 2 },
+          { "name": "Vermont", "seed": 15 }
+        ]
+      },
+      "top_right": {
+        "teams": [
+          { "name": "Houston", "seed": 1 },
+          { "name": "Northern Kentucky", "seed": 16 },
+          { "name": "Iowa", "seed": 8 },
+          { "name": "Auburn", "seed": 9 },
+          { "name": "Miami FL", "seed": 5 },
+          { "name": "Drake", "seed": 12 },
+          { "name": "Indiana", "seed": 4 },
+          { "name": "Kent St.", "seed": 13 },
+          { "name": "Iowa St.", "seed": 6 },
+          { "name": "Pittsburgh", "seed": 11 },
+          { "name": "Xavier", "seed": 3 },
+          { "name": "Kennesaw St.", "seed": 14 },
+          { "name": "Texas A&M", "seed": 7 },
+          { "name": "Penn St.", "seed": 10 },
+          { "name": "Texas", "seed": 2 },
+          { "name": "Colgate", "seed": 15 }
+        ]
+      },
+      "bottom_right": {
+        "teams": [
+          { "name": "Kansas", "seed": 1 },
+          { "name": "Howard", "seed": 16 },
+          { "name": "Arkansas", "seed": 8 },
+          { "name": "Illinois", "seed": 9 },
+          { "name": "Saint Mary's", "seed": 5 },
+          { "name": "VCU", "seed": 12 },
+          { "name": "Connecticut", "seed": 4 },
+          { "name": "Iona", "seed": 13 },
+          { "name": "TCU", "seed": 6 },
+          { "name": "Arizona St.", "seed": 11 },
+          { "name": "Gonzaga", "seed": 3 },
+          { "name": "Grand Canyon", "seed": 14 },
+          { "name": "Northwestern", "seed": 7 },
+          { "name": "Boise St.", "seed": 10 },
+          { "name": "UCLA", "seed": 2 },
+          { "name": "UNC Asheville", "seed": 15 }
+        ]
+      }
     })";
 }
 

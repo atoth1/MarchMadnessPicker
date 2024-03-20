@@ -4,6 +4,7 @@ set(SOURCES
   BracketData.cpp
   OutputStrategy_OStream.cpp
   ProblemData.cpp
+  RandomizationStrategy_Factory.cpp
   RandomizationStrategy_MersenneTwister.cpp
   RandomizationStrategy_MinStdRand.cpp
   RandomizationStrategy_StdRand.cpp

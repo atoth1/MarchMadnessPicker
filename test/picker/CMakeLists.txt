@@ -7,6 +7,7 @@ set(SOURCES
   BracketTest.cpp
   OutputStrategyTest.cpp
   ProblemDataTest.cpp
+  RandomizationStrategyFactoryTest.cpp
   RandomizationStrategyTest.cpp
   SelectionStrategyTest.cpp
   TeamDataTest.cpp

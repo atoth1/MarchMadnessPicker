@@ -3,12 +3,9 @@
 
 #include <string>
 
+#include "BracketData.hpp"
 #include "RandomizationStrategy.hpp"
 #include "SelectionStrategy.hpp"
-
-namespace picker {
-struct Bracket;
-}
 
 class DeterministicStrategy : public picker::RandomizationStrategy
 {
@@ -28,5 +25,7 @@ public:
 
   std::string selectWinner(const std::string& team1, const std::string& team2) const override;
 };
+
+picker::BracketData getTestBracketData( );
 
 #endif

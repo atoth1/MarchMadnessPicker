@@ -3,9 +3,11 @@
 
 #include <array>
 #include <memory>
-// #include <ostream>
+#include <ostream>
 #include <string>
 #include <variant>
+
+#include "BracketData.hpp"
 
 namespace picker {
 
@@ -37,11 +39,13 @@ private:
 
 struct Region
 {
-  static constexpr int ROUND_OF_64_MATCHUPS = 8;
-  static constexpr int ROUND_OF_32_MATCHUPS = 4;
-  static constexpr int SWEET_16_MATCHUPS = 4;
+  static constexpr int ROUND_OF_64_TEAMS = RegionData::N_TEAMS;
+  static constexpr int ROUND_OF_64_MATCHUPS = ROUND_OF_64_TEAMS / 2;
+  static constexpr int ROUND_OF_32_MATCHUPS = ROUND_OF_64_MATCHUPS / 2;
+  static constexpr int SWEET_16_MATCHUPS = ROUND_OF_32_MATCHUPS / 2;
 
   std::string name{ };
+  std::array<std::string, ROUND_OF_64_TEAMS> teams{ };
   std::array<std::shared_ptr<Matchup>, ROUND_OF_64_MATCHUPS> roundOf64{ };
   std::array<std::shared_ptr<Matchup>, ROUND_OF_32_MATCHUPS> roundOf32{ };
   std::array<std::shared_ptr<Matchup>, SWEET_16_MATCHUPS> sweet16{ };
@@ -60,13 +64,11 @@ struct Bracket
   std::unique_ptr<Matchup> championship{ };
 };
 
-struct BracketData;
-
 Bracket makeBracket(const BracketData& bracketData, const std::shared_ptr<SelectionStrategy>& strategy);
 
-// std::ostream& operator<<(std::ostream& out, Region& region);
+std::ostream& operator<<(std::ostream& out, const Region& region);
 
-// std::ostream& operator<<(std::ostream& out, Bracket& bracket);
+std::ostream& operator<<(std::ostream& out, const Bracket& bracket);
 
 }// namespace picker
 

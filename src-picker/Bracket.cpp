@@ -1,7 +1,10 @@
 #include <memory>
-// #include <ostream>
+#include <ostream>
 #include <string>
+#include <string_view>
 #include <variant>
+
+#include "fmt/core.h"
 
 #include "Bracket.hpp"
 #include "BracketData.hpp"
@@ -37,6 +40,7 @@ picker::Bracket picker::makeBracket(const BracketData& bracketData, const std::s
     // NOLINTBEGIN
     region = std::make_unique<Region>( );
     region->name = regionData.name;
+    region->teams = regionData.teams;
 
     region->roundOf64[0] = std::make_shared<Matchup>(regionData.teams[0], regionData.teams[15], strategy);
     region->roundOf64[1] = std::make_shared<Matchup>(regionData.teams[7], regionData.teams[8], strategy);
@@ -70,16 +74,70 @@ picker::Bracket picker::makeBracket(const BracketData& bracketData, const std::s
   return bracket;
 }
 
-// std::ostream& picker::operator<<(std::ostream& out, picker::Region& region) {}
+namespace {
+constexpr std::string_view pattern{ "{:_^25}\n" };
 
-/*std::ostream& picker::operator<<(std::ostream& out, picker::Bracket& bracket)
+constexpr std::string_view INDENT{ "                            " };
+
+void writeFinalFour(std::ostream& out, const picker::Bracket& bracket)
 {
-  out << bracket.topLeft->name << " Region:\n";
-  out << bracket.topLeft << "\n\n";
+  out << "Final Four:\n";
+  out << fmt::format(pattern, bracket.topLeft->elite8->getWinner( ));
+  out << INDENT << fmt::format(pattern, bracket.leftSemifinal->getWinner( ));
+  out << fmt::format(pattern, bracket.bottomLeft->elite8->getWinner( ));
+  out << INDENT << INDENT << fmt::format(pattern, bracket.championship->getWinner( ));
+  out << fmt::format(pattern, bracket.topRight->elite8->getWinner( ));
+  out << INDENT << fmt::format(pattern, bracket.rightSemifinal->getWinner( ));
+  out << fmt::format(pattern, bracket.bottomRight->elite8->getWinner( ));
+}
 
-  out << bracket.bottomLeft << "\n\n";
+}// namespace
 
-  out << bracket.topRight << "\n\n";
+std::ostream& picker::operator<<(std::ostream& out, const picker::Region& region)
+{
+  // NOLINTBEGIN
+  out << "Region Name - " << region.name << ":\n";
+  out << fmt::format(pattern, region.teams[0]);
+  out << INDENT << fmt::format(pattern, region.roundOf64[0]->getWinner( ));
+  out << fmt::format(pattern, region.teams[15]);
+  out << INDENT << INDENT << fmt::format(pattern, region.roundOf32[0]->getWinner( ));
+  out << fmt::format(pattern, region.teams[7]);
+  out << INDENT << fmt::format(pattern, region.roundOf64[1]->getWinner( ));
+  out << fmt::format(pattern, region.teams[8]);
+  out << INDENT << INDENT << INDENT << fmt::format(pattern, region.sweet16[0]->getWinner( ));
+  out << fmt::format(pattern, region.teams[4]);
+  out << INDENT << fmt::format(pattern, region.roundOf64[2]->getWinner( ));
+  out << fmt::format(pattern, region.teams[11]);
+  out << INDENT << INDENT << fmt::format(pattern, region.roundOf32[1]->getWinner( ));
+  out << fmt::format(pattern, region.teams[3]);
+  out << INDENT << fmt::format(pattern, region.roundOf64[3]->getWinner( ));
+  out << fmt::format(pattern, region.teams[12]);
+  out << INDENT << INDENT << INDENT << INDENT << fmt::format(pattern, region.elite8->getWinner( ));
+  out << fmt::format(pattern, region.teams[5]);
+  out << INDENT << fmt::format(pattern, region.roundOf64[4]->getWinner( ));
+  out << fmt::format(pattern, region.teams[10]);
+  out << INDENT << INDENT << fmt::format(pattern, region.roundOf32[2]->getWinner( ));
+  out << fmt::format(pattern, region.teams[2]);
+  out << INDENT << fmt::format(pattern, region.roundOf64[5]->getWinner( ));
+  out << fmt::format(pattern, region.teams[13]);
+  out << INDENT << INDENT << INDENT << fmt::format(pattern, region.sweet16[1]->getWinner( ));
+  out << fmt::format(pattern, region.teams[6]);
+  out << INDENT << fmt::format(pattern, region.roundOf64[6]->getWinner( ));
+  out << fmt::format(pattern, region.teams[9]);
+  out << INDENT << INDENT << fmt::format(pattern, region.roundOf32[3]->getWinner( ));
+  out << fmt::format(pattern, region.teams[1]);
+  out << INDENT << fmt::format(pattern, region.roundOf64[7]->getWinner( ));
+  out << fmt::format(pattern, region.teams[14]);
+  // NOLINTEND
+  return out;
+}
 
-  out << bracket.bottomRight << "\n\n";*
-}*/
+std::ostream& picker::operator<<(std::ostream& out, const picker::Bracket& bracket)
+{
+  out << *bracket.topLeft << '\n';
+  out << *bracket.bottomLeft << '\n';
+  out << *bracket.topRight << '\n';
+  out << *bracket.bottomRight << '\n';
+  writeFinalFour(out, bracket);
+  return out;
+}

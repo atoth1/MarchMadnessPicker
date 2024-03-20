@@ -2,9 +2,7 @@
 set(SOURCES
   Bracket.cpp
   BracketData.cpp
-  #OutputStrategy_Combination.hpp
-  #OutputStrategy_File.hpp
-  #OutputStrategy_Stdout.hpp
+  OutputStrategy_OStream.cpp
   ProblemData.cpp
   RandomizationStrategy_MersenneTwister.cpp
   RandomizationStrategy_MinStdRand.cpp
@@ -17,11 +15,17 @@ set(SOURCES
 
 add_library(${PROJECT_NAME} ${SOURCES})
 target_include_directories(${PROJECT_NAME} PUBLIC ${CMAKE_CURRENT_LIST_DIR})
-target_link_libraries(${PROJECT_NAME} MarchMadnessPicker_options)
-target_link_libraries(${PROJECT_NAME} MarchMadnessPicker_warnings)
-target_link_libraries(${PROJECT_NAME} nlohmann_json::nlohmann_json)
+target_link_libraries(${PROJECT_NAME}
+  PUBLIC
+  MarchMadnessPicker::MarchMadnessPicker_warnings
+  MarchMadnessPicker::MarchMadnessPicker_options
+  nlohmann_json::nlohmann_json
+  PRIVATE
+  fmt::fmt)
 
 set(EXE_NAME picker)
 add_executable(${EXE_NAME} main.cpp)
-target_link_libraries(${EXE_NAME} CLI11::CLI11)
-target_link_libraries(${EXE_NAME} ${PROJECT_NAME})
+target_link_libraries(${EXE_NAME}
+  PRIVATE
+  ${PROJECT_NAME}
+  CLI11::CLI11)

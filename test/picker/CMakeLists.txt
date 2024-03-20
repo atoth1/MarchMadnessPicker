@@ -5,6 +5,7 @@ configure_file("test-team-data.json" "test-team-data.json" COPYONLY)
 set(SOURCES
   BracketDataTest.cpp
   BracketTest.cpp
+  OutputStrategyTest.cpp
   ProblemDataTest.cpp
   RandomizationStrategyTest.cpp
   SelectionStrategyTest.cpp
@@ -16,8 +17,6 @@ add_executable(unit-tests ${SOURCES})
 target_link_libraries(unit-tests
   PRIVATE
   ${PROJECT_NAME}
-  MarchMadnessPicker::MarchMadnessPicker_warnings
-  MarchMadnessPicker::MarchMadnessPicker_options
   Catch2::Catch2WithMain
   fmt::fmt)
 

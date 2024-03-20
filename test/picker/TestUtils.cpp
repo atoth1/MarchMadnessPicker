@@ -1,7 +1,16 @@
+#include <memory>
+#include <sstream>
 #include <string>
 
+#include "Bracket.hpp"
 #include "BracketData.hpp"
 #include "TestUtils.hpp"
+
+StringstreamOutStrategy::StringstreamOutStrategy( ) : out(std::make_unique<std::ostringstream>( )) {}
+
+void StringstreamOutStrategy::writeOutput(const picker::Bracket& bracket) const { (*out) << bracket; }
+
+std::string StringstreamOutStrategy::getOutputString( ) const { return out->str( ); }
 
 DeterministicStrategy::DeterministicStrategy(const double inVal) : val(inVal) {}
 

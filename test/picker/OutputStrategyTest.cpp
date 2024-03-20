@@ -1,11 +1,10 @@
 #include <memory>
-#include <sstream>
 #include <string>
 
 #include "catch2/catch_test_macros.hpp"
 
 #include "Bracket.hpp"
-#include "OutputStrategy_OStream.hpp"
+#include "OutputStrategy.hpp"
 #include "TestUtils.hpp"
 
 namespace {
@@ -161,8 +160,8 @@ TEST_CASE("OutputStrategy - expected output", "[OutputStrategy]")// NOLINT
   const auto selectionStrategy = std::make_shared<LexicographicCompareStrategy>( );
   const auto bracket = picker::makeBracket(getTestBracketData( ), selectionStrategy);
 
-  std::stringstream out{ };
-  const picker::OStreamStrategy outputStrategy(&out);
+  const StringstreamOutStrategy stringstreamOutputStrategy{ };
+  const picker::OutputStrategy& outputStrategy = stringstreamOutputStrategy;
   outputStrategy.writeOutput(bracket);
-  CHECK(out.str( ) == getExpectedOutput( ));// NOLINT
+  CHECK(stringstreamOutputStrategy.getOutputString( ) == getExpectedOutput( ));// NOLINT*/
 }

@@ -8,7 +8,9 @@
 #include "nlohmann/json.hpp"
 
 #include "BracketData.hpp"
+#include "OutputStrategy_Factory.hpp"
 #include "RandomizationStrategy_Factory.hpp"
+#include "SelectionStrategy_Factory.hpp"
 #include "TeamData.hpp"
 
 namespace picker {
@@ -20,13 +22,14 @@ struct ProblemData
   BracketData bracketData{ };
   TeamDataLookup teamDataLookup{ };
 
+  // std::string selectionStrategy{ SelectionStrategyFactory::SPREAD_BASED_LABEL };
   std::string selectionStrategy{ "spread-based" };
   std::optional<nlohmann::json> selectionStrategyParams{ };
 
   std::string randomizationStrategy{ RandomizationStrategyFactory::MERSENNE_TWISTER_LABEL };
   std::optional<nlohmann::json> randomizationStrategyParams{ };
 
-  std::string outputStrategy{ "stdout" };
+  std::string outputStrategy{ OutputStrategyFactory::STDOUT_LABEL };
   std::optional<nlohmann::json> outputStrategyParams{ };
 
   void validate( ) const;

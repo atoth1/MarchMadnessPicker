@@ -2,13 +2,16 @@
 set(SOURCES
   Bracket.cpp
   BracketData.cpp
-  OutputStrategy_OStream.cpp
+  OutputStrategy_Factory.cpp
+  OutputStrategy_FileOut.cpp
+  OutputStrategy_StdOut.cpp
   ProblemData.cpp
   RandomizationStrategy_Factory.cpp
   RandomizationStrategy_MersenneTwister.cpp
   RandomizationStrategy_MinStdRand.cpp
   RandomizationStrategy_StdRand.cpp
   SelectionStrategy_CoinFlip.cpp
+  SelectionStrategy_Factory.cpp
   SelectionStrategy_RankDeterministic.cpp
   SelectionStrategy_SpreadBased.cpp
   TeamData.cpp

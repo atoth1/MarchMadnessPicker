@@ -26,18 +26,18 @@ TEST_CASE("SelectionStrategy - coin flip", "[SelectionStrategy]")// NOLINT
   const auto teamDataLookup = getTeamDataLookup( );
 
   constexpr double A_WIN_PROB = 0.49;
-  picker::CoinFlipStrategy strategy1(std::make_unique<DeterministicStrategy>(A_WIN_PROB));
+  const picker::CoinFlipStrategy strategy1(std::make_shared<DeterministicStrategy>(A_WIN_PROB));
   CHECK(strategy1.selectWinner("A", "B") == "A");// NOLINT
 
   constexpr double B_WIN_PROB = 0.51;
-  picker::CoinFlipStrategy strategy2(std::make_unique<DeterministicStrategy>(B_WIN_PROB));
+  const picker::CoinFlipStrategy strategy2(std::make_shared<DeterministicStrategy>(B_WIN_PROB));
   CHECK(strategy2.selectWinner("A", "B") == "B");// NOLINT
 }
 
 TEST_CASE("SelectionStrategy - rank deterministic", "[SelectionStrategy]")// NOLINT
 {
   const auto teamDataLookup = getTeamDataLookup( );
-  picker::RankDeterministicStrategy strategy(&teamDataLookup);
+  const picker::RankDeterministicStrategy strategy(&teamDataLookup);
   CHECK(strategy.selectWinner("A", "B") == "A");// NOLINT
 }
 
@@ -48,10 +48,12 @@ void testExpectedSpread(const double spread, const double expectedWinProb, picke
   lookup.at("A").adjEff = lookup.at("B").adjEff + spread;
 
   constexpr double probDelta = 1.0e-8;
-  picker::SpreadBasedStrategy strategy1(std::make_unique<DeterministicStrategy>(expectedWinProb - probDelta), &lookup);
+  const picker::SpreadBasedStrategy strategy1(
+    std::make_shared<DeterministicStrategy>(expectedWinProb - probDelta), &lookup);
   CHECK(strategy1.selectWinner("A", "B") == "A");// NOLINT
 
-  picker::SpreadBasedStrategy strategy2(std::make_unique<DeterministicStrategy>(expectedWinProb + probDelta), &lookup);
+  const picker::SpreadBasedStrategy strategy2(
+    std::make_shared<DeterministicStrategy>(expectedWinProb + probDelta), &lookup);
   CHECK(strategy2.selectWinner("A", "B") == "B");// NOLINT
 }
 }// namespace

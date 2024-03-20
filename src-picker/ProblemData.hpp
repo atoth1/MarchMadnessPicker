@@ -22,8 +22,7 @@ struct ProblemData
   BracketData bracketData{ };
   TeamDataLookup teamDataLookup{ };
 
-  // std::string selectionStrategy{ SelectionStrategyFactory::SPREAD_BASED_LABEL };
-  std::string selectionStrategy{ "spread-based" };
+  std::string selectionStrategy{ SelectionStrategyFactory::SPREAD_BASED_LABEL };
   std::optional<nlohmann::json> selectionStrategyParams{ };
 
   std::string randomizationStrategy{ RandomizationStrategyFactory::MERSENNE_TWISTER_LABEL };

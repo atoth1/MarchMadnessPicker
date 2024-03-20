@@ -3,12 +3,15 @@
 #include <utility>
 
 #include "RandomizationStrategy.hpp"
+#include "SelectionStrategy.hpp"
 #include "SelectionStrategy_SpreadBased.hpp"
 
-picker::SpreadBasedStrategy::SpreadBasedStrategy(std::unique_ptr<RandomizationStrategy>&& inRand,
+// NOLINTBEGIN
+picker::SpreadBasedStrategy::SpreadBasedStrategy(const std::shared_ptr<RandomizationStrategy>& inRand,
   const TeamDataLookup* inTeamDataLookup)
-  : rand(std::move(inRand)), teamDataLookup(inTeamDataLookup)
+  : rand(inRand), teamDataLookup(inTeamDataLookup)
 {}
+// NOLINTEND
 
 namespace {
 // NOLINTBEGIN
@@ -87,4 +90,17 @@ std::string picker::SpreadBasedStrategy::selectWinner(const std::string& team1, 
   const picker::TeamData& underdog = team1Favored ? data2 : data1;
   const double predictedSpread = computePredictedSpread(favorite, underdog);
   return rand->getRandom( ) < computeWinProbability(predictedSpread) ? favorite.teamName : underdog.teamName;
+}
+
+// NOLINTBEGIN
+picker::SpreadBasedStrategyFactory::SpreadBasedStrategyFactory(const std::shared_ptr<RandomizationStrategy>& inRand,
+  const TeamDataLookup* inTeamDataLookup)
+  : rand(inRand), teamDataLookup(inTeamDataLookup)
+{}
+// NOLINTEND
+
+std::shared_ptr<picker::SelectionStrategy> picker::SpreadBasedStrategyFactory::create(
+  const nlohmann::json& /*params*/) const
+{
+  return std::make_shared<SpreadBasedStrategy>(rand, teamDataLookup);
 }

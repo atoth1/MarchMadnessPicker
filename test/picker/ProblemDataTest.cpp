@@ -10,7 +10,10 @@
 #include "nlohmann/json.hpp"
 
 #include "BracketData.hpp"
+#include "OutputStrategy_Factory.hpp"
 #include "ProblemData.hpp"
+#include "RandomizationStrategy_Factory.hpp"
+#include "SelectionStrategy_Factory.hpp"
 #include "TeamData.hpp"
 
 namespace {
@@ -151,11 +154,11 @@ picker::ProblemData getExpectedProblemDataNoDefaultArgs( )
   using namespace nlohmann::literals;
   return { getExpectedBracketData( ),
     getExpectedTeamDataLookup( ),
-    "coin-flip",
+    std::string{ picker::SelectionStrategyFactory::COIN_FLIP_LABEL },
     "{}"_json,
-    "std-rand",
+    std::string{ picker::RandomizationStrategyFactory::STD_RAND_LABEL },
     "{}"_json,
-    "file",
+    std::string{ picker::OutputStrategyFactory::FILE_LABEL },
     "{}"_json };
 }
 
@@ -163,11 +166,11 @@ picker::ProblemData getExpectedProblemDataDefaultArgs( )
 {
   return { getExpectedBracketData( ),
     getExpectedTeamDataLookup( ),
-    "spread-based",
+    std::string{ picker::SelectionStrategyFactory::SPREAD_BASED_LABEL },
     std::nullopt,
-    "mersenne-twister",
+    std::string{ picker::RandomizationStrategyFactory::MERSENNE_TWISTER_LABEL },
     std::nullopt,
-    "stdout",
+    std::string{ picker::OutputStrategyFactory::STDOUT_LABEL },
     std::nullopt };
 }
 

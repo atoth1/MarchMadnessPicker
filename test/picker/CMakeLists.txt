@@ -10,6 +10,7 @@ set(SOURCES
   ProblemDataTest.cpp
   RandomizationStrategyFactoryTest.cpp
   RandomizationStrategyTest.cpp
+  SelectionStrategyFactoryTest.cpp
   SelectionStrategyTest.cpp
   TeamDataTest.cpp
   TestUtils.cpp

@@ -4,6 +4,9 @@
 #include <memory>
 #include <string>
 
+#include "nlohmann/json_fwd.hpp"
+
+#include "GenericFactory.hpp"
 #include "ProblemData.hpp"
 #include "SelectionStrategy.hpp"
 
@@ -18,12 +21,28 @@ class SpreadBasedStrategy : public SelectionStrategy
 public:
   using TeamDataLookup = picker::ProblemData::TeamDataLookup;
 
-  SpreadBasedStrategy(std::unique_ptr<RandomizationStrategy>&& inRand, const TeamDataLookup* inTeamDataLookup);
+  SpreadBasedStrategy(const std::shared_ptr<RandomizationStrategy>& inRand, const TeamDataLookup* inTeamDataLookup);
 
   std::string selectWinner(const std::string& team1, const std::string& team2) const override;
 
 private:
-  std::unique_ptr<RandomizationStrategy> rand;
+  std::shared_ptr<RandomizationStrategy> rand;
+
+  const TeamDataLookup* teamDataLookup;
+};
+
+class SpreadBasedStrategyFactory : public GenericFactory<SelectionStrategy>
+{
+public:
+  using TeamDataLookup = ProblemData::TeamDataLookup;
+
+  SpreadBasedStrategyFactory(const std::shared_ptr<RandomizationStrategy>& inRand,
+    const TeamDataLookup* inTeamDataLookup);
+
+  std::shared_ptr<SelectionStrategy> create(const nlohmann::json& params) const override;
+
+private:
+  std::shared_ptr<RandomizationStrategy> rand;
 
   const TeamDataLookup* teamDataLookup;
 };

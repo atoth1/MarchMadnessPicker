@@ -162,7 +162,7 @@ TEST_CASE("OutputStrategy - expected output", "[OutputStrategy]")// NOLINT
   const auto bracket = picker::makeBracket(getTestBracketData( ), selectionStrategy);
 
   std::stringstream out{ };
-  const picker::OutputStrategy_OStream outputStrategy(&out);
+  const picker::OStreamStrategy outputStrategy(&out);
   outputStrategy.writeOutput(bracket);
   CHECK(out.str( ) == getExpectedOutput( ));// NOLINT
 }

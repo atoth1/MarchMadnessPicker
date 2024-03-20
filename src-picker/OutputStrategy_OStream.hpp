@@ -9,10 +9,10 @@ namespace picker {
 
 struct Bracket;
 
-class OutputStrategy_OStream : public picker::OutputStrategy
+class OStreamStrategy : public picker::OutputStrategy
 {
 public:
-  explicit OutputStrategy_OStream(std::ostream* inOut) : out(inOut) {}
+  explicit OStreamStrategy(std::ostream* inOut) : out(inOut) {}
 
   void writeOutput(const Bracket& bracket) const override;
 

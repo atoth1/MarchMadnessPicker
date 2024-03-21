@@ -1,6 +1,7 @@
 #include <memory>
 #include <string>
-#include <utility>
+
+#include "nlohmann/json.hpp"
 
 #include "RandomizationStrategy.hpp"
 #include "SelectionStrategy.hpp"

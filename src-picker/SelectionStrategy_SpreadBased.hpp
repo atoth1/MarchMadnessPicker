@@ -12,14 +12,12 @@
 
 namespace picker {
 
-struct TeamData;
-
 class RandomizationStrategy;
 
 class SpreadBasedStrategy : public SelectionStrategy
 {
 public:
-  using TeamDataLookup = picker::ProblemData::TeamDataLookup;
+  using TeamDataLookup = ProblemData::TeamDataLookup;
 
   SpreadBasedStrategy(const std::shared_ptr<RandomizationStrategy>& inRand, const TeamDataLookup* inTeamDataLookup);
 

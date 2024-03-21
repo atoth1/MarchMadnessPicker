@@ -12,8 +12,6 @@
 
 namespace picker {
 
-struct TeamData;
-
 class RandomizationStrategy;
 
 class RankDeterministicStrategy : public SelectionStrategy

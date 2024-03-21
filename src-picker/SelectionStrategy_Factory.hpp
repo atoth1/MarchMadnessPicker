@@ -16,12 +16,6 @@ class SelectionStrategy;
 class SelectionStrategyFactory
 {
 public:
-  static constexpr std::string_view COIN_FLIP_LABEL = "coin-flip";
-
-  static constexpr std::string_view RANK_DETERMINISTIC_LABEL = "rank-deterministic";
-
-  static constexpr std::string_view SPREAD_BASED_LABEL = "spread-based";
-
   SelectionStrategyFactory( ) = default;
 
   void registerFactory(std::string_view type, std::unique_ptr<GenericFactory<SelectionStrategy>>&& factory);

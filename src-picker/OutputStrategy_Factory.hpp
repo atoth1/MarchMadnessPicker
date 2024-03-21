@@ -16,10 +16,6 @@ class OutputStrategy;
 class OutputStrategyFactory
 {
 public:
-  static constexpr std::string_view FILE_LABEL = "file";
-
-  static constexpr std::string_view STDOUT_LABEL = "stdout";
-
   OutputStrategyFactory( ) = default;
 
   void registerFactory(std::string_view type, std::unique_ptr<GenericFactory<OutputStrategy>>&& factory);

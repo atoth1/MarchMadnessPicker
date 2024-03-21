@@ -1,16 +1,13 @@
 #ifndef PICKER_PROBLEM_DATA_HPP
 #define PICKER_PROBLEM_DATA_HPP
 
-#include <optional>
 #include <string>
 #include <unordered_map>
 
 #include "nlohmann/json.hpp"
 
 #include "BracketData.hpp"
-#include "OutputStrategy_Factory.hpp"
-#include "RandomizationStrategy_Factory.hpp"
-#include "SelectionStrategy_Factory.hpp"
+#include "Constants.hpp"
 #include "TeamData.hpp"
 
 namespace picker {
@@ -22,14 +19,14 @@ struct ProblemData
   BracketData bracketData{ };
   TeamDataLookup teamDataLookup{ };
 
-  std::string selectionStrategy{ SelectionStrategyFactory::SPREAD_BASED_LABEL };
-  std::optional<nlohmann::json> selectionStrategyParams{ };
+  std::string selectionStrategy{ SPREAD_BASED_STRATEGY_LABEL };
+  nlohmann::json selectionStrategyParams{ };
 
-  std::string randomizationStrategy{ RandomizationStrategyFactory::MERSENNE_TWISTER_LABEL };
-  std::optional<nlohmann::json> randomizationStrategyParams{ };
+  std::string randomizationStrategy{ MERSENNE_TWISTER_STRATEGY_LABEL };
+  nlohmann::json randomizationStrategyParams{ };
 
-  std::string outputStrategy{ OutputStrategyFactory::STDOUT_LABEL };
-  std::optional<nlohmann::json> outputStrategyParams{ };
+  std::string outputStrategy{ STD_OUT_STRATEGY_LABEL };
+  nlohmann::json outputStrategyParams{ };
 
   void validate( ) const;
 

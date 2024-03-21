@@ -1,6 +1,8 @@
 #include <memory>
 #include <string>
 
+#include "nlohmann/json.hpp"
+
 #include "SelectionStrategy.hpp"
 #include "SelectionStrategy_RankDeterministic.hpp"
 #include "TeamData.hpp"

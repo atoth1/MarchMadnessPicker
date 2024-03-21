@@ -4,6 +4,7 @@
 #include "catch2/catch_test_macros.hpp"
 #include "nlohmann/json.hpp"
 
+#include "Constants.hpp"
 #include "ProblemData.hpp"
 #include "SelectionStrategy_CoinFlip.hpp"
 #include "SelectionStrategy_Factory.hpp"
@@ -19,24 +20,23 @@ TEST_CASE("SelectionStrategyFactory - create strategies", "[SelectionStrategyFac
 
   picker::SelectionStrategyFactory factory{ };
   factory.registerFactory(
-    picker::SelectionStrategyFactory::COIN_FLIP_LABEL, std::make_unique<picker::CoinFlipStrategyFactory>(randStrategy));
-  factory.registerFactory(picker::SelectionStrategyFactory::RANK_DETERMINISTIC_LABEL,
+    picker::COIN_FLIP_STRATEGY_LABEL, std::make_unique<picker::CoinFlipStrategyFactory>(randStrategy));
+  factory.registerFactory(picker::RANK_DETERMINISTIC_STRATEGY_LABEL,
     std::make_unique<picker::RankDeterministicStrategyFactory>(&teamDataLookup));
-  factory.registerFactory(picker::SelectionStrategyFactory::SPREAD_BASED_LABEL,
+  factory.registerFactory(picker::SPREAD_BASED_STRATEGY_LABEL,
     std::make_unique<picker::SpreadBasedStrategyFactory>(randStrategy, &teamDataLookup));
 
   // NOLINTBEGIN
   constexpr std::string_view unregisteredFactoryLabel{ "unregistered" };
   const nlohmann::json params{ };
   CHECK(factory.create(unregisteredFactoryLabel, params) == nullptr);
-  CHECK(std::dynamic_pointer_cast<picker::CoinFlipStrategy>(
-          factory.create(picker::SelectionStrategyFactory::COIN_FLIP_LABEL, params))
+  CHECK(std::dynamic_pointer_cast<picker::CoinFlipStrategy>(factory.create(picker::COIN_FLIP_STRATEGY_LABEL, params))
         != nullptr);
   CHECK(std::dynamic_pointer_cast<picker::RankDeterministicStrategy>(
-          factory.create(picker::SelectionStrategyFactory::RANK_DETERMINISTIC_LABEL, params))
+          factory.create(picker::RANK_DETERMINISTIC_STRATEGY_LABEL, params))
         != nullptr);
-  CHECK(std::dynamic_pointer_cast<picker::SpreadBasedStrategy>(
-          factory.create(picker::SelectionStrategyFactory::SPREAD_BASED_LABEL, params))
-        != nullptr);
+  CHECK(
+    std::dynamic_pointer_cast<picker::SpreadBasedStrategy>(factory.create(picker::SPREAD_BASED_STRATEGY_LABEL, params))
+    != nullptr);
   // NOLINTEND
 }

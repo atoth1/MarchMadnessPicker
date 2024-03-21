@@ -1,6 +1,5 @@
 #include <fstream>
 #include <iterator>
-#include <optional>
 #include <string>
 #include <utility>
 #include <vector>
@@ -10,10 +9,8 @@
 #include "nlohmann/json.hpp"
 
 #include "BracketData.hpp"
-#include "OutputStrategy_Factory.hpp"
+#include "Constants.hpp"
 #include "ProblemData.hpp"
-#include "RandomizationStrategy_Factory.hpp"
-#include "SelectionStrategy_Factory.hpp"
 #include "TeamData.hpp"
 
 namespace {
@@ -111,11 +108,11 @@ std::string getValidInputStringNoDefaultArgs( )
       "bracket_data": {},
       "team_data_file": "test-team-data.json",
       "selection_strategy": "coin-flip",
-      "selection_strategy_params": {{ }},
+      "selection_strategy_params": {{ "A": "B" }},
       "randomization_strategy": "std-rand",
-      "randomization_strategy_params": {{ }},
+      "randomization_strategy_params": {{ "C": 1 }},
       "output_strategy": "file",
-      "output_strategy_params": {{ }}
+      "output_strategy_params": {{ "D": "E" }}
     }})",
     getBracketDataString( ));
 }
@@ -154,24 +151,24 @@ picker::ProblemData getExpectedProblemDataNoDefaultArgs( )
   using namespace nlohmann::literals;
   return { getExpectedBracketData( ),
     getExpectedTeamDataLookup( ),
-    std::string{ picker::SelectionStrategyFactory::COIN_FLIP_LABEL },
-    "{}"_json,
-    std::string{ picker::RandomizationStrategyFactory::STD_RAND_LABEL },
-    "{}"_json,
-    std::string{ picker::OutputStrategyFactory::FILE_LABEL },
-    "{}"_json };
+    std::string{ picker::COIN_FLIP_STRATEGY_LABEL },
+    R"({ "A": "B" })"_json,
+    std::string{ picker::STD_RAND_STRATEGY_LABEL },
+    R"({ "C": 1 })"_json,
+    std::string{ picker::FILE_OUT_STRATEGY_LABEL },
+    R"({ "D": "E" })"_json };
 }
 
 picker::ProblemData getExpectedProblemDataDefaultArgs( )
 {
   return { getExpectedBracketData( ),
     getExpectedTeamDataLookup( ),
-    std::string{ picker::SelectionStrategyFactory::SPREAD_BASED_LABEL },
-    std::nullopt,
-    std::string{ picker::RandomizationStrategyFactory::MERSENNE_TWISTER_LABEL },
-    std::nullopt,
-    std::string{ picker::OutputStrategyFactory::STDOUT_LABEL },
-    std::nullopt };
+    std::string{ picker::SPREAD_BASED_STRATEGY_LABEL },
+    { },
+    std::string{ picker::MERSENNE_TWISTER_STRATEGY_LABEL },
+    { },
+    std::string{ picker::STD_OUT_STRATEGY_LABEL },
+    {} };
 }
 
 std::vector<std::string> getInvalidInputStrings( )

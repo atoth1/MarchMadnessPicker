@@ -16,12 +16,6 @@ class RandomizationStrategy;
 class RandomizationStrategyFactory
 {
 public:
-  static constexpr std::string_view MERSENNE_TWISTER_LABEL = "mersenne-twister";
-
-  static constexpr std::string_view MINSTD_RAND_LABEL = "minstd-rand";
-
-  static constexpr std::string_view STD_RAND_LABEL = "std-rand";
-
   RandomizationStrategyFactory( ) = default;
 
   void registerFactory(std::string_view type, std::unique_ptr<GenericFactory<RandomizationStrategy>>&& factory);

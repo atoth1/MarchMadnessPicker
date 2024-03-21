@@ -1,6 +1,8 @@
 #include <memory>
 #include <string>
 
+#include "nlohmann/json.hpp"
+
 #include "RandomizationStrategy.hpp"
 #include "SelectionStrategy.hpp"
 #include "SelectionStrategy_CoinFlip.hpp"

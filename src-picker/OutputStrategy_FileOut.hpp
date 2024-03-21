@@ -7,6 +7,7 @@
 
 #include "GenericFactory.hpp"
 #include "OutputStrategy.hpp"
+#include "OutputStrategy_Factory.hpp"
 
 namespace picker {
 
@@ -23,7 +24,7 @@ private:
   std::unique_ptr<std::ofstream> out;
 };
 
-class FileOutStrategyFactory : public GenericFactory<OutputStrategy>
+class FileOutStrategyFactory : public OutputStrategyFactory::FactoryType
 {
 public:
   std::shared_ptr<OutputStrategy> create(const nlohmann::json& params) const override;

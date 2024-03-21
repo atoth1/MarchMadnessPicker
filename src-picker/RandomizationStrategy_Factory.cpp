@@ -8,7 +8,7 @@
 #include "RandomizationStrategy_Factory.hpp"
 
 void picker::RandomizationStrategyFactory::registerFactory(std::string_view type,
-  std::unique_ptr<GenericFactory<RandomizationStrategy>>&& factory)
+  std::unique_ptr<FactoryType>&& factory)
 {
   factories[type] = std::move(factory);
 }

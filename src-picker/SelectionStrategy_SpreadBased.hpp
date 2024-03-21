@@ -7,8 +7,8 @@
 #include "nlohmann/json_fwd.hpp"
 
 #include "GenericFactory.hpp"
-#include "ProblemData.hpp"
 #include "SelectionStrategy.hpp"
+#include "SelectionStrategy_Factory.hpp"
 
 namespace picker {
 
@@ -17,32 +17,32 @@ class RandomizationStrategy;
 class SpreadBasedStrategy : public SelectionStrategy
 {
 public:
-  using TeamDataLookup = ProblemData::TeamDataLookup;
+  using RandomizationStrategyPtr = SelectionStrategyFactory::RandomizationStrategyPtr;
 
-  SpreadBasedStrategy(const std::shared_ptr<RandomizationStrategy>& inRand, const TeamDataLookup* inTeamDataLookup);
+  using TeamDataLookupPtr = SelectionStrategyFactory::TeamDataLookupPtr;
+
+  SpreadBasedStrategy(RandomizationStrategyPtr inRand, TeamDataLookupPtr inTeamDataLookup);
 
   std::string selectWinner(const std::string& team1, const std::string& team2) const override;
 
 private:
-  std::shared_ptr<RandomizationStrategy> rand;
+  RandomizationStrategyPtr rand;
 
-  const TeamDataLookup* teamDataLookup;
+  TeamDataLookupPtr teamDataLookup;
 };
 
-class SpreadBasedStrategyFactory : public GenericFactory<SelectionStrategy>
+class SpreadBasedStrategyFactory : public SelectionStrategyFactory::FactoryType
 {
 public:
-  using TeamDataLookup = ProblemData::TeamDataLookup;
+  using RandomizationStrategyPtr = SelectionStrategyFactory::RandomizationStrategyPtr;
 
-  SpreadBasedStrategyFactory(const std::shared_ptr<RandomizationStrategy>& inRand,
-    const TeamDataLookup* inTeamDataLookup);
+  using TeamDataLookupPtr = SelectionStrategyFactory::TeamDataLookupPtr;
 
-  std::shared_ptr<SelectionStrategy> create(const nlohmann::json& params) const override;
+  SpreadBasedStrategyFactory( ) = default;
 
-private:
-  std::shared_ptr<RandomizationStrategy> rand;
-
-  const TeamDataLookup* teamDataLookup;
+  std::shared_ptr<SelectionStrategy> create(const nlohmann::json& params,
+    const RandomizationStrategyPtr& randomizationStrategy,
+    const TeamDataLookupPtr& teamDataLookup) const override;
 };
 
 }// namespace picker

@@ -8,6 +8,7 @@
 
 #include "GenericFactory.hpp"
 #include "SelectionStrategy.hpp"
+#include "SelectionStrategy_Factory.hpp"
 
 namespace picker {
 
@@ -16,7 +17,9 @@ class RandomizationStrategy;
 class CoinFlipStrategy : public SelectionStrategy
 {
 public:
-  explicit CoinFlipStrategy(const std::shared_ptr<RandomizationStrategy>& inRand);
+using RandomizationStrategyPtr = SelectionStrategyFactory::RandomizationStrategyPtr;
+
+  explicit CoinFlipStrategy(RandomizationStrategyPtr inRand);
 
   std::string selectWinner(const std::string& team1, const std::string& team2) const override;
 
@@ -26,15 +29,19 @@ private:
   std::shared_ptr<RandomizationStrategy> rand;
 };
 
-class CoinFlipStrategyFactory : public GenericFactory<SelectionStrategy>
+class CoinFlipStrategyFactory : public SelectionStrategyFactory::FactoryType
+
 {
 public:
-  explicit CoinFlipStrategyFactory(const std::shared_ptr<RandomizationStrategy>& inRand);
+  using RandomizationStrategyPtr = SelectionStrategyFactory::RandomizationStrategyPtr;
 
-  std::shared_ptr<SelectionStrategy> create(const nlohmann::json& params) const override;
+  using TeamDataLookupPtr = SelectionStrategyFactory::TeamDataLookupPtr;
 
-private:
-  std::shared_ptr<RandomizationStrategy> rand;
+  CoinFlipStrategyFactory( ) = default;
+
+  std::shared_ptr<SelectionStrategy> create(const nlohmann::json& params,
+    const RandomizationStrategyPtr& randomizationStrategy,
+    const TeamDataLookupPtr& teamDataLookup) const override;
 };
 
 }// namespace picker

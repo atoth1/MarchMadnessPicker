@@ -6,7 +6,7 @@
 #include "nlohmann/json_fwd.hpp"
 
 namespace picker {
-template <class Created> class GenericFactory
+template <class Created, class... ArgTypes> class GenericFactory
 {
 public:
   virtual ~GenericFactory( ) = default;
@@ -19,7 +19,7 @@ public:
 
   GenericFactory& operator=(GenericFactory&&) = delete;
 
-  virtual std::shared_ptr<Created> create(const nlohmann::json& params) const = 0;
+  virtual std::shared_ptr<Created> create(const nlohmann::json& params, const ArgTypes&... args) const = 0;
 
 protected:
   GenericFactory( ) = default;

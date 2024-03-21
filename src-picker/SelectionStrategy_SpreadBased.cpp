@@ -1,18 +1,17 @@
 #include <memory>
 #include <string>
+#include <utility>
 
-#include "nlohmann/json.hpp"
+#include "nlohmann/json.hpp"// NOLINT(misc-include-cleaner)
 
-#include "RandomizationStrategy.hpp"
+#include "RandomizationStrategy.hpp"// NOLINT(misc-include-cleaner)
 #include "SelectionStrategy.hpp"
 #include "SelectionStrategy_SpreadBased.hpp"
+#include "TeamData.hpp"
 
-// NOLINTBEGIN
-picker::SpreadBasedStrategy::SpreadBasedStrategy(const std::shared_ptr<RandomizationStrategy>& inRand,
-  const TeamDataLookup* inTeamDataLookup)
-  : rand(inRand), teamDataLookup(inTeamDataLookup)
+picker::SpreadBasedStrategy::SpreadBasedStrategy(RandomizationStrategyPtr inRand, TeamDataLookupPtr inTeamDataLookup)
+  : rand(std::move(inRand)), teamDataLookup(std::move(inTeamDataLookup))
 {}
-// NOLINTEND
 
 namespace {
 // NOLINTBEGIN
@@ -93,15 +92,10 @@ std::string picker::SpreadBasedStrategy::selectWinner(const std::string& team1, 
   return rand->getRandom( ) < computeWinProbability(predictedSpread) ? favorite.teamName : underdog.teamName;
 }
 
-// NOLINTBEGIN
-picker::SpreadBasedStrategyFactory::SpreadBasedStrategyFactory(const std::shared_ptr<RandomizationStrategy>& inRand,
-  const TeamDataLookup* inTeamDataLookup)
-  : rand(inRand), teamDataLookup(inTeamDataLookup)
-{}
-// NOLINTEND
-
 std::shared_ptr<picker::SelectionStrategy> picker::SpreadBasedStrategyFactory::create(
-  const nlohmann::json& /*params*/) const
+  const nlohmann::json& /*params*/,// NOLINT(misc-include-cleaner)
+  const RandomizationStrategyPtr& randomizationStrategy,
+  const TeamDataLookupPtr& teamDataLookup) const
 {
-  return std::make_shared<SpreadBasedStrategy>(rand, teamDataLookup);
+  return std::make_shared<SpreadBasedStrategy>(randomizationStrategy, teamDataLookup);
 }

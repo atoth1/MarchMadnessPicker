@@ -8,6 +8,7 @@
 
 #include "GenericFactory.hpp"
 #include "RandomizationStrategy.hpp"
+#include "RandomizationStrategy_Factory.hpp"
 
 namespace picker {
 
@@ -24,7 +25,7 @@ private:
   std::uniform_real_distribution<double> dist;
 };
 
-class MinStdRandStrategyFactory : public GenericFactory<RandomizationStrategy>
+class MinStdRandStrategyFactory : public RandomizationStrategyFactory::FactoryType
 {
 public:
   std::shared_ptr<RandomizationStrategy> create(const nlohmann::json& params) const override;

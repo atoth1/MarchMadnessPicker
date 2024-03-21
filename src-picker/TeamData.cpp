@@ -5,7 +5,7 @@
 
 #include "TeamData.hpp"
 
-void picker::from_json(const nlohmann::json& input, picker::TeamData& output)
+void picker::from_json(const nlohmann::json& input, picker::TeamData& output)// NOLINT(misc-include-cleaner)
 {
   input.at("team_name").get_to(output.teamName);
   if (!input.at("seed").is_null( )) { output.seed = input.at("seed").template get<int>( ); }

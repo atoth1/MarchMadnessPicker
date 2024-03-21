@@ -37,7 +37,7 @@ std::string picker::Matchup::getWinner( )
 picker::Bracket picker::makeBracket(const BracketData& bracketData, const std::shared_ptr<SelectionStrategy>& strategy)
 {
   auto makeRegion = [strategy](std::unique_ptr<Region>& region, const RegionData& regionData) {
-    // NOLINTBEGIN
+    // NOLINTBEGIN(*-magic-numbers)
     region = std::make_unique<Region>( );
     region->name = regionData.name;
     region->teams = regionData.teams;
@@ -60,7 +60,7 @@ picker::Bracket picker::makeBracket(const BracketData& bracketData, const std::s
     region->sweet16[1] = std::make_shared<Matchup>(region->roundOf32[2], region->roundOf32[3], strategy);
 
     region->elite8 = std::make_shared<Matchup>(region->sweet16[0], region->sweet16[1], strategy);
-    // NOLINTEND
+    // NOLINTEND(*-magic-numbers)
   };
 
   Bracket bracket{ };
@@ -95,7 +95,7 @@ void writeFinalFour(std::ostream& out, const picker::Bracket& bracket)
 
 std::ostream& picker::operator<<(std::ostream& out, const picker::Region& region)
 {
-  // NOLINTBEGIN
+  // NOLINTBEGIN(*-magic-numbers)
   out << "Region Name - " << region.name << ":\n";
   out << fmt::format(pattern, region.teams[0]);
   out << INDENT << fmt::format(pattern, region.roundOf64[0]->getWinner( ));
@@ -128,7 +128,7 @@ std::ostream& picker::operator<<(std::ostream& out, const picker::Region& region
   out << fmt::format(pattern, region.teams[1]);
   out << INDENT << fmt::format(pattern, region.roundOf64[7]->getWinner( ));
   out << fmt::format(pattern, region.teams[14]);
-  // NOLINTEND
+  // NOLINTEND(*-magic-numbers)
   return out;
 }
 

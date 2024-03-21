@@ -9,6 +9,7 @@
 #include "GenericFactory.hpp"
 #include "ProblemData.hpp"
 #include "SelectionStrategy.hpp"
+#include "SelectionStrategy_Factory.hpp"
 
 namespace picker {
 
@@ -17,27 +18,28 @@ class RandomizationStrategy;
 class RankDeterministicStrategy : public SelectionStrategy
 {
 public:
-  using TeamDataLookup = picker::ProblemData::TeamDataLookup;
+  using TeamDataLookupPtr = SelectionStrategyFactory::TeamDataLookupPtr;
 
-  explicit RankDeterministicStrategy(const TeamDataLookup* inTeamDataLookup);
+  explicit RankDeterministicStrategy(TeamDataLookupPtr inTeamDataLookup);
 
   std::string selectWinner(const std::string& team1, const std::string& team2) const override;
 
 private:
-  const TeamDataLookup* teamDataLookup;
+  TeamDataLookupPtr teamDataLookup;
 };
 
-class RankDeterministicStrategyFactory : public GenericFactory<SelectionStrategy>
+class RankDeterministicStrategyFactory : public SelectionStrategyFactory::FactoryType
 {
 public:
-  using TeamDataLookup = ProblemData::TeamDataLookup;
+  using RandomizationStrategyPtr = SelectionStrategyFactory::RandomizationStrategyPtr;
 
-  RankDeterministicStrategyFactory(const TeamDataLookup* inTeamDataLookup);
+  using TeamDataLookupPtr = SelectionStrategyFactory::TeamDataLookupPtr;
 
-  std::shared_ptr<SelectionStrategy> create(const nlohmann::json& params) const override;
+  RankDeterministicStrategyFactory( ) = default;
 
-private:
-  const TeamDataLookup* teamDataLookup;
+  std::shared_ptr<SelectionStrategy> create(const nlohmann::json& params,
+    const RandomizationStrategyPtr& randomizationStrategy,
+    const TeamDataLookupPtr& teamDataLookup) const override;
 };
 
 }// namespace picker

@@ -5,7 +5,7 @@
 
 #include "BracketData.hpp"
 
-void picker::from_json(const nlohmann::json& input, picker::RegionData& output)
+void picker::from_json(const nlohmann::json& input, picker::RegionData& output)// NOLINT(misc-include-cleaner)
 {
   if (input.contains("name")) { input.at("name").get_to(output.name); }
 
@@ -24,7 +24,7 @@ void picker::from_json(const nlohmann::json& input, picker::RegionData& output)
   if (seeds.size( ) < RegionData::N_TEAMS) { throw std::runtime_error("ERROR - Duplicate seeds in region."); }
 }
 
-void picker::from_json(const nlohmann::json& input, picker::BracketData& output)
+void picker::from_json(const nlohmann::json& input, picker::BracketData& output)// NOLINT(misc-include-cleaner)
 {
   input.at("top_left").get_to(output.topLeft);
   input.at("bottom_left").get_to(output.bottomLeft);

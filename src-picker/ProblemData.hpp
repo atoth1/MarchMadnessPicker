@@ -1,6 +1,7 @@
 #ifndef PICKER_PROBLEM_DATA_HPP
 #define PICKER_PROBLEM_DATA_HPP
 
+#include <memory>
 #include <string>
 #include <unordered_map>
 
@@ -17,7 +18,7 @@ struct ProblemData
   using TeamDataLookup = std::unordered_map<std::string, TeamData>;
 
   BracketData bracketData{ };
-  TeamDataLookup teamDataLookup{ };
+  std::shared_ptr<TeamDataLookup> teamDataLookup{ };
 
   std::string selectionStrategy{ SPREAD_BASED_STRATEGY_LABEL };
   nlohmann::json selectionStrategyParams{ };
@@ -30,7 +31,7 @@ struct ProblemData
 
   void validate( ) const;
 
-  bool operator==(const ProblemData&) const noexcept = default;
+  bool operator==(const ProblemData& other) const noexcept;
 };
 
 void from_json(const nlohmann::json&, ProblemData&);

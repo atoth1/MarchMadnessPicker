@@ -1,4 +1,5 @@
 #include <fstream>
+#include <memory>
 #include <stdexcept>
 #include <string>
 #include <vector>
@@ -14,7 +15,7 @@ void picker::ProblemData::validate( ) const
   auto validateRegion = [this](const picker::RegionData& regionData) {
     bool allTeamNamesFound = true;
     for (const auto& teamName : regionData.teams) {
-      if (auto teamDataIt = this->teamDataLookup.find(teamName); teamDataIt == this->teamDataLookup.end( )) {
+      if (auto teamDataIt = this->teamDataLookup->find(teamName); teamDataIt == this->teamDataLookup->end( )) {
         allTeamNamesFound = false;
       }
     }
@@ -26,7 +27,7 @@ void picker::ProblemData::validate( ) const
     bool allSeedsCorrect = true;
     int seed = 1;
     for (const auto& teamName : regionData.teams) {
-      const auto& data = this->teamDataLookup.at(teamName);
+      const auto& data = this->teamDataLookup->at(teamName);
       if (data.seed != seed) { allSeedsCorrect = false; }
       ++seed;
     }
@@ -42,20 +43,32 @@ void picker::ProblemData::validate( ) const
   validateRegion(bracketData.bottomRight);
 }
 
-void picker::from_json(const nlohmann::json& input, picker::ProblemData& output)
+bool picker::ProblemData::operator==(const picker::ProblemData& other) const noexcept
+{
+  auto equalLookups = [](const auto& lookup1, const auto& lookup2) {
+    return (!lookup1 && !lookup2) || (lookup1 && lookup2 && *lookup1 == *lookup2);
+  };
+  return bracketData == other.bracketData && equalLookups(teamDataLookup, other.teamDataLookup)
+         && selectionStrategy == other.selectionStrategy && selectionStrategyParams == other.selectionStrategyParams
+         && randomizationStrategy == other.randomizationStrategy
+         && randomizationStrategyParams == other.randomizationStrategyParams && outputStrategy == other.outputStrategy
+         && outputStrategyParams == other.outputStrategyParams;
+}
+
+void picker::from_json(const nlohmann::json& input, picker::ProblemData& output)// NOLINT(misc-include-cleaner)
 {
   input.at("bracket_data").get_to(output.bracketData);
 
   auto makeTeamDataLookup = [&]( ) {
     const auto teamDataFile = input.at("team_data_file").template get<std::string>( );
     std::ifstream teamDataStream(teamDataFile);
-    const auto parsedTeamData = nlohmann::json::parse(teamDataStream);
+    const auto parsedTeamData = nlohmann::json::parse(teamDataStream);// NOLINT(misc-include-cleaner)
 
     std::vector<picker::TeamData> teamData{ };
     parsedTeamData.get_to(teamData);
 
-    picker::ProblemData::TeamDataLookup lookup{ };
-    for (const auto& data : teamData) { lookup[data.teamName] = data; }
+    auto lookup = std::make_shared<ProblemData::TeamDataLookup>( );
+    for (const auto& data : teamData) { (*lookup)[data.teamName] = data; }
     return lookup;
   };
   output.teamDataLookup = makeTeamDataLookup( );

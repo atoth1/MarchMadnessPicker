@@ -1,5 +1,6 @@
 #include <fstream>
 #include <iterator>
+#include <memory>
 #include <string>
 #include <utility>
 #include <vector>
@@ -135,14 +136,14 @@ picker::BracketData getExpectedBracketData( )
   return data;
 }
 
-picker::ProblemData::TeamDataLookup getExpectedTeamDataLookup( )
+std::shared_ptr<picker::ProblemData::TeamDataLookup> getExpectedTeamDataLookup( )
 {
   std::ifstream teamDataStream("test-team-data.json");
   const auto teamData = nlohmann::json::parse(teamDataStream);
   const auto parsedTeamData = teamData.template get<std::vector<picker::TeamData>>( );
 
-  picker::ProblemData::TeamDataLookup lookup{ };
-  for (const auto& data : parsedTeamData) { lookup[data.teamName] = data; }
+  auto lookup = std::make_shared<picker::ProblemData::TeamDataLookup>( );
+  for (const auto& data : parsedTeamData) { (*lookup)[data.teamName] = data; }
   return lookup;
 }
 
@@ -210,9 +211,9 @@ TEST_CASE("PriblemData validation - invalid bracket", "[ProblemData]")// NOLINT
   const auto jsonData = nlohmann::json::parse(getValidInputStringDefaultArgs( ));
   picker::ProblemData problemData{ };
   jsonData.get_to(problemData);
-  picker::TeamData& topSeed = problemData.teamDataLookup.at(*problemData.bracketData.topLeft.teams.begin( ));
+  picker::TeamData& topSeed = problemData.teamDataLookup->at(*problemData.bracketData.topLeft.teams.begin( ));
   picker::TeamData& bottomSeed =
-    problemData.teamDataLookup.at(*std::prev(problemData.bracketData.topLeft.teams.end( )));
+    problemData.teamDataLookup->at(*std::prev(problemData.bracketData.topLeft.teams.end( )));
   std::swap(topSeed.seed, bottomSeed.seed);
   CHECK_THROWS_AS(problemData.validate( ), std::runtime_error);// NOLINT
 }

@@ -16,14 +16,16 @@ class RandomizationStrategy;
 class RandomizationStrategyFactory
 {
 public:
+  using FactoryType = GenericFactory<RandomizationStrategy>;
+
   RandomizationStrategyFactory( ) = default;
 
-  void registerFactory(std::string_view type, std::unique_ptr<GenericFactory<RandomizationStrategy>>&& factory);
+  void registerFactory(std::string_view type, std::unique_ptr<FactoryType>&& factory);
 
   std::shared_ptr<RandomizationStrategy> create(std::string_view type, const nlohmann::json& params) const;
 
 private:
-  std::unordered_map<std::string_view, std::unique_ptr<GenericFactory<RandomizationStrategy>>> factories{ };
+  std::unordered_map<std::string_view, std::unique_ptr<FactoryType>> factories{ };
 };
 
 }// namespace picker

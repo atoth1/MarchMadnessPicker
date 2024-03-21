@@ -8,6 +8,7 @@ set(SOURCES
   OutputStrategyFactoryTest.cpp
   OutputStrategyTest.cpp
   ProblemDataTest.cpp
+  ProblemTest.cpp
   RandomizationStrategyFactoryTest.cpp
   RandomizationStrategyTest.cpp
   SelectionStrategyFactoryTest.cpp

@@ -5,6 +5,7 @@ set(SOURCES
   OutputStrategy_Factory.cpp
   OutputStrategy_FileOut.cpp
   OutputStrategy_StdOut.cpp
+  Problem.cpp
   ProblemData.cpp
   RandomizationStrategy_Factory.cpp
   RandomizationStrategy_MersenneTwister.cpp

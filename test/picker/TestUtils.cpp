@@ -10,42 +10,6 @@
 #include "SelectionStrategy.hpp"
 #include "TestUtils.hpp"
 
-StringstreamOutStrategy::StringstreamOutStrategy(std::shared_ptr<std::ostringstream> inOut) : out(std::move(inOut)) {}
-
-void StringstreamOutStrategy::writeOutput(const picker::Bracket& bracket) const { (*out) << bracket; }
-
-StringstreamOutStrategyFactory::StringstreamOutStrategyFactory(std::shared_ptr<std::ostringstream> inOut)
-  : out(std::move(inOut))
-{}
-
-std::shared_ptr<picker::OutputStrategy> StringstreamOutStrategyFactory::create(const nlohmann::json& /*params*/) const
-{
-  return std::make_shared<StringstreamOutStrategy>(out);
-}
-
-DeterministicStrategy::DeterministicStrategy(const double inVal) : val(inVal) {}
-
-double DeterministicStrategy::getRandom( ) { return val; }
-
-std::shared_ptr<picker::RandomizationStrategy> DeterministicStrategyFactory::create(
-  const nlohmann::json& /*params*/) const
-{
-  constexpr double val = 0.5;
-  return std::make_shared<DeterministicStrategy>(val);
-}
-
-std::string LexicographicCompareStrategy::selectWinner(const std::string& team1, const std::string& team2) const
-{
-  return team1 < team2 ? team1 : team2;
-}
-
-std::shared_ptr<picker::SelectionStrategy> LexicographicCompareStrategyFactory::create(const nlohmann::json& /*params*/,
-  const RandomizationStrategyPtr& /*randomizationStrategy*/,
-  const TeamDataLookupPtr& /*teamDataLookup*/) const
-{
-  return std::make_shared<LexicographicCompareStrategy>( );
-}
-
 picker::BracketData getTestBracketData( )
 {
   return {
@@ -199,4 +163,40 @@ ___________A3____________
                             ___________A3____________
 ___________A4____________
 )";
+}
+
+StringstreamOutStrategy::StringstreamOutStrategy(std::shared_ptr<std::ostringstream> inOut) : out(std::move(inOut)) {}
+
+void StringstreamOutStrategy::writeOutput(const picker::Bracket& bracket) const { (*out) << bracket; }
+
+StringstreamOutStrategyFactory::StringstreamOutStrategyFactory(std::shared_ptr<std::ostringstream> inOut)
+  : out(std::move(inOut))
+{}
+
+std::shared_ptr<picker::OutputStrategy> StringstreamOutStrategyFactory::create(const nlohmann::json& /*params*/) const
+{
+  return std::make_shared<StringstreamOutStrategy>(out);
+}
+
+DeterministicStrategy::DeterministicStrategy(const double inVal) : val(inVal) {}
+
+double DeterministicStrategy::getRandom( ) { return val; }
+
+std::shared_ptr<picker::RandomizationStrategy> DeterministicStrategyFactory::create(
+  const nlohmann::json& /*params*/) const
+{
+  constexpr double val = 0.5;
+  return std::make_shared<DeterministicStrategy>(val);
+}
+
+std::string LexicographicCompareStrategy::selectWinner(const std::string& team1, const std::string& team2) const
+{
+  return team1 < team2 ? team1 : team2;
+}
+
+std::shared_ptr<picker::SelectionStrategy> LexicographicCompareStrategyFactory::create(const nlohmann::json& /*params*/,
+  const RandomizationStrategyPtr& /*randomizationStrategy*/,
+  const TeamDataLookupPtr& /*teamDataLookup*/) const
+{
+  return std::make_shared<LexicographicCompareStrategy>( );
 }

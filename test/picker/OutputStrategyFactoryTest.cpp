@@ -9,17 +9,17 @@
 #include "OutputStrategy_FileOut.hpp"
 #include "OutputStrategy_StdOut.hpp"
 
-TEST_CASE("OutputStrategyFactory - create strategies", "[OutputStrategyFactory]")// NOLINT
+TEST_CASE("OutputStrategyFactory - create strategies", "[OutputStrategyFactory]")// NOLINT(misc-use-anonymous-namespace)
 {
   picker::OutputStrategyFactory factory{ };
   factory.registerFactory(picker::FILE_OUT_STRATEGY_LABEL, std::make_unique<picker::FileOutStrategyFactory>( ));
   factory.registerFactory(picker::STD_OUT_STRATEGY_LABEL, std::make_unique<picker::StdOutStrategyFactory>( ));
 
-  // NOLINTBEGIN
   using namespace nlohmann::literals;
   constexpr std::string_view unregisteredFactoryLabel{ "unregistered" };
-  const nlohmann::json emptyParams{ };
+  const nlohmann::json emptyParams{ };// NOLINT(misc-include-cleaner)
   const auto fileNameParams = R"({ "file_name": "test-file-name.txt" })"_json;
+  // NOLINTBEGIN(cppcoreguidelines-avoid-do-while)
   CHECK(factory.create(unregisteredFactoryLabel, emptyParams) == nullptr);
   CHECK(std::dynamic_pointer_cast<picker::FileOutStrategy>(factory.create(picker::FILE_OUT_STRATEGY_LABEL, emptyParams))
         != nullptr);
@@ -28,5 +28,5 @@ TEST_CASE("OutputStrategyFactory - create strategies", "[OutputStrategyFactory]"
     != nullptr);
   CHECK(std::dynamic_pointer_cast<picker::StdOutStrategy>(factory.create(picker::STD_OUT_STRATEGY_LABEL, emptyParams))
         != nullptr);
-  // NOLINTEND
+  // NOLINTEND(cppcoreguidelines-avoid-do-while)
 }

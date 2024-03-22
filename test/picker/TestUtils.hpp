@@ -19,6 +19,10 @@ namespace picker {
 struct Bracket;
 }
 
+picker::BracketData getTestBracketData( );
+
+std::string getExpectedOutput( );
+
 class StringstreamOutStrategy : public picker::OutputStrategy
 {
 public:
@@ -75,9 +79,5 @@ public:
     const RandomizationStrategyPtr& randomizationStrategy,
     const TeamDataLookupPtr& teamDataLookup) const override;
 };
-
-picker::BracketData getTestBracketData( );
-
-std::string getExpectedOutput( );
 
 #endif

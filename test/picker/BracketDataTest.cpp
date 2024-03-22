@@ -156,39 +156,43 @@ std::vector<std::string> getInvalidBracketInputStrings( )
 
 }// namespace
 
-TEST_CASE("RegionData parsing - successul parse", "[RegionData]")// NOLINT
+TEST_CASE("RegionData parsing - successul parse", "[RegionData]")// NOLINT(misc-use-anonymous-namespace)
 {
-  const auto jsonData = nlohmann::json::parse(getValidRegionInputString( ));
+  const auto jsonData = nlohmann::json::parse(getValidRegionInputString( ));// NOLINT(misc-include-cleaner)
   picker::RegionData regionData{ };
   jsonData.get_to(regionData);
-  CHECK(regionData == getExpectedRegionData( ));// NOLINT
+  CHECK(regionData == getExpectedRegionData( ));// NOLINT(cppcoreguidelines-avoid-do-while)
 }
 
-TEST_CASE("RegionData parsing - expected exceptions", "[RegionData]")// NOLINT
+// NOLINTNEXTLINE(misc-use-anonymous-namespace, readability-function-cognitive-complexity)
+TEST_CASE("RegionData parsing - expected exceptions", "[RegionData]")
 {
   for (const auto& inputString : getRuntimeErrorRegionInputStrings( )) {
-    const auto jsonData = nlohmann::json::parse(inputString);
-    REQUIRE_THROWS_AS(jsonData.template get<picker::RegionData>( ), std::runtime_error);// NOLINT
+    const auto jsonData = nlohmann::json::parse(inputString);// NOLINT(misc-include-cleaner)
+    // NOLINTNEXTLINE(cppcoreguidelines-avoid-do-while)
+    CHECK_THROWS_AS(jsonData.template get<picker::RegionData>( ), std::runtime_error);
   }
 
   for (const auto& inputString : getJsonErrorRegionInputStrings( )) {
-    const auto jsonData = nlohmann::json::parse(inputString);
-    REQUIRE_THROWS_AS(jsonData.template get<picker::RegionData>( ), nlohmann::json::exception);// NOLINT
+    const auto jsonData = nlohmann::json::parse(inputString);// NOLINT(misc-include-cleaner)
+    // NOLINTNEXTLINE(cppcoreguidelines-avoid-do-while, misc-include-cleaner)
+    CHECK_THROWS_AS(jsonData.template get<picker::RegionData>( ), nlohmann::json::exception);
   }
 }
 
-TEST_CASE("BracketData parsing - successul parse", "[BracketData]")// NOLINT
+TEST_CASE("BracketData parsing - successul parse", "[BracketData]")// NOLINT(misc-use-anonymous-namespace)
 {
-  const auto jsonData = nlohmann::json::parse(getValidBracketInputString( ));
+  const auto jsonData = nlohmann::json::parse(getValidBracketInputString( ));// NOLINT(misc-include-cleaner)
   picker::BracketData bracketData{ };
   jsonData.get_to(bracketData);
-  CHECK(bracketData == getExpectedBracketData( ));// NOLINT
+  CHECK(bracketData == getExpectedBracketData( ));// NOLINT(cppcoreguidelines-avoid-do-while)
 }
 
-TEST_CASE("BracketData parsing - expected exceptions", "[BracketData]")// NOLINT
+TEST_CASE("BracketData parsing - expected exceptions", "[BracketData]")// NOLINT(misc-use-anonymous-namespace)
 {
   for (const auto& inputString : getInvalidBracketInputStrings( )) {
-    const auto jsonData = nlohmann::json::parse(inputString);
-    REQUIRE_THROWS_AS(jsonData.template get<picker::BracketData>( ), nlohmann::json::exception);// NOLINT
+    const auto jsonData = nlohmann::json::parse(inputString);// NOLINT(misc-include-cleaner)
+    // NOLINTNEXTLINE(cppcoreguidelines-avoid-do-while, misc-include-cleaner)
+    REQUIRE_THROWS_AS(jsonData.template get<picker::BracketData>( ), nlohmann::json::exception);
   }
 }

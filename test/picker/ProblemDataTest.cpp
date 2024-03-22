@@ -1,6 +1,7 @@
 #include <fstream>
 #include <iterator>
 #include <memory>
+#include <stdexcept>
 #include <string>
 #include <utility>
 #include <vector>
@@ -131,7 +132,7 @@ std::string getValidInputStringDefaultArgs( )
 picker::BracketData getExpectedBracketData( )
 {
   picker::BracketData data{ };
-  const auto jsonData = nlohmann::json::parse(getBracketDataString( ));
+  const auto jsonData = nlohmann::json::parse(getBracketDataString( ));// NOLINT(misc-include-cleaner)
   jsonData.get_to(data);
   return data;
 }
@@ -139,7 +140,7 @@ picker::BracketData getExpectedBracketData( )
 std::shared_ptr<picker::ProblemData::TeamDataLookup> getExpectedTeamDataLookup( )
 {
   std::ifstream teamDataStream("test-team-data.json");
-  const auto teamData = nlohmann::json::parse(teamDataStream);
+  const auto teamData = nlohmann::json::parse(teamDataStream);// NOLINT(misc-include-cleaner)
   const auto parsedTeamData = teamData.template get<std::vector<picker::TeamData>>( );
 
   auto lookup = std::make_shared<picker::ProblemData::TeamDataLookup>( );
@@ -180,40 +181,43 @@ std::vector<std::string> getInvalidInputStrings( )
 
 }// namespace
 
-TEST_CASE("ProblemData parsing - successul parse no default arguments", "[ProblemData]")// NOLINT
+// NOLINTNEXTLINE(misc-use-anonymous-namespace)
+TEST_CASE("ProblemData parsing - successul parse no default arguments", "[ProblemData]")
 {
-  const auto jsonData = nlohmann::json::parse(getValidInputStringNoDefaultArgs( ));
+  const auto jsonData = nlohmann::json::parse(getValidInputStringNoDefaultArgs( ));// NOLINT(misc-include-cleaner)
   picker::ProblemData problemData{ };
   jsonData.get_to(problemData);
-  CHECK(problemData == getExpectedProblemDataNoDefaultArgs( ));// NOLINT
-  CHECK_NOTHROW(problemData.validate( ));// NOLINT;
+  CHECK(problemData == getExpectedProblemDataNoDefaultArgs( ));// NOLINT(cppcoreguidelines-avoid-do-while)
+  CHECK_NOTHROW(problemData.validate( ));// NOLINT(cppcoreguidelines-avoid-do-while)
 }
 
-TEST_CASE("ProblemData parsing - successul parse with default arguments", "[ProblemData]")// NOLINT
+// NOLINTNEXTLINE(misc-use-anonymous-namespace)
+TEST_CASE("ProblemData parsing - successul parse with default arguments", "[ProblemData]")
 {
-  const auto jsonData = nlohmann::json::parse(getValidInputStringDefaultArgs( ));
+  const auto jsonData = nlohmann::json::parse(getValidInputStringDefaultArgs( ));// NOLINT(misc-include-cleaner)
   picker::ProblemData problemData{ };
   jsonData.get_to(problemData);
-  CHECK(problemData == getExpectedProblemDataDefaultArgs( ));// NOLINT
-  CHECK_NOTHROW(problemData.validate( ));// NOLINT;
+  CHECK(problemData == getExpectedProblemDataDefaultArgs( ));// NOLINT(cppcoreguidelines-avoid-do-while)
+  CHECK_NOTHROW(problemData.validate( ));// NOLINT(cppcoreguidelines-avoid-do-while)
 }
 
-TEST_CASE("ProblemData parsing - expected exceptions", "[ProblemData]")// NOLINT
+TEST_CASE("ProblemData parsing - expected exceptions", "[ProblemData]")// NOLINT(misc-use-anonymous-namespace)
 {
   for (const auto& inputString : getInvalidInputStrings( )) {
-    const auto jsonData = nlohmann::json::parse(inputString);
-    CHECK_THROWS_AS(jsonData.template get<picker::ProblemData>( ), nlohmann::json::exception);// NOLINT
+    const auto jsonData = nlohmann::json::parse(inputString);// NOLINT(misc-include-cleaner)
+    // NOLINTNEXTLINE(cppcoreguidelines-avoid-do-while, misc-include-cleaner)
+    CHECK_THROWS_AS(jsonData.template get<picker::ProblemData>( ), nlohmann::json::exception);
   }
 }
 
-TEST_CASE("PriblemData validation - invalid bracket", "[ProblemData]")// NOLINT
+TEST_CASE("PriblemData validation - invalid bracket", "[ProblemData]")// NOLINT(misc-use-anonymous-namespace)
 {
-  const auto jsonData = nlohmann::json::parse(getValidInputStringDefaultArgs( ));
+  const auto jsonData = nlohmann::json::parse(getValidInputStringDefaultArgs( ));// NOLINT(misc-include-cleaner)
   picker::ProblemData problemData{ };
   jsonData.get_to(problemData);
   picker::TeamData& topSeed = problemData.teamDataLookup->at(*problemData.bracketData.topLeft.teams.begin( ));
   picker::TeamData& bottomSeed =
     problemData.teamDataLookup->at(*std::prev(problemData.bracketData.topLeft.teams.end( )));
   std::swap(topSeed.seed, bottomSeed.seed);
-  CHECK_THROWS_AS(problemData.validate( ), std::runtime_error);// NOLINT
+  CHECK_THROWS_AS(problemData.validate( ), std::runtime_error);// NOLINT(cppcoreguidelines-avoid-do-while)
 }

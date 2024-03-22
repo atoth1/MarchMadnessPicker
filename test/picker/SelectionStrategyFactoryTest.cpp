@@ -2,7 +2,7 @@
 #include <string_view>
 
 #include "catch2/catch_test_macros.hpp"
-#include "nlohmann/json.hpp"
+#include "nlohmann/json.hpp"// NOLINT(misc-include-cleaner)
 
 #include "Constants.hpp"
 #include "ProblemData.hpp"
@@ -24,25 +24,30 @@ picker::SelectionStrategyFactory getTestFactory( )
 }
 }// namespace
 
-TEST_CASE("SelectionStrategyFactory - unset requirements", "[SelectionStrategyFactory]")// NOLINT
+// NOLINTNEXTLINE(misc-use-anonymous-namespace)
+TEST_CASE("SelectionStrategyFactory - unset requirements", "[SelectionStrategyFactory]")
 {
   const auto factory1 = getTestFactory( );
-  const nlohmann::json params{ };
-  CHECK(factory1.create(picker::SPREAD_BASED_STRATEGY_LABEL, params) == nullptr);// NOLINT
+  const nlohmann::json params{ };// NOLINT(misc-include-cleaner)
+  // NOLINTNEXTLINE(cppcoreguidelines-avoid-do-while)
+  CHECK(factory1.create(picker::SPREAD_BASED_STRATEGY_LABEL, params) == nullptr);
 
   auto factory2 = getTestFactory( );
   constexpr double randValue = 0.42;
   const auto randStrategy = std::make_shared<DeterministicStrategy>(randValue);
   factory2.setRandomizationStrategy(randStrategy);
-  CHECK(factory2.create(picker::SPREAD_BASED_STRATEGY_LABEL, params) == nullptr);// NOLINT
+  // NOLINTNEXTLINE(cppcoreguidelines-avoid-do-while)
+  CHECK(factory2.create(picker::SPREAD_BASED_STRATEGY_LABEL, params) == nullptr);
 
   auto factory3 = getTestFactory( );
   const auto teamDataLookup = std::make_shared<picker::ProblemData::TeamDataLookup>( );
   factory3.setTeamDataLookup(teamDataLookup);
-  CHECK(factory3.create(picker::SPREAD_BASED_STRATEGY_LABEL, params) == nullptr);// NOLINT
+  // NOLINTNEXTLINE(cppcoreguidelines-avoid-do-while)
+  CHECK(factory3.create(picker::SPREAD_BASED_STRATEGY_LABEL, params) == nullptr);
 }
 
-TEST_CASE("SelectionStrategyFactory - create strategies", "[SelectionStrategyFactory]")// NOLINT
+// NOLINTNEXTLINE(misc-use-anonymous-namespace)
+TEST_CASE("SelectionStrategyFactory - create strategies", "[SelectionStrategyFactory]")
 {
   auto factory = getTestFactory( );
   constexpr double randValue = 0.42;
@@ -51,9 +56,9 @@ TEST_CASE("SelectionStrategyFactory - create strategies", "[SelectionStrategyFac
   factory.setRandomizationStrategy(randStrategy);
   factory.setTeamDataLookup(teamDataLookup);
 
-  // NOLINTBEGIN
   constexpr std::string_view unregisteredFactoryLabel{ "unregistered" };
-  const nlohmann::json params{ };
+  const nlohmann::json params{ };// NOLINT(misc-include-cleaner)
+  // NOLINTBEGIN(cppcoreguidelines-avoid-do-while)
   CHECK(factory.create(unregisteredFactoryLabel, params) == nullptr);
   CHECK(std::dynamic_pointer_cast<picker::CoinFlipStrategy>(factory.create(picker::COIN_FLIP_STRATEGY_LABEL, params))
         != nullptr);
@@ -63,5 +68,5 @@ TEST_CASE("SelectionStrategyFactory - create strategies", "[SelectionStrategyFac
   CHECK(
     std::dynamic_pointer_cast<picker::SpreadBasedStrategy>(factory.create(picker::SPREAD_BASED_STRATEGY_LABEL, params))
     != nullptr);
-  // NOLINTEND
+  // NOLINTEND(cppcoreguidelines-avoid-do-while)
 }

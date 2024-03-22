@@ -8,7 +8,7 @@
 #include "Problem.hpp"
 #include "TestUtils.hpp"
 
-TEST_CASE("Problem - successful simulation", "[Problem]")// NOLINT
+TEST_CASE("Problem - successful simulation", "[Problem]")// NOLINT(misc-use-anonymous-namespace)
 {
   const std::string inFile{ "test-input.json" };
   picker::Problem problem{ inFile };
@@ -28,5 +28,5 @@ TEST_CASE("Problem - successful simulation", "[Problem]")// NOLINT
 
   problem.setup( );
   problem.run( );
-  CHECK(out->str( ) == getExpectedOutput( ));// NOLINT
+  CHECK(out->str( ) == getExpectedOutput( ));// NOLINT(cppcoreguidelines-avoid-do-while)
 }

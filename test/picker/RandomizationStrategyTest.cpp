@@ -13,14 +13,15 @@ void testRandomizationStrategy(picker::RandomizationStrategy& strategy)
   constexpr int TIMES = 10;
   for (int count = 0; count < TIMES; ++count) {
     const double num = strategy.getRandom( );
-    CHECK(num >= 0.0);// NOLINT
-    CHECK(num <= 1.0);// NOLINT
+    CHECK(num >= 0.0);// NOLINT(cppcoreguidelines-avoid-do-while)
+    CHECK(num <= 1.0);// NOLINT(cppcoreguidelines-avoid-do-while)
   }
 }
 
 }// namespace
 
-TEST_CASE("RandomizationStrategy - numbers in correct range", "[RandomizationStrategy]")// NOLINT
+// NOLINTNEXTLINE(misc-use-anonymous-namespace)
+TEST_CASE("RandomizationStrategy - numbers in correct range", "[RandomizationStrategy]")
 {
   picker::MersenneTwisterStrategy mersenne(std::random_device{ }( ));
   testRandomizationStrategy(mersenne);

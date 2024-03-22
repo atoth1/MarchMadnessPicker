@@ -23,22 +23,22 @@ std::shared_ptr<picker::ProblemData::TeamDataLookup> getTeamDataLookup( )
 
 }// namespace
 
-TEST_CASE("SelectionStrategy - coin flip", "[SelectionStrategy]")// NOLINT
+TEST_CASE("SelectionStrategy - coin flip", "[SelectionStrategy]")// NOLINT(misc-use-anonymous-namespace)
 {
   constexpr double A_WIN_PROB = 0.49;
   const picker::CoinFlipStrategy strategy1(std::make_shared<DeterministicStrategy>(A_WIN_PROB));
-  CHECK(strategy1.selectWinner("A", "B") == "A");// NOLINT
+  CHECK(strategy1.selectWinner("A", "B") == "A");// NOLINT(cppcoreguidelines-avoid-do-while)
 
   constexpr double B_WIN_PROB = 0.51;
   const picker::CoinFlipStrategy strategy2(std::make_shared<DeterministicStrategy>(B_WIN_PROB));
-  CHECK(strategy2.selectWinner("A", "B") == "B");// NOLINT
+  CHECK(strategy2.selectWinner("A", "B") == "B");// NOLINT(cppcoreguidelines-avoid-do-while)
 }
 
-TEST_CASE("SelectionStrategy - rank deterministic", "[SelectionStrategy]")// NOLINT
+TEST_CASE("SelectionStrategy - rank deterministic", "[SelectionStrategy]")// NOLINT(misc-use-anonymous-namespace)
 {
   const auto teamDataLookup = getTeamDataLookup( );
   const picker::RankDeterministicStrategy strategy(teamDataLookup);
-  CHECK(strategy.selectWinner("A", "B") == "A");// NOLINT
+  CHECK(strategy.selectWinner("A", "B") == "A");// NOLINT(cppcoreguidelines-avoid-do-while)
 }
 
 namespace {
@@ -51,15 +51,16 @@ void testExpectedSpread(const double spread,// NOLINT(bugprone-easily-swappable-
   constexpr double probDelta = 1.0e-8;
   const picker::SpreadBasedStrategy strategy1(
     std::make_shared<DeterministicStrategy>(expectedWinProb - probDelta), lookup);
-  CHECK(strategy1.selectWinner("A", "B") == "A");// NOLINT
+  CHECK(strategy1.selectWinner("A", "B") == "A");// NOLINT(cppcoreguidelines-avoid-do-while)
 
   const picker::SpreadBasedStrategy strategy2(
     std::make_shared<DeterministicStrategy>(expectedWinProb + probDelta), lookup);
-  CHECK(strategy2.selectWinner("A", "B") == "B");// NOLINT
+  CHECK(strategy2.selectWinner("A", "B") == "B");// NOLINT(cppcoreguidelines-avoid-do-while)
 }
+
 }// namespace
 
-TEST_CASE("SelectionStrategy - spread based", "[SelectionStrategy]")// NOLINT
+TEST_CASE("SelectionStrategy - spread based", "[SelectionStrategy]")// NOLINT(misc-use-anonymous-namespace)
 {
   auto teamDataLookup = getTeamDataLookup( );
   // NOLINTBEGIN

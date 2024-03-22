@@ -35,8 +35,6 @@ public:
 
   using TeamDataLookupPtr = SelectionStrategyFactory::TeamDataLookupPtr;
 
-  RankDeterministicStrategyFactory( ) = default;
-
   std::shared_ptr<SelectionStrategy> create(const nlohmann::json& params,
     const RandomizationStrategyPtr& randomizationStrategy,
     const TeamDataLookupPtr& teamDataLookup) const override;

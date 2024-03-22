@@ -9,7 +9,6 @@
 #include "OutputStrategy_FileOut.hpp"
 #include "OutputStrategy_StdOut.hpp"
 #include "Problem.hpp"
-#include "ProblemData.hpp"
 #include "RandomizationStrategy_MersenneTwister.hpp"
 #include "RandomizationStrategy_MinStdRand.hpp"
 #include "RandomizationStrategy_StdRand.hpp"

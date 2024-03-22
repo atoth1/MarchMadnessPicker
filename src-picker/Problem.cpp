@@ -45,8 +45,12 @@ void picker::Problem::setup( )
 {
   const auto randomizationStrategy =
     randomizationStrategyFactory.create(problemData.randomizationStrategy, problemData.randomizationStrategyParams);
+
+  selectionStrategyFactory.setRandomizationStrategy(randomizationStrategy);
+  selectionStrategyFactory.setTeamDataLookup(problemData.teamDataLookup);
   selectionStrategy =
     selectionStrategyFactory.create(problemData.selectionStrategy, problemData.selectionStrategyParams);
+
   outputStrategy = outputStrategyFactory.create(problemData.outputStrategy, problemData.outputStrategyParams);
 }
 

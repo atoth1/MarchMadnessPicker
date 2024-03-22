@@ -17,7 +17,7 @@ class RandomizationStrategy;
 class CoinFlipStrategy : public SelectionStrategy
 {
 public:
-using RandomizationStrategyPtr = SelectionStrategyFactory::RandomizationStrategyPtr;
+  using RandomizationStrategyPtr = SelectionStrategyFactory::RandomizationStrategyPtr;
 
   explicit CoinFlipStrategy(RandomizationStrategyPtr inRand);
 
@@ -36,8 +36,6 @@ public:
   using RandomizationStrategyPtr = SelectionStrategyFactory::RandomizationStrategyPtr;
 
   using TeamDataLookupPtr = SelectionStrategyFactory::TeamDataLookupPtr;
-
-  CoinFlipStrategyFactory( ) = default;
 
   std::shared_ptr<SelectionStrategy> create(const nlohmann::json& params,
     const RandomizationStrategyPtr& randomizationStrategy,

@@ -1,5 +1,6 @@
 include(${Catch2_SOURCE_DIR}/extras/Catch.cmake)
 
+configure_file("test-input.json" "test-input.json" COPYONLY)
 configure_file("test-team-data.json" "test-team-data.json" COPYONLY)
 
 set(SOURCES

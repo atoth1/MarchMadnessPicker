@@ -1,0 +1,284 @@
+{
+  "team_data_file": "test-team-data.json",
+  "selection_strategy": "lexicographic",
+  "randomization_strategy": "deterministic",
+  "output_strategy": "stringstream",
+  "bracket_data": {
+    "top_left": {
+      "name": "Region 1",
+      "teams": [
+        {
+          "name": "A1",
+          "seed": 1
+        },
+        {
+          "name": "B1",
+          "seed": 2
+        },
+        {
+          "name": "C1",
+          "seed": 3
+        },
+        {
+          "name": "D1",
+          "seed": 4
+        },
+        {
+          "name": "E1",
+          "seed": 5
+        },
+        {
+          "name": "F1",
+          "seed": 6
+        },
+        {
+          "name": "G1",
+          "seed": 7
+        },
+        {
+          "name": "H1",
+          "seed": 8
+        },
+        {
+          "name": "I1",
+          "seed": 9
+        },
+        {
+          "name": "J1",
+          "seed": 10
+        },
+        {
+          "name": "K1",
+          "seed": 11
+        },
+        {
+          "name": "L1",
+          "seed": 12
+        },
+        {
+          "name": "M1",
+          "seed": 13
+        },
+        {
+          "name": "N1",
+          "seed": 14
+        },
+        {
+          "name": "O1",
+          "seed": 15
+        },
+        {
+          "name": "P1",
+          "seed": 16
+        }
+      ]
+    },
+    "bottom_left": {
+      "name": "Region 2",
+      "teams": [
+        {
+          "name": "A2",
+          "seed": 1
+        },
+        {
+          "name": "B2",
+          "seed": 2
+        },
+        {
+          "name": "C2",
+          "seed": 3
+        },
+        {
+          "name": "D2",
+          "seed": 4
+        },
+        {
+          "name": "E2",
+          "seed": 5
+        },
+        {
+          "name": "F2",
+          "seed": 6
+        },
+        {
+          "name": "G2",
+          "seed": 7
+        },
+        {
+          "name": "H2",
+          "seed": 8
+        },
+        {
+          "name": "I2",
+          "seed": 9
+        },
+        {
+          "name": "J2",
+          "seed": 10
+        },
+        {
+          "name": "K2",
+          "seed": 11
+        },
+        {
+          "name": "L2",
+          "seed": 12
+        },
+        {
+          "name": "M2",
+          "seed": 13
+        },
+        {
+          "name": "N2",
+          "seed": 14
+        },
+        {
+          "name": "O2",
+          "seed": 15
+        },
+        {
+          "name": "P2",
+          "seed": 16
+        }
+      ]
+    },
+    "top_right": {
+      "name": "Region 3",
+      "teams": [
+        {
+          "name": "A3",
+          "seed": 1
+        },
+        {
+          "name": "B3",
+          "seed": 2
+        },
+        {
+          "name": "C3",
+          "seed": 3
+        },
+        {
+          "name": "D3",
+          "seed": 4
+        },
+        {
+          "name": "E3",
+          "seed": 5
+        },
+        {
+          "name": "F3",
+          "seed": 6
+        },
+        {
+          "name": "G3",
+          "seed": 7
+        },
+        {
+          "name": "H3",
+          "seed": 8
+        },
+        {
+          "name": "I3",
+          "seed": 9
+        },
+        {
+          "name": "J3",
+          "seed": 10
+        },
+        {
+          "name": "K3",
+          "seed": 11
+        },
+        {
+          "name": "L3",
+          "seed": 12
+        },
+        {
+          "name": "M3",
+          "seed": 13
+        },
+        {
+          "name": "N3",
+          "seed": 14
+        },
+        {
+          "name": "O3",
+          "seed": 15
+        },
+        {
+          "name": "P3",
+          "seed": 16
+        }
+      ]
+    },
+    "bottom_right": {
+      "name": "Region 4",
+      "teams": [
+        {
+          "name": "A4",
+          "seed": 1
+        },
+        {
+          "name": "B4",
+          "seed": 2
+        },
+        {
+          "name": "C4",
+          "seed": 3
+        },
+        {
+          "name": "D4",
+          "seed": 4
+        },
+        {
+          "name": "E4",
+          "seed": 5
+        },
+        {
+          "name": "F4",
+          "seed": 6
+        },
+        {
+          "name": "G4",
+          "seed": 7
+        },
+        {
+          "name": "H4",
+          "seed": 8
+        },
+        {
+          "name": "I4",
+          "seed": 9
+        },
+        {
+          "name": "J4",
+          "seed": 10
+        },
+        {
+          "name": "K4",
+          "seed": 11
+        },
+        {
+          "name": "L4",
+          "seed": 12
+        },
+        {
+          "name": "M4",
+          "seed": 13
+        },
+        {
+          "name": "N4",
+          "seed": 14
+        },
+        {
+          "name": "O4",
+          "seed": 15
+        },
+        {
+          "name": "P4",
+          "seed": 16
+        }
+      ]
+    }
+  }
+}

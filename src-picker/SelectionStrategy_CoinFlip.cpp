@@ -2,9 +2,9 @@
 #include <string>
 #include <utility>
 
-#include "nlohmann/json.hpp"
+#include "nlohmann/json.hpp"// NOLINT(misc-include-cleaner)
 
-#include "RandomizationStrategy.hpp"
+#include "RandomizationStrategy.hpp"// NOLINT(misc-include-cleaner)
 #include "SelectionStrategy.hpp"
 #include "SelectionStrategy_CoinFlip.hpp"
 
@@ -15,6 +15,7 @@ std::string picker::CoinFlipStrategy::selectWinner(const std::string& team1, con
   return rand->getRandom( ) < THRESH ? team1 : team2;
 }
 
+// NOLINTNEXTLINE(misc-include-cleaner)
 std::shared_ptr<picker::SelectionStrategy> picker::CoinFlipStrategyFactory::create(const nlohmann::json& /*params*/,
   const RandomizationStrategyPtr& randomizationStrategy,
   const TeamDataLookupPtr& /*teamDataLookup*/) const

@@ -8,7 +8,7 @@
 #include "nlohmann/json.hpp"
 
 #include "Bracket.hpp"
-#include "OutputStrategy.hpp"
+#include "OutputStrategy.hpp"// NOLINT(misc-include-cleaner)
 #include "OutputStrategy_Factory.hpp"
 #include "Problem.hpp"
 #include "ProblemData.hpp"
@@ -18,7 +18,7 @@
 picker::Problem::Problem(const std::string& inputFileName)
 {
   std::ifstream inputFile(inputFileName);
-  const auto parsedInput = nlohmann::json::parse(inputFile);
+  const auto parsedInput = nlohmann::json::parse(inputFile);// NOLINT(misc-include-cleaner)
   parsedInput.get_to(problemData);
   problemData.validate( );
 }

@@ -13,6 +13,7 @@ picker::FileOutStrategy::FileOutStrategy(const std::string& fileName) : out(std:
 
 void picker::FileOutStrategy::writeOutput(const picker::Bracket& bracket) const { (*out) << bracket; }
 
+// NOLINTNEXTLINE(misc-include-cleaner)
 std::shared_ptr<picker::OutputStrategy> picker::FileOutStrategyFactory::create(const nlohmann::json& params) const
 {
   std::string fileName{ "bracket.txt" };

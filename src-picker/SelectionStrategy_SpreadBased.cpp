@@ -14,7 +14,7 @@ picker::SpreadBasedStrategy::SpreadBasedStrategy(RandomizationStrategyPtr inRand
 {}
 
 namespace {
-// NOLINTBEGIN
+// NOLINTBEGIN(*-magic-numbers)
 double computePredictedSpread(const picker::TeamData& favorite, const picker::TeamData& underdog)
 {
   const double predictedPossessions = 0.5 * (favorite.adjTempo + underdog.adjTempo);
@@ -22,7 +22,7 @@ double computePredictedSpread(const picker::TeamData& favorite, const picker::Te
   return predictedSpreadFor100Possessions * predictedPossessions / 100;
 }
 
-double computeWinProbability(const double predictedSpread)
+double computeWinProbability(const double predictedSpread)// NOLINT(readability-function-cognitive-complexity)
 {
   // I completely forget where I got data for this from, but it's a linear fit
   // based on some data somewhere.
@@ -77,7 +77,7 @@ double computeWinProbability(const double predictedSpread)
   }
   return 0.9999;
 }
-// NOLINTEND
+// NOLINTEND(*-magic-numbers)
 
 }// namespace
 

@@ -14,7 +14,7 @@ namespace picker {
 class StdRandStrategy : public RandomizationStrategy
 {
 public:
-  StdRandStrategy(unsigned seed);
+  explicit StdRandStrategy(unsigned seed);
 
   double getRandom( ) override;
 };

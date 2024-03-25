@@ -26,7 +26,7 @@ std::string getExpectedOutput( );
 class StringstreamOutStrategy : public picker::OutputStrategy
 {
 public:
-  StringstreamOutStrategy(std::shared_ptr<std::ostringstream> inOut);
+  explicit StringstreamOutStrategy(std::shared_ptr<std::ostringstream> inOut);
 
   void writeOutput(const picker::Bracket& bracket) const override;
 
@@ -37,7 +37,7 @@ private:
 class StringstreamOutStrategyFactory : public picker::OutputStrategyFactory::FactoryType
 {
 public:
-  StringstreamOutStrategyFactory(std::shared_ptr<std::ostringstream> inOut);
+  explicit StringstreamOutStrategyFactory(std::shared_ptr<std::ostringstream> inOut);
 
   std::shared_ptr<picker::OutputStrategy> create(const nlohmann::json& params) const override;
 

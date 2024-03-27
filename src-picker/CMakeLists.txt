@@ -2,6 +2,8 @@
 set(SOURCES
   Bracket.cpp
   BracketData.cpp
+  Logger_Spdlog.cpp
+  LogManager.cpp
   OutputStrategy_Factory.cpp
   OutputStrategy_FileOut.cpp
   OutputStrategy_StdOut.cpp
@@ -18,13 +20,20 @@ set(SOURCES
   TeamData.cpp
 )
 
+set(PICKER_ENABLE_LOGGING ${MarchMadnessPicker_ENABLE_LOGGING})
+configure_file(PickerConfig.hpp.in PickerConfig.hpp)
+
 add_library(${PROJECT_NAME} ${SOURCES})
-target_include_directories(${PROJECT_NAME} PUBLIC ${CMAKE_CURRENT_LIST_DIR})
+target_include_directories(${PROJECT_NAME}
+  PUBLIC
+  ${CMAKE_CURRENT_LIST_DIR}
+  ${CMAKE_CURRENT_BINARY_DIR})
 target_link_libraries(${PROJECT_NAME}
   PUBLIC
   MarchMadnessPicker::MarchMadnessPicker_warnings
   MarchMadnessPicker::MarchMadnessPicker_options
   nlohmann_json::nlohmann_json
+  spdlog::spdlog
   PRIVATE
   fmt::fmt)
 

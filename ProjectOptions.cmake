@@ -42,6 +42,7 @@ macro(MarchMadnessPicker_setup_options)
   option(MarchMadnessPicker_ENABLE_CPPCHECK "Enable cpp-check analysis" ON)
   option(MarchMadnessPicker_ENABLE_PCH "Enable precompiled headers" OFF)
   option(MarchMadnessPicker_ENABLE_CACHE "Enable ccache" ON)
+  option(MarchMadnessPicker_ENABLE_LOGGING "Enable run-time logging" ON)
 
 endmacro()
 

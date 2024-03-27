@@ -8,6 +8,7 @@
 
 #include "BracketData.hpp"
 #include "GenericFactory.hpp"
+#include "Logger.hpp"
 #include "OutputStrategy.hpp"
 #include "OutputStrategy_Factory.hpp"
 #include "RandomizationStrategy.hpp"
@@ -78,6 +79,49 @@ public:
   std::shared_ptr<picker::SelectionStrategy> create(const nlohmann::json& params,
     const RandomizationStrategyPtr& randomizationStrategy,
     const TeamDataLookupPtr& teamDataLookup) const override;
+};
+
+class MockLogger : public picker::Logger
+{
+public:
+  struct Counts
+  {
+    int trace{ };
+    int debug{ };
+    int info{ };
+    int warning{ };
+    int error{ };
+    int critical{ };
+  };
+
+  explicit MockLogger(Counts* inCountsPtr) : countsPtr(inCountsPtr) {}
+
+  void trace(std::string_view message) override;
+
+  void debug(std::string_view message) override;
+
+  void info(std::string_view message) override;
+
+  void warning(std::string_view message) override;
+
+  void error(std::string_view message) override;
+
+  void critical(std::string_view message) override;
+
+  int getTraceCount( ) const noexcept;
+
+  int getDebugCount( ) const noexcept;
+
+  int getInfoCount( ) const noexcept;
+
+  int getWarningCount( ) const noexcept;
+
+  int getErrorCount( ) const noexcept;
+
+  int getCriticalCount( ) const noexcept;
+
+private:
+  Counts* countsPtr;
 };
 
 #endif

@@ -1,7 +1,10 @@
 #include <memory>
 #include <sstream>
 #include <string>
+#include <string_view>
 #include <utility>
+
+#include "nlohmann/json.hpp"// NOLINT(misc-include-cleaner)
 
 #include "Bracket.hpp"
 #include "BracketData.hpp"
@@ -173,6 +176,7 @@ StringstreamOutStrategyFactory::StringstreamOutStrategyFactory(std::shared_ptr<s
   : out(std::move(inOut))
 {}
 
+// NOLINTNEXTLINE(misc-include-cleaner)
 std::shared_ptr<picker::OutputStrategy> StringstreamOutStrategyFactory::create(const nlohmann::json& /*params*/) const
 {
   return std::make_shared<StringstreamOutStrategy>(out);
@@ -183,7 +187,7 @@ DeterministicStrategy::DeterministicStrategy(const double inVal) : val(inVal) {}
 double DeterministicStrategy::getRandom( ) { return val; }
 
 std::shared_ptr<picker::RandomizationStrategy> DeterministicStrategyFactory::create(
-  const nlohmann::json& /*params*/) const
+  const nlohmann::json& /*params*/) const// NOLINT(misc-include-cleaner)
 {
   constexpr double val = 0.5;
   return std::make_shared<DeterministicStrategy>(val);
@@ -194,9 +198,34 @@ std::string LexicographicCompareStrategy::selectWinner(const std::string& team1,
   return team1 < team2 ? team1 : team2;
 }
 
+// NOLINTNEXTLINE(misc-include-cleaner)
 std::shared_ptr<picker::SelectionStrategy> LexicographicCompareStrategyFactory::create(const nlohmann::json& /*params*/,
   const RandomizationStrategyPtr& /*randomizationStrategy*/,
   const TeamDataLookupPtr& /*teamDataLookup*/) const
 {
   return std::make_shared<LexicographicCompareStrategy>( );
 }
+
+void MockLogger::trace(std::string_view /*message*/) { ++countsPtr->trace; }
+
+void MockLogger::debug(std::string_view /*message*/) { ++countsPtr->debug; }
+
+void MockLogger::info(std::string_view /*message*/) { ++countsPtr->info; }
+
+void MockLogger::warning(std::string_view /*message*/) { ++countsPtr->warning; }
+
+void MockLogger::error(std::string_view /*message*/) { ++countsPtr->error; }
+
+void MockLogger::critical(std::string_view /*message*/) { ++countsPtr->critical; }
+
+int MockLogger::getTraceCount( ) const noexcept { return countsPtr->trace; }
+
+int MockLogger::getDebugCount( ) const noexcept { return countsPtr->debug; }
+
+int MockLogger::getInfoCount( ) const noexcept { return countsPtr->info; }
+
+int MockLogger::getWarningCount( ) const noexcept { return countsPtr->warning; }
+
+int MockLogger::getErrorCount( ) const noexcept { return countsPtr->error; }
+
+int MockLogger::getCriticalCount( ) const noexcept { return countsPtr->critical; }

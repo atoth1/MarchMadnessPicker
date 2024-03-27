@@ -1,0 +1,14 @@
+#ifndef PICKER_CONFIG_HPP
+#define PICKER_CONFIG_HPP
+
+#cmakedefine PICKER_ENABLE_LOGGING
+
+namespace picker {
+#ifdef PICKER_ENABLE_LOGGING
+inline constexpr bool enableLogging = true;
+#else
+inline constexpr bool enableLogging = false;
+#endif
+}// namespace picker
+
+#endif

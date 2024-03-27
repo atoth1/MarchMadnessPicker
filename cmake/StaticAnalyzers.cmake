@@ -23,8 +23,9 @@ macro(MarchMadnessPicker_enable_cppcheck WARNINGS_AS_ERRORS CPPCHECK_OPTIONS)
           --suppress=unmatchedSuppression
           # noisy and incorrect sometimes
           --suppress=passedByValue
-          # spdlog headers cause a problem without this
+          # not a fan of this, but spdlog headers cause a problem without these
           --suppress=functionStatic
+          --suppress=uninitMemberVar
           # ignores code that cppcheck thinks is invalid C++
           --suppress=syntaxError
           --suppress=preprocessorErrorDirective

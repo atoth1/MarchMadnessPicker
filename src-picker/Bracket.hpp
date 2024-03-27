@@ -11,7 +11,7 @@
 
 namespace picker {
 
-struct SelectionStrategy;
+class SelectionStrategy;
 
 class Matchup
 {

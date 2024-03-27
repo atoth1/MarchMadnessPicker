@@ -9,7 +9,7 @@
 
 picker::StdRandStrategy::StdRandStrategy(const unsigned seed) { std::srand(seed); }
 
-// NOLINTNEXTLINE(cert-msc30-c, cert-msc50-cpp, concurrency-mt-unsafe)
+// NOLINTNEXTLINE
 double picker::StdRandStrategy::getRandom( ) { return static_cast<double>(std::rand( )) / RAND_MAX; }
 
 std::shared_ptr<picker::RandomizationStrategy> picker::StdRandStrategyFactory::create(

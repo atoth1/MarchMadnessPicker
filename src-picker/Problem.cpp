@@ -1,13 +1,14 @@
 #include <fstream>
 #include <memory>
-#include <stdexcept>
 #include <string>
 #include <string_view>
 #include <utility>
 
+#include "fmt/core.h"
 #include "nlohmann/json.hpp"
 
 #include "Bracket.hpp"
+#include "LogManager.hpp"
 #include "OutputStrategy.hpp"// NOLINT(misc-include-cleaner)
 #include "OutputStrategy_Factory.hpp"
 #include "Problem.hpp"
@@ -27,22 +28,27 @@ void picker::Problem::registerOutputStrategyFactory(std::string_view name,
   std::unique_ptr<OutputStrategyFactory::FactoryType>&& factory)
 {
   outputStrategyFactory.registerFactory(name, std::move(factory));
+  logDebug(fmt::format("Registered factory for output strategy: {}.", name));
 }
 
 void picker::Problem::registerRandomizationStrategyFactory(std::string_view name,
   std::unique_ptr<RandomizationStrategyFactory::FactoryType>&& factory)
 {
   randomizationStrategyFactory.registerFactory(name, std::move(factory));
+  logDebug(fmt::format("Registered factory for randomization strategy: {}.", name));
 }
 
 void picker::Problem::registerSelectionStrategyFactory(std::string_view name,
   std::unique_ptr<SelectionStrategyFactory::FactoryType>&& factory)
 {
   selectionStrategyFactory.registerFactory(name, std::move(factory));
+  logDebug(fmt::format("Registered factory for selection strategy: {}.", name));
 }
 
 void picker::Problem::setup( )
 {
+  logDebug("Setting up problem.");
+
   const auto randomizationStrategy =
     randomizationStrategyFactory.create(problemData.randomizationStrategy, problemData.randomizationStrategyParams);
 
@@ -56,7 +62,17 @@ void picker::Problem::setup( )
 
 void picker::Problem::run( ) const
 {
-  if (!selectionStrategy) { throw std::runtime_error("ERROR - selection strategy is null."); }
-  if (!outputStrategy) { throw std::runtime_error("ERROR - output strategy is null."); }
+  logDebug("Running problem.");
+
+  if (!selectionStrategy) {
+    logWarning("Selection strategy is null, returning early.");
+    return;
+  }
+
+  if (!outputStrategy) {
+    logWarning("Output strategy is null, returning early.");
+    return;
+  }
+
   outputStrategy->writeOutput(makeBracket(problemData.bracketData, selectionStrategy));
 }

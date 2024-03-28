@@ -8,6 +8,7 @@
 
 #include "Bracket.hpp"
 #include "BracketData.hpp"
+#include "LogManager.hpp"
 #include "SelectionStrategy.hpp"
 
 namespace {
@@ -41,7 +42,9 @@ picker::Bracket picker::makeBracket(const BracketData& bracketData, const std::s
     region = std::make_unique<Region>( );
     region->name = regionData.name;
     region->teams = regionData.teams;
+    logDebug(fmt::format("Creating matchups for region: {}", regionData.name));
 
+    logDebug("Creating Round of 64 matchups.");
     region->roundOf64[0] = std::make_shared<Matchup>(regionData.teams[0], regionData.teams[15], strategy);
     region->roundOf64[1] = std::make_shared<Matchup>(regionData.teams[7], regionData.teams[8], strategy);
     region->roundOf64[2] = std::make_shared<Matchup>(regionData.teams[4], regionData.teams[11], strategy);
@@ -51,14 +54,17 @@ picker::Bracket picker::makeBracket(const BracketData& bracketData, const std::s
     region->roundOf64[6] = std::make_shared<Matchup>(regionData.teams[6], regionData.teams[9], strategy);
     region->roundOf64[7] = std::make_shared<Matchup>(regionData.teams[1], regionData.teams[14], strategy);
 
+    logDebug("Creating Round of 32 matchups.");
     region->roundOf32[0] = std::make_shared<Matchup>(region->roundOf64[0], region->roundOf64[1], strategy);
     region->roundOf32[1] = std::make_shared<Matchup>(region->roundOf64[2], region->roundOf64[3], strategy);
     region->roundOf32[2] = std::make_shared<Matchup>(region->roundOf64[4], region->roundOf64[5], strategy);
     region->roundOf32[3] = std::make_shared<Matchup>(region->roundOf64[6], region->roundOf64[7], strategy);
 
+    logDebug("Creating Sweet 16 matchups.");
     region->sweet16[0] = std::make_shared<Matchup>(region->roundOf32[0], region->roundOf32[1], strategy);
     region->sweet16[1] = std::make_shared<Matchup>(region->roundOf32[2], region->roundOf32[3], strategy);
 
+    logDebug("Creating Elite 8 matchup.");
     region->elite8 = std::make_shared<Matchup>(region->sweet16[0], region->sweet16[1], strategy);
     // NOLINTEND(*-magic-numbers)
   };
@@ -68,9 +74,15 @@ picker::Bracket picker::makeBracket(const BracketData& bracketData, const std::s
   makeRegion(bracket.bottomLeft, bracketData.bottomLeft);
   makeRegion(bracket.topRight, bracketData.topRight);
   makeRegion(bracket.bottomRight, bracketData.bottomRight);
+
+  logDebug("Creating Final Four matchups.");
   bracket.leftSemifinal = std::make_shared<Matchup>(bracket.topLeft->elite8, bracket.bottomLeft->elite8, strategy);
   bracket.rightSemifinal = std::make_shared<Matchup>(bracket.topRight->elite8, bracket.bottomRight->elite8, strategy);
   bracket.championship = std::make_unique<Matchup>(bracket.leftSemifinal, bracket.rightSemifinal, strategy);
+
+  logDebug("Filling out bracket.");
+  [[maybe_unused]] const auto winner = bracket.championship->getWinner( );
+
   return bracket;
 }
 

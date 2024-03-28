@@ -60,7 +60,6 @@ int main(int argc, char** argv)
     picker::Problem problem(jsonInput);
 
     auto registerRandomizationStrategyFactories = [&]( ) {
-      picker::logDebug("Registering randomization strategy factories.");
       problem.registerRandomizationStrategyFactory(
         picker::MERSENNE_TWISTER_STRATEGY_LABEL, std::make_unique<picker::MersenneTwisterStrategyFactory>( ));
       problem.registerRandomizationStrategyFactory(
@@ -71,7 +70,6 @@ int main(int argc, char** argv)
     registerRandomizationStrategyFactories( );
 
     auto registerSelectionStrategyFactories = [&]( ) {
-      picker::logDebug("Registering selection strategy factories");
       problem.registerSelectionStrategyFactory(
         picker::COIN_FLIP_STRATEGY_LABEL, std::make_unique<picker::CoinFlipStrategyFactory>( ));
       problem.registerSelectionStrategyFactory(
@@ -82,7 +80,6 @@ int main(int argc, char** argv)
     registerSelectionStrategyFactories( );
 
     auto registerOutputStrategyFactories = [&]( ) {
-      picker::logDebug("Registering output strategy factories");
       problem.registerOutputStrategyFactory(
         picker::FILE_OUT_STRATEGY_LABEL, std::make_unique<picker::FileOutStrategyFactory>( ));
       problem.registerOutputStrategyFactory(

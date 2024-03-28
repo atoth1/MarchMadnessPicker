@@ -2,8 +2,10 @@
 #include <string>
 #include <utility>
 
+#include "fmt/core.h"
 #include "nlohmann/json.hpp"// NOLINT(misc-include-cleaner)
 
+#include "LogManager.hpp"
 #include "RandomizationStrategy.hpp"// NOLINT(misc-include-cleaner)
 #include "SelectionStrategy.hpp"
 #include "SelectionStrategy_SpreadBased.hpp"
@@ -89,7 +91,18 @@ std::string picker::SpreadBasedStrategy::selectWinner(const std::string& team1, 
   const picker::TeamData& favorite = team1Favored ? data1 : data2;
   const picker::TeamData& underdog = team1Favored ? data2 : data1;
   const double predictedSpread = computePredictedSpread(favorite, underdog);
-  return rand->getRandom( ) < computeWinProbability(predictedSpread) ? favorite.teamName : underdog.teamName;
+  const double predictedWinProb = computeWinProbability(predictedSpread);
+  std::string winner = rand->getRandom( ) < predictedWinProb ? favorite.teamName : underdog.teamName;
+  logDebug(
+    fmt::format("In matchup {} vs {}, {} advances (predicted favorite = {}, predicted spread = {}, predicted win "
+                "probability = {}).",
+      data1.teamName,
+      data2.teamName,
+      winner,
+      favorite.teamName,
+      predictedSpread,
+      predictedWinProb));
+  return winner;
 }
 
 std::shared_ptr<picker::SelectionStrategy> picker::SpreadBasedStrategyFactory::create(

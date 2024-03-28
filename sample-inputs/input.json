@@ -1,11 +1,13 @@
 {
   "team_data_file": "kenpom-data-pre-tournament-2024.json",
-  "selection_strategy": "this is optional",
+  "selection_strategy": "spread-based",
   "selection_strategy_params": {},
-  "randomization_strategy": "this is optional",
+  "randomization_strategy": "mersenne-twister",
   "randomization_strategy_params": {},
-  "output_strategy": "this is optional (prints to stdout by default)",
-  "output_strategy_params": {},
+  "output_strategy": "file",
+  "output_strategy_params": {
+    "file_name": "bracket-2024.txt"
+  },
   "bracket_data": {
     "dummy": "Spellings of team names need match those in team_data_file.",
     "top_left": {

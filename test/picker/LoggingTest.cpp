@@ -48,7 +48,7 @@ TEST_CASE("Logging - spdlog file creation", "[Logging]")// NOLINT(misc-use-anony
   const auto logger = std::make_unique<picker::SpdlogLogger>(
     picker::SpdlogLogger::LogLevels{ picker::LogLevel::OFF, picker::LogLevel::DEBUG });
   const std::string logFileName{ picker::SpdlogLogger::LOG_FILE_NAME };
-  std::ifstream logFile{ logFileName };
+  const std::ifstream logFile{ logFileName };
   logger->debug("test log message.");
   CHECK(logFile.is_open( ));// NOLINT(cppcoreguidelines-avoid-do-while)
 }

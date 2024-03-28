@@ -19,7 +19,7 @@ TEST_CASE("OutputStrategy - file output creates file", "[OutputStrategy]")// NOL
   const picker::FileOutStrategy outputStrategy{ fileName };
   outputStrategy.writeOutput(bracket);
 
-  std::ifstream outFile{ fileName };
+  const std::ifstream outFile{ fileName };
   CHECK(outFile.is_open( ));// NOLINT(cppcoreguidelines-avoid-do-while)
 }
 

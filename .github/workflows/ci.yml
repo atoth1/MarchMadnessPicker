@@ -63,13 +63,6 @@ jobs:
             gcov_executable: gcov
             enable_ipo: Off
 
-          # Windows msvc builds
-          #- os: windows-latest
-          #  compiler: msvc
-          #  generator: "Visual Studio 17 2022"
-          #  build_type: Debug
-          #  enable_ipo: On
-
           - os: windows-latest
             compiler: msvc
             generator: "Visual Studio 17 2022"

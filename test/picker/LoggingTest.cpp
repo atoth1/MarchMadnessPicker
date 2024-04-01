@@ -47,7 +47,7 @@ TEST_CASE("Logging - global interface", "[Logging]")
 // NOLINTNEXTLINE(misc-use-anonymous-namespace, readability-function-cognitive-complexity)
 TEST_CASE("Logging - spdlog API", "[Logging]")
 {
-  std::array logLevels{ picker::LogLevel::TRACE,
+  const std::array logLevels{ picker::LogLevel::TRACE,
     picker::LogLevel::DEBUG,
     picker::LogLevel::INFO,
     picker::LogLevel::WARNING,

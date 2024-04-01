@@ -3,7 +3,7 @@
 #include <string_view>
 
 #include "fmt/core.h"
-#include "fmt/ranges.h"// NOLINT(misc-inlcude-cleaner)
+#include "fmt/ranges.h"// NOLINT(misc-include-cleaner)
 #include "nlohmann/json.hpp"
 
 #include "BracketData.hpp"

@@ -1,3 +1,4 @@
+#include <array>
 #include <fstream>
 #include <memory>
 #include <string>
@@ -43,13 +44,28 @@ TEST_CASE("Logging - global interface", "[Logging]")
   CHECK(counts.critical == criticalCount);// NOLINT(cppcoreguidelines-avoid-do-while)
 }
 
-TEST_CASE("Logging - spdlog file creation", "[Logging]")// NOLINT(misc-use-anonymous-namespace)
+// NOLINTNEXTLINE(misc-use-anonymous-namespace, readability-function-cognitive-complexity)
+TEST_CASE("Logging - spdlog API", "[Logging]")
 {
-  const auto logger = std::make_unique<picker::SpdlogLogger>(
-    picker::SpdlogLogger::LogLevels{ picker::LogLevel::OFF, picker::LogLevel::DEBUG });
-  logger->debug("test log message.");
+  std::array logLevels{ picker::LogLevel::TRACE,
+    picker::LogLevel::DEBUG,
+    picker::LogLevel::INFO,
+    picker::LogLevel::WARNING,
+    picker::LogLevel::ERROR,
+    picker::LogLevel::CRITICAL,
+    picker::LogLevel::OFF };
+  for (const auto level : logLevels) {
+    const auto logger = std::make_unique<picker::SpdlogLogger>(picker::SpdlogLogger::LogLevels{ level, level });
+    const std::string logFileName{ picker::SpdlogLogger::LOG_FILE_NAME };
+    const std::ifstream logFile{ logFileName };
+    CHECK(logFile.is_open( ));// NOLINT(cppcoreguidelines-avoid-do-while)
 
-  const std::string logFileName{ picker::SpdlogLogger::LOG_FILE_NAME };
-  const std::ifstream logFile{ logFileName };
-  CHECK(logFile.is_open( ));// NOLINT(cppcoreguidelines-avoid-do-while)
+    static constexpr std::string_view message{ "dummy" };
+    CHECK_NOTHROW(logger->trace(message));// NOLINT(cppcoreguidelines-avoid-do-while)
+    CHECK_NOTHROW(logger->debug(message));// NOLINT(cppcoreguidelines-avoid-do-while)
+    CHECK_NOTHROW(logger->info(message));// NOLINT(cppcoreguidelines-avoid-do-while)
+    CHECK_NOTHROW(logger->warning(message));// NOLINT(cppcoreguidelines-avoid-do-while)
+    CHECK_NOTHROW(logger->error(message));// NOLINT(cppcoreguidelines-avoid-do-while)
+    CHECK_NOTHROW(logger->critical(message));// NOLINT(cppcoreguidelines-avoid-do-while)
+  }
 }

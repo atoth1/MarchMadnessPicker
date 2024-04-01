@@ -217,15 +217,3 @@ void MockLogger::warning(std::string_view /*message*/) { ++countsPtr->warning; }
 void MockLogger::error(std::string_view /*message*/) { ++countsPtr->error; }
 
 void MockLogger::critical(std::string_view /*message*/) { ++countsPtr->critical; }
-
-int MockLogger::getTraceCount( ) const noexcept { return countsPtr->trace; }
-
-int MockLogger::getDebugCount( ) const noexcept { return countsPtr->debug; }
-
-int MockLogger::getInfoCount( ) const noexcept { return countsPtr->info; }
-
-int MockLogger::getWarningCount( ) const noexcept { return countsPtr->warning; }
-
-int MockLogger::getErrorCount( ) const noexcept { return countsPtr->error; }
-
-int MockLogger::getCriticalCount( ) const noexcept { return countsPtr->critical; }

@@ -108,18 +108,6 @@ public:
 
   void critical(std::string_view message) override;
 
-  int getTraceCount( ) const noexcept;
-
-  int getDebugCount( ) const noexcept;
-
-  int getInfoCount( ) const noexcept;
-
-  int getWarningCount( ) const noexcept;
-
-  int getErrorCount( ) const noexcept;
-
-  int getCriticalCount( ) const noexcept;
-
 private:
   Counts* countsPtr;
 };

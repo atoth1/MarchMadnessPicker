@@ -12,6 +12,42 @@
 #include "SelectionStrategy_SpreadBased.hpp"
 #include "TestUtils.hpp"
 
+// NOLINTNEXTLINE(misc-use-anonymous-namespace)
+TEST_CASE("SelectionStrategyFactory - create coin flip strategy", "[SelectionStrategyFactory]")
+{
+  constexpr double randValue = 0.42;
+  const auto randStrategy = std::make_shared<DeterministicStrategy>(randValue);
+  const auto teamDataLookup = std::make_shared<picker::ProblemData::TeamDataLookup>( );
+  const picker::CoinFlipStrategyFactory factory{ };
+  // NOLINTNEXTLINE(cppcoreguidelines-avoid-do-while)
+  CHECK(
+    std::dynamic_pointer_cast<picker::CoinFlipStrategy>(factory.create({ }, randStrategy, teamDataLookup)) != nullptr);
+}
+
+// NOLINTNEXTLINE(misc-use-anonymous-namespace)
+TEST_CASE("SelectionStrategyFactory - create rank deterministic strategy", "[SelectionStrategyFactory]")
+{
+  constexpr double randValue = 0.42;
+  const auto randStrategy = std::make_shared<DeterministicStrategy>(randValue);
+  const auto teamDataLookup = std::make_shared<picker::ProblemData::TeamDataLookup>( );
+  const picker::RankDeterministicStrategyFactory factory{ };
+  // NOLINTNEXTLINE(cppcoreguidelines-avoid-do-while)
+  CHECK(std::dynamic_pointer_cast<picker::RankDeterministicStrategy>(factory.create({ }, randStrategy, teamDataLookup))
+        != nullptr);
+}
+
+// NOLINTNEXTLINE(misc-use-anonymous-namespace)
+TEST_CASE("SelectionStrategyFactory - create spread based strategy", "[SelectionStrategyFactory]")
+{
+  constexpr double randValue = 0.42;
+  const auto randStrategy = std::make_shared<DeterministicStrategy>(randValue);
+  const auto teamDataLookup = std::make_shared<picker::ProblemData::TeamDataLookup>( );
+  const picker::SpreadBasedStrategyFactory factory{ };
+  // NOLINTNEXTLINE(cppcoreguidelines-avoid-do-while)
+  CHECK(std::dynamic_pointer_cast<picker::SpreadBasedStrategy>(factory.create({ }, randStrategy, teamDataLookup))
+        != nullptr);
+}
+
 namespace {
 picker::SelectionStrategyFactory getTestFactory( )
 {

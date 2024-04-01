@@ -11,6 +11,30 @@
 #include "RandomizationStrategy_StdRand.hpp"
 
 // NOLINTNEXTLINE(misc-use-anonymous-namespace)
+TEST_CASE("RandomizationStrategyFactory - create mersenne twister strategy", "[RandomizationStrategyFactory]")
+{
+  const picker::MersenneTwisterStrategyFactory factory{ };
+  // NOLINTNEXTLINE(cppcoreguidelines-avoid-do-while)
+  CHECK(std::dynamic_pointer_cast<picker::MersenneTwisterStrategy>(factory.create({ })) != nullptr);
+}
+
+// NOLINTNEXTLINE(misc-use-anonymous-namespace)
+TEST_CASE("RandomizationStrategyFactory - create minstd-rand strategy", "[RandomizationStrategyFactory]")
+{
+  const picker::MinStdRandStrategyFactory factory{ };
+  // NOLINTNEXTLINE(cppcoreguidelines-avoid-do-while)
+  CHECK(std::dynamic_pointer_cast<picker::MinStdRandStrategy>(factory.create({ })) != nullptr);
+}
+
+// NOLINTNEXTLINE(misc-use-anonymous-namespace)
+TEST_CASE("RandomizationStrategyFactory - create std-rand strategy", "[RandomizationStrategyFactory]")
+{
+  const picker::StdRandStrategyFactory factory{ };
+  // NOLINTNEXTLINE(cppcoreguidelines-avoid-do-while)
+  CHECK(std::dynamic_pointer_cast<picker::StdRandStrategy>(factory.create({ })) != nullptr);
+}
+
+// NOLINTNEXTLINE(misc-use-anonymous-namespace)
 TEST_CASE("RandomizationStrategyFactory - create strategies", "[RandomizationStrategyFactory]")
 {
   picker::RandomizationStrategyFactory factory{ };

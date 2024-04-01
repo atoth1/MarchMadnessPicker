@@ -9,6 +9,22 @@
 #include "OutputStrategy_FileOut.hpp"
 #include "OutputStrategy_StdOut.hpp"
 
+// NOLINTNEXTLINE(misc-use-anonymous-namespace)
+TEST_CASE("OutputStrategyFactory - create fileout strategy", "[OutputStrategyFactory]")
+{
+  const picker::FileOutStrategyFactory factory{ };
+  // NOLINTNEXTLINE(cppcoreguidelines-avoid-do-while)
+  CHECK(std::dynamic_pointer_cast<picker::FileOutStrategy>(factory.create({ })) != nullptr);
+}
+
+// NOLINTNEXTLINE(misc-use-anonymous-namespace)
+TEST_CASE("OutputStrategyFactory - create stdout strategy", "[OutputStrategyFactory]")
+{
+  const picker::StdOutStrategyFactory factory{ };
+  // NOLINTNEXTLINE(cppcoreguidelines-avoid-do-while)
+  CHECK(std::dynamic_pointer_cast<picker::StdOutStrategy>(factory.create({ })) != nullptr);
+}
+
 TEST_CASE("OutputStrategyFactory - create strategies", "[OutputStrategyFactory]")// NOLINT(misc-use-anonymous-namespace)
 {
   picker::OutputStrategyFactory factory{ };

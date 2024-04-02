@@ -30,6 +30,50 @@ TEST_CASE("Problem - run without setup", "[Problem]")// NOLINT(misc-use-anonymou
   CHECK(out->str( ).empty( ));// NOLINT(cppcoreguidelines-avoid-do-while)
 }
 
+TEST_CASE("Problem - run with invalid selection strategy", "[Problem]")// NOLINT(misc-use-anonymous-namespace)
+{
+  const std::string inFile{ "test-input.json" };
+  picker::Problem problem{ inFile };
+
+  constexpr std::string_view deterministicStrategyLabel{ "deterministic" };
+  problem.registerRandomizationStrategyFactory(
+    deterministicStrategyLabel, std::make_unique<DeterministicStrategyFactory>( ));
+
+  constexpr std::string_view lexicographicStrategyLabel{ "mismatched" };
+  problem.registerSelectionStrategyFactory(
+    lexicographicStrategyLabel, std::make_unique<LexicographicCompareStrategyFactory>( ));
+
+  constexpr std::string_view stringstreamStrategyLabel{ "stringstream" };
+  auto out = std::make_shared<std::ostringstream>( );
+  problem.registerOutputStrategyFactory(
+    stringstreamStrategyLabel, std::make_unique<StringstreamOutStrategyFactory>(out));
+
+  problem.run( );
+  CHECK(out->str( ).empty( ));// NOLINT(cppcoreguidelines-avoid-do-while)
+}
+
+TEST_CASE("Problem - run with invalid output strategy", "[Problem]")// NOLINT(misc-use-anonymous-namespace)
+{
+  const std::string inFile{ "test-input.json" };
+  picker::Problem problem{ inFile };
+
+  constexpr std::string_view deterministicStrategyLabel{ "deterministic" };
+  problem.registerRandomizationStrategyFactory(
+    deterministicStrategyLabel, std::make_unique<DeterministicStrategyFactory>( ));
+
+  constexpr std::string_view lexicographicStrategyLabel{ "lexicographic" };
+  problem.registerSelectionStrategyFactory(
+    lexicographicStrategyLabel, std::make_unique<LexicographicCompareStrategyFactory>( ));
+
+  constexpr std::string_view stringstreamStrategyLabel{ "mismatched" };
+  auto out = std::make_shared<std::ostringstream>( );
+  problem.registerOutputStrategyFactory(
+    stringstreamStrategyLabel, std::make_unique<StringstreamOutStrategyFactory>(out));
+
+  problem.run( );
+  CHECK(out->str( ).empty( ));// NOLINT(cppcoreguidelines-avoid-do-while)
+}
+
 TEST_CASE("Problem - successful simulation", "[Problem]")// NOLINT(misc-use-anonymous-namespace)
 {
   const std::string inFile{ "test-input.json" };

@@ -210,7 +210,16 @@ TEST_CASE("ProblemData parsing - expected exceptions", "[ProblemData]")// NOLINT
   }
 }
 
-TEST_CASE("PriblemData validation - invalid bracket", "[ProblemData]")// NOLINT(misc-use-anonymous-namespace)
+TEST_CASE("PriblemData validation - team name mismatch", "[ProblemData]")// NOLINT(misc-use-anonymous-namespace)
+{
+  const auto jsonData = nlohmann::json::parse(getValidInputStringDefaultArgs( ));// NOLINT(misc-include-cleaner)
+  picker::ProblemData problemData{ };
+  jsonData.get_to(problemData);
+  problemData.bracketData.topLeft.teams.front( ).push_back('A');
+  CHECK_THROWS_AS(problemData.validate( ), std::runtime_error);// NOLINT(cppcoreguidelines-avoid-do-while)
+}
+
+TEST_CASE("PriblemData validation - invalid bracket seeding", "[ProblemData]")// NOLINT(misc-use-anonymous-namespace)
 {
   const auto jsonData = nlohmann::json::parse(getValidInputStringDefaultArgs( ));// NOLINT(misc-include-cleaner)
   picker::ProblemData problemData{ };

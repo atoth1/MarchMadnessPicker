@@ -65,14 +65,10 @@ void picker::Problem::run( ) const
   logDebug("Running problem.");
 
   if (!selectionStrategy) {
-    logWarning("Selection strategy is null, returning early.");
-    return;
+    logWarning("Selection strategy is null, returning without running.");
+  } else if (!outputStrategy) {
+    logWarning("Output strategy is null, returning without running.");
+  } else {
+    outputStrategy->writeOutput(makeBracket(problemData.bracketData, selectionStrategy));
   }
-
-  if (!outputStrategy) {
-    logWarning("Output strategy is null, returning early.");
-    return;
-  }
-
-  outputStrategy->writeOutput(makeBracket(problemData.bracketData, selectionStrategy));
 }

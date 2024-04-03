@@ -4,6 +4,7 @@
 #include <memory>
 #include <string_view>
 #include <unordered_map>
+#include <vector>
 
 #include "nlohmann/json_fwd.hpp"
 
@@ -37,6 +38,8 @@ public:
   void registerFactory(std::string_view type, std::unique_ptr<FactoryType>&& factory);
 
   std::shared_ptr<SelectionStrategy> create(std::string_view type, const nlohmann::json& params) const;
+
+  std::vector<std::string_view> getRegisteredNames( ) const;
 
 private:
   RandomizationStrategyPtr randomizationStrategy{ };

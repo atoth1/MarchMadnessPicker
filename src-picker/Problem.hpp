@@ -3,6 +3,8 @@
 
 #include <memory>
 #include <string>
+#include <string_view>
+#include <vector>
 
 #include "OutputStrategy_Factory.hpp"
 #include "ProblemData.hpp"
@@ -33,7 +35,15 @@ public:
 
   void run( ) const;
 
+  std::vector<std::string_view> getRegisteredOutputStrategyNames( ) const;
+
+  std::vector<std::string_view> getRegisteredRandomizationStrategyNames( ) const;
+
+  std::vector<std::string_view> getRegisteredSelectionStrategyNames( ) const;
+
 private:
+  void registerStandardStrategyFactories( );
+
   ProblemData problemData{ };
 
   OutputStrategyFactory outputStrategyFactory{ };

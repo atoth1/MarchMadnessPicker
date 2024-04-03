@@ -3,18 +3,27 @@
 #include <string>
 #include <string_view>
 #include <utility>
+#include <vector>
 
 #include "fmt/core.h"
 #include "nlohmann/json.hpp"
 
 #include "Bracket.hpp"
+#include "Constants.hpp"
 #include "LogManager.hpp"
-#include "OutputStrategy.hpp"// NOLINT(misc-include-cleaner)
 #include "OutputStrategy_Factory.hpp"
+#include "OutputStrategy_FileOut.hpp"
+#include "OutputStrategy_StdOut.hpp"
 #include "Problem.hpp"
 #include "ProblemData.hpp"
 #include "RandomizationStrategy_Factory.hpp"
+#include "RandomizationStrategy_MersenneTwister.hpp"
+#include "RandomizationStrategy_MinStdRand.hpp"
+#include "RandomizationStrategy_StdRand.hpp"
+#include "SelectionStrategy_CoinFlip.hpp"
 #include "SelectionStrategy_Factory.hpp"
+#include "SelectionStrategy_RankDeterministic.hpp"
+#include "SelectionStrategy_SpreadBased.hpp"
 
 picker::Problem::Problem(const std::string& inputFileName)
 {
@@ -49,6 +58,8 @@ void picker::Problem::setup( )
 {
   logDebug("Setting up problem.");
 
+  registerStandardStrategyFactories( );
+
   const auto randomizationStrategy =
     randomizationStrategyFactory.create(problemData.randomizationStrategy, problemData.randomizationStrategyParams);
 
@@ -71,4 +82,48 @@ void picker::Problem::run( ) const
   } else {
     outputStrategy->writeOutput(makeBracket(problemData.bracketData, selectionStrategy));
   }
+}
+
+std::vector<std::string_view> picker::Problem::getRegisteredOutputStrategyNames( ) const
+{
+  return outputStrategyFactory.getRegisteredNames( );
+}
+
+std::vector<std::string_view> picker::Problem::getRegisteredRandomizationStrategyNames( ) const
+{
+  return randomizationStrategyFactory.getRegisteredNames( );
+}
+
+std::vector<std::string_view> picker::Problem::getRegisteredSelectionStrategyNames( ) const
+{
+  return selectionStrategyFactory.getRegisteredNames( );
+}
+
+void picker::Problem::registerStandardStrategyFactories( )
+{
+  auto registerRandomizationStrategyFactories = [this]( ) {
+    registerRandomizationStrategyFactory(
+      picker::MERSENNE_TWISTER_STRATEGY_LABEL, std::make_unique<picker::MersenneTwisterStrategyFactory>( ));
+    registerRandomizationStrategyFactory(
+      picker::MINSTD_RAND_STRATEGY_LABEL, std::make_unique<picker::MinStdRandStrategyFactory>( ));
+    registerRandomizationStrategyFactory(
+      picker::STD_RAND_STRATEGY_LABEL, std::make_unique<picker::StdRandStrategyFactory>( ));
+  };
+  registerRandomizationStrategyFactories( );
+
+  auto registerSelectionStrategyFactories = [this]( ) {
+    registerSelectionStrategyFactory(
+      picker::COIN_FLIP_STRATEGY_LABEL, std::make_unique<picker::CoinFlipStrategyFactory>( ));
+    registerSelectionStrategyFactory(
+      picker::RANK_DETERMINISTIC_STRATEGY_LABEL, std::make_unique<picker::RankDeterministicStrategyFactory>( ));
+    registerSelectionStrategyFactory(
+      picker::SPREAD_BASED_STRATEGY_LABEL, std::make_unique<picker::SpreadBasedStrategyFactory>( ));
+  };
+  registerSelectionStrategyFactories( );
+
+  auto registerOutputStrategyFactories = [this]( ) {
+    registerOutputStrategyFactory(picker::FILE_OUT_STRATEGY_LABEL, std::make_unique<picker::FileOutStrategyFactory>( ));
+    registerOutputStrategyFactory(picker::STD_OUT_STRATEGY_LABEL, std::make_unique<picker::StdOutStrategyFactory>( ));
+  };
+  registerOutputStrategyFactories( );
 }

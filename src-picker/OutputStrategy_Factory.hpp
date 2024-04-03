@@ -4,6 +4,7 @@
 #include <memory>
 #include <string_view>
 #include <unordered_map>
+#include <vector>
 
 #include "nlohmann/json_fwd.hpp"
 
@@ -23,6 +24,8 @@ public:
   void registerFactory(std::string_view type, std::unique_ptr<FactoryType>&& factory);
 
   std::shared_ptr<OutputStrategy> create(std::string_view type, const nlohmann::json& params) const;
+
+  std::vector<std::string_view> getRegisteredNames( ) const;
 
 private:
   std::unordered_map<std::string_view, std::unique_ptr<FactoryType>> factories{ };

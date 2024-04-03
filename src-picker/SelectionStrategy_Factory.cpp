@@ -1,6 +1,7 @@
 #include <memory>
 #include <string_view>
 #include <utility>
+#include <vector>
 
 #include "fmt/core.h"
 #include "nlohmann/json.hpp"// NOLINT(misc-include-cleaner)
@@ -38,4 +39,12 @@ std::shared_ptr<picker::SelectionStrategy> picker::SelectionStrategyFactory::cre
   }
   logWarning("Selection strategy is not registered, returning null.");
   return nullptr;
+}
+
+std::vector<std::string_view> picker::SelectionStrategyFactory::getRegisteredNames( ) const
+{
+  std::vector<std::string_view> names{ };
+  names.reserve(factories.size( ));
+  for (const auto& [name, _] : factories) { names.push_back(name); }
+  return names;
 }

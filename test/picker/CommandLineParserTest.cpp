@@ -12,7 +12,7 @@
 TEST_CASE("CommandLineParser - missing required input file name", "[CLP]")// NOLINT(misc-use-anonymous-namespace)
 {
   constexpr std::array argv = { "program_name" };
-  constexpr int argc = argv.size( );
+  constexpr auto argc = static_cast<int>(argv.size( ));
 
   const std::unique_ptr<picker::CommandLineParser> clp = std::make_unique<picker::CLIParser>( );
   const auto parseResult = clp->parse(argc, argv.data( ));
@@ -23,7 +23,7 @@ TEST_CASE("CommandLineParser - missing required input file name", "[CLP]")// NOL
 TEST_CASE("CommandLineParser - successful parse with defaults", "[CLP]")// NOLINT(misc-use-anonymous-namespace)
 {
   constexpr std::array argv = { "program_name", "-i", "input.json" };
-  constexpr int argc = argv.size( );
+  constexpr auto argc = static_cast<int>(argv.size( ));
   constexpr int inFileId = 2;
 
   const std::unique_ptr<picker::CommandLineParser> clp = std::make_unique<picker::CLIParser>( );
@@ -41,7 +41,7 @@ TEST_CASE("CommandLineParser - successful parse with defaults", "[CLP]")// NOLIN
 TEST_CASE("CommandLineParser - successful parse no defaults", "[CLP]")
 {
   std::array argv{ "program_name", "-i", "input.json", "-f", "", "-s", "" };
-  constexpr int argc = argv.size( );
+  constexpr auto argc = static_cast<int>(argv.size( ));
   constexpr int inFileId = 2;
   constexpr int fileLogLevelId = 4;
   constexpr int screenLogLevelId = 6;

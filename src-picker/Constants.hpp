@@ -4,6 +4,14 @@
 #include <string_view>
 
 namespace picker {
+inline constexpr std::string_view TRACE_LABEL = "trace";
+inline constexpr std::string_view DEBUG_LABEL = "debug";
+inline constexpr std::string_view INFO_LABEL = "info";
+inline constexpr std::string_view WARNING_LABEL = "warning";
+inline constexpr std::string_view ERROR_LABEL = "error";
+inline constexpr std::string_view CRITICAL_LABEL = "critical";
+inline constexpr std::string_view OFF_LABEL = "off";
+
 inline constexpr std::string_view FILE_OUT_STRATEGY_LABEL = "file";
 inline constexpr std::string_view STD_OUT_STRATEGY_LABEL = "stdout";
 

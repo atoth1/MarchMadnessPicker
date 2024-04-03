@@ -6,6 +6,7 @@ configure_file("test-team-data.json" "test-team-data.json" COPYONLY)
 set(SOURCES
   BracketDataTest.cpp
   BracketTest.cpp
+  CommandLineParserTest.cpp
   LoggingTest.cpp
   OutputStrategyFactoryTest.cpp
   OutputStrategyTest.cpp

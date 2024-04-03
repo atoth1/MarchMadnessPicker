@@ -42,6 +42,9 @@ TEST_CASE("Logging - global interface", "[Logging]")
   static constexpr int criticalCount = picker::enableLogging ? 6 : 0;
   for (int repeat = 0; repeat < criticalCount; ++repeat) { picker::logCritical(msg); }
   CHECK(counts.critical == criticalCount);// NOLINT(cppcoreguidelines-avoid-do-while)
+
+  // counts goes out of scope, so need to unset logger here
+  picker::setGlobalLogger(nullptr);
 }
 
 // NOLINTNEXTLINE(misc-use-anonymous-namespace, readability-function-cognitive-complexity)

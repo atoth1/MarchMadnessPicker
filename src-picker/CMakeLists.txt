@@ -2,6 +2,7 @@
 set(SOURCES
   Bracket.cpp
   BracketData.cpp
+  CommandLineParser_CLI.cpp
   Logger_Spdlog.cpp
   LogManager.cpp
   OutputStrategy_Factory.cpp
@@ -32,6 +33,7 @@ target_link_libraries(${PROJECT_NAME}
   PUBLIC
   MarchMadnessPicker::MarchMadnessPicker_warnings
   MarchMadnessPicker::MarchMadnessPicker_options
+  CLI11::CLI11
   nlohmann_json::nlohmann_json
   spdlog::spdlog
   PRIVATE
@@ -41,5 +43,4 @@ set(EXE_NAME picker)
 add_executable(${EXE_NAME} main.cpp)
 target_link_libraries(${EXE_NAME}
   PRIVATE
-  ${PROJECT_NAME}
-  CLI11::CLI11)
+  ${PROJECT_NAME})

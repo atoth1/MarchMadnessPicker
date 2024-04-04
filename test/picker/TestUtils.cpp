@@ -206,14 +206,32 @@ std::shared_ptr<picker::SelectionStrategy> LexicographicCompareStrategyFactory::
   return std::make_shared<LexicographicCompareStrategy>( );
 }
 
-void MockLogger::trace(std::string_view /*message*/) { ++countsPtr->trace; }
+void MockLogger::trace(std::string_view /*message*/)
+{
+  if (countsPtr) { ++countsPtr->trace; }// NOLINT(readability-implicit-bool-conversion)
+}
 
-void MockLogger::debug(std::string_view /*message*/) { ++countsPtr->debug; }
+void MockLogger::debug(std::string_view /*message*/)
+{
+  if (countsPtr) { ++countsPtr->debug; }// NOLINT(readability-implicit-bool-conversion)
+}
 
-void MockLogger::info(std::string_view /*message*/) { ++countsPtr->info; }
+void MockLogger::info(std::string_view /*message*/)
+{
+  if (countsPtr) { ++countsPtr->info; }// NOLINT(readability-implicit-bool-conversion)
+}
 
-void MockLogger::warning(std::string_view /*message*/) { ++countsPtr->warning; }
+void MockLogger::warning(std::string_view /*message*/)
+{
+  if (countsPtr) { ++countsPtr->warning; }// NOLINT(readability-implicit-bool-conversion)
+}
 
-void MockLogger::error(std::string_view /*message*/) { ++countsPtr->error; }
+void MockLogger::error(std::string_view /*message*/)
+{
+  if (countsPtr) { ++countsPtr->error; }// NOLINT(readability-implicit-bool-conversion)
+}
 
-void MockLogger::critical(std::string_view /*message*/) { ++countsPtr->critical; }
+void MockLogger::critical(std::string_view /*message*/)
+{
+  if (countsPtr) { ++countsPtr->critical; }// NOLINT(readability-implicit-bool-conversion)
+}

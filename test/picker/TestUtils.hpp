@@ -94,7 +94,7 @@ public:
     int critical{ };
   };
 
-  explicit MockLogger(Counts* inCountsPtr) : countsPtr(inCountsPtr) {}
+  explicit MockLogger(std::shared_ptr<Counts> inCountsPtr) : countsPtr(std::move(inCountsPtr)) {}
 
   void trace(std::string_view message) override;
 
@@ -109,7 +109,7 @@ public:
   void critical(std::string_view message) override;
 
 private:
-  Counts* countsPtr;
+  std::shared_ptr<Counts> countsPtr;
 };
 
 #endif

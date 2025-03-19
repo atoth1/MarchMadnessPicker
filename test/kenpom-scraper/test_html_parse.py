@@ -5,14 +5,15 @@ from html_parse import BeautifulSoupHtmlParser
 from http_request import HttpApi
 from kenpom_data import KenpomData
 
+
 class TestHttpApi(HttpApi):
 
-  def makeRequest(self) -> int:
-    return HttpApi.successful_request
-  
-  # Reduced page source from 2023 end-of-season
-  def getText(self) -> str:
-    return """<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+    def makeRequest(self) -> int:
+        return HttpApi.successful_request
+
+    # Reduced page source from 2023 end-of-season
+    def getText(self) -> str:
+        return """<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
 "http://www.w3.org/TR/html4/loose.dtd">
 <HTML>
 <HEAD>
@@ -197,43 +198,44 @@ class TestHttpApi(HttpApi):
 <script type="text/javascript" src="https://code.jquery.com/ui/1.11.0/jquery-ui.min.js"></script>
 <script type='text/javascript' src='coach_box.js?1702667430'></script>
 </html>"""
-  
-  def getExpectedData(self) -> list[KenpomData]:
-    return [KenpomData(
-      team_name="Connecticut",
-      seed=4,
-      rank=1,
-      adj_eff=29.86,
-      adj_off=120.8,
-      adj_def=90.9,
-      adj_tempo=66.6,
-      luck=-0.056,
-      adj_eff_sos=10.39,
-      adj_off_sos=109.7,
-      adj_def_sos=99.3,
-      adj_eff_sos_nc=-1.75
-    ), KenpomData(
-      team_name="IUPUI",
-      seed=None,
-      rank=360,
-      adj_eff=-22.05,
-      adj_off=95.6,
-      adj_def=117.7,
-      adj_tempo=66.9,
-      luck=-0.076,
-      adj_eff_sos=-5.79,
-      adj_off_sos=102.4,
-      adj_def_sos=108.1,
-      adj_eff_sos_nc=-7.15
-    )]
+
+    def getExpectedData(self) -> list[KenpomData]:
+        return [KenpomData(
+            team_name="Connecticut",
+            seed=4,
+            rank=1,
+            adj_eff=29.86,
+            adj_off=120.8,
+            adj_def=90.9,
+            adj_tempo=66.6,
+            luck=-0.056,
+            adj_eff_sos=10.39,
+            adj_off_sos=109.7,
+            adj_def_sos=99.3,
+            adj_eff_sos_nc=-1.75
+        ), KenpomData(
+            team_name="IUPUI",
+            seed=None,
+            rank=360,
+            adj_eff=-22.05,
+            adj_off=95.6,
+            adj_def=117.7,
+            adj_tempo=66.9,
+            luck=-0.076,
+            adj_eff_sos=-5.79,
+            adj_off_sos=102.4,
+            adj_def_sos=108.1,
+            adj_eff_sos_nc=-7.15
+        )]
+
 
 class TestHtmlParse(unittest.TestCase):
 
-  def test_parse(self):
-    api = TestHttpApi()
-    parser = BeautifulSoupHtmlParser(api)
-    self.assertEqual(parser.getKenpomData(), api.getExpectedData())
+    def test_parse(self):
+        api = TestHttpApi()
+        parser = BeautifulSoupHtmlParser(api)
+        self.assertEqual(parser.getKenpomData(), api.getExpectedData())
+
 
 if (__name__ == "__main__"):
-  unittest.main()
-  
+    unittest.main()

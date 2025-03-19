@@ -127,7 +127,7 @@ jobs:
       - name: Build
         # Execute the build.  You can specify a specific target with "--target <NAME>"
         run: |
-          cmake --build ./build --config ${{matrix.build_type}} -E test_http_request
+          cmake --build ./build --config ${{matrix.build_type}}
 
       - name: Unix - Test and coverage
         if: runner.os != 'Windows'
@@ -136,14 +136,14 @@ jobs:
         # See https://cmake.org/cmake/help/latest/manual/ctest.1.html for more detail
         run: |
           export ASAN_OPTIONS=detect_container_overflow=0
-          ctest -VV -C ${{matrix.build_type}}
+          ctest -VV -C ${{matrix.build_type}} -E test_http_request
           gcovr -j ${{env.nproc}} --delete --root ../ --print-summary --exclude-unreachable-branches --exclude-throw-branches --xml-pretty --xml coverage.xml . --gcov-executable '${{ matrix.gcov_executable }}'
 
       - name: Windows - Test and coverage
         if: runner.os == 'Windows'
         working-directory: ./build
         run: |
-          OpenCppCoverage.exe --export_type cobertura:coverage.xml --cover_children -- ctest -C ${{matrix.build_type}}
+          OpenCppCoverage.exe --export_type cobertura:coverage.xml --cover_children -- ctest -C ${{matrix.build_type}} -E test_http_request
 
       - name: Publish to codecov
         uses: codecov/codecov-action@v2
